@@ -31,8 +31,8 @@ type SkipList struct {
 }
 
 type record struct {
-	currNode *node // 比 value 大的节点
-	rindex   int   // 这个节点在 next 数组中的下标
+	currNode *node // node of bigger than value
+	rindex   int   // the index that node in next array position
 }
 
 // New
@@ -66,18 +66,11 @@ func (skiplist *SkipList) Set(value int) {
 		value: value,
 		next:  make([]*node, p),
 	}
-	// fmt.Println("recordArray 长度：", len(recordArray))
-	// fmt.Println("recordArray：", recordArray)
-	// fmt.Println("recordArray 0：", recordArray[0].currNode.value)
-	// fmt.Println("骰子：", p)
 
 	// insert
 	for i := 0; i < p; i++ {
 		currNode := recordArray[i].currNode
 		rindex := recordArray[i].rindex
-		// fmt.Println("--->")
-		// fmt.Println("len:", len(currNode.next))
-		// fmt.Println("--->")
 		newNode.next[i] = currNode.next[rindex]
 		currNode.next[rindex] = newNode
 	}
@@ -85,7 +78,7 @@ func (skiplist *SkipList) Set(value int) {
 	skiplist.Size++
 }
 
-// find 找 value 的前一个节点（也就是比 value 小的节点中最大的一个）
+// find
 func (skiplist *SkipList) find(value int) []record {
 	recordArray := make([]record, DEFAULTLEVEL)
 	currNode := skiplist.head
@@ -95,7 +88,7 @@ x:
 		// move down
 		if currNode.next[i] == nil {
 			recordArray = addRecordArray(recordArray, currNode, i)
-			i-- // 相当于指针下移
+			i--
 			continue
 		}
 
@@ -116,7 +109,6 @@ x:
 }
 
 func addRecordArray(recordArray []record, currNode *node, rindex int) []record {
-	// 记录中间变量
 	record := record{
 		currNode: currNode,
 		rindex:   rindex,
