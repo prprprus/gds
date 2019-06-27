@@ -27,7 +27,6 @@ type SkipList struct {
 	head     *node
 	Size     int
 	MaxLevel int
-	top      *node
 }
 
 type record struct {
@@ -84,7 +83,7 @@ func (skiplist *SkipList) find(value int) []record {
 
 x:
 	for i := len(currNode.next) - 1; i >= 0; {
-		// CASE1.1: move down
+		// CASE1-1: move down
 		if currNode.next[i] == nil {
 			recordArray = addRecordArray(recordArray, currNode, i)
 			i--
@@ -97,7 +96,7 @@ x:
 			continue x
 		}
 
-		// CASE1.2: move down
+		// CASE1-2: move down
 		if value <= currNode.next[i].value {
 			recordArray = addRecordArray(recordArray, currNode, i)
 			i--
