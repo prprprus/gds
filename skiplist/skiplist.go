@@ -31,7 +31,7 @@ type SkipList struct {
 }
 
 type record struct {
-	currNode *node // node of bigger than value
+	currNode *node // the node that bigger than value
 	rindex   int   // the index that node in next array position
 }
 
