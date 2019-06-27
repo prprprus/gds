@@ -43,7 +43,6 @@ func New() *SkipList {
 		MaxLevel: DEFAULTLEVEL,
 	}
 	skiplist.head.next = make([]*node, DEFAULTLEVEL)
-
 	return skiplist
 }
 
@@ -85,20 +84,20 @@ func (skiplist *SkipList) find(value int) []record {
 
 x:
 	for i := len(currNode.next) - 1; i >= 0; {
-		// move down
+		// CASE1.1: move down
 		if currNode.next[i] == nil {
 			recordArray = addRecordArray(recordArray, currNode, i)
 			i--
 			continue
 		}
 
-		// move right
+		// CASE2: move right
 		for value > currNode.next[i].value {
 			currNode = currNode.next[i]
 			continue x
 		}
 
-		// move down
+		// CASE1.2: move down
 		if value <= currNode.next[i].value {
 			recordArray = addRecordArray(recordArray, currNode, i)
 			i--
@@ -135,7 +134,7 @@ func (skiplist *SkipList) Get(value int) bool {
 
 	if recordArray[0].currNode.next[0].value == value {
 		return true
-
 	}
+
 	return false
 }
