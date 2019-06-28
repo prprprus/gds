@@ -115,6 +115,7 @@ func addRecordArray(recordArray []record, currNode *node, rindex int) []record {
 	return recordArray
 }
 
+// Show
 func (skiplist *SkipList) Show() {
 	flag := skiplist.head.next[0]
 	for flag != nil {
