@@ -138,3 +138,12 @@ func (skiplist *SkipList) Get(value int) bool {
 
 	return false
 }
+
+// Delete
+func (skiplist *SkipList) Delete(value int) error {
+	return nil
+}
+
+func freeNode(node *node) {
+
+}
