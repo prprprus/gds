@@ -105,9 +105,9 @@ func main() {
 	fmt.Println(skiplist.Get(99))
 	fmt.Println(skiplist.Get(999))
 
-	// fmt.Println(skiplist.Get(11))
-	// fmt.Println(skiplist.Get(111))
-	// fmt.Println(skiplist.Get(1111))
-	// fmt.Println(skiplist.Get(1278))
-	// fmt.Println(skiplist.Get(11178))
+	fmt.Println(skiplist.Get(11))
+	fmt.Println(skiplist.Get(111))
+	fmt.Println(skiplist.Get(1111))
+	fmt.Println(skiplist.Get(1278))
+	fmt.Println(skiplist.Get(11178))
 }

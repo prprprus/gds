@@ -89,7 +89,7 @@ x:
 		// CASE2: move right
 		for value > currNode.next[i].value {
 			currNode = currNode.next[i]
-			continue x
+			goto x
 		}
 
 		// CASE1-2: move down
