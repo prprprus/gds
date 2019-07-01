@@ -237,7 +237,7 @@ func (list *List) Clear() {
 }
 
 // Values
-func (list *List) Values() interface{} {
+func (list *List) Values() []interface{} {
 	values := make([]interface{}, 0)
 
 	iterator := list.Iterator()
@@ -245,12 +245,6 @@ func (list *List) Values() interface{} {
 	for iterator.Next() {
 		values = append(values, iterator.Value())
 	}
-
-	// foundElement := list.frist
-	// for foundElement != nil {
-	// 	values = append(values, foundElement.value)
-	// 	foundElement = foundElement.next
-	// }
 
 	return values
 }

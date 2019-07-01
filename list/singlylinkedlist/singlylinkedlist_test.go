@@ -126,25 +126,25 @@ func TestIndexInRange(t *testing.T) {
 func TestGet(t *testing.T) {
 	list := New(1, 2, 3, 4, 5)
 
-	// case1: get value
+	// case1: get value by index
 	v, err := list.Get(3)
 	if err != nil && v.(int) != 4 {
-		t.Error("case2 error: get value")
+		t.Error("case2 error: get value by index")
 	}
 }
 
 func TestRemove(t *testing.T) {
 	list := New(1, 3, 5)
 
-	// case1: remove value
+	// case1: remove value by index
 	err := list.Remove(1)
-	value1, _ := list.Get(0)
-	value2, _ := list.Get(1)
-	if err != nil && value1.(int) != 1 && value2.(int) != 5 {
-		t.Error("case2 error: remove value")
+	v1, _ := list.Get(0)
+	v2, _ := list.Get(1)
+	if err != nil && v1.(int) != 1 && v2.(int) != 5 {
+		t.Error("case2 error: remove value by index")
 	}
 	if list.size != 2 {
-		t.Error("case2 error: remove value, size error")
+		t.Error("case2 error: remove value by index, size error")
 	}
 }
 
@@ -153,9 +153,9 @@ func TestSwap(t *testing.T) {
 
 	// case1: swap value by index
 	list.Swap(1, 4)
-	value1, _ := list.Get(0)
-	value2, _ := list.Get(4)
-	if value1.(int) != 4 && value2.(int) != 2 {
+	v1, _ := list.Get(0)
+	v2, _ := list.Get(4)
+	if v1.(int) != 4 && v2.(int) != 2 {
 		t.Error("case1 error: swap value by index")
 	}
 }
@@ -166,8 +166,8 @@ func TestInsert(t *testing.T) {
 	// case1: insert a value to mediumn
 	// after insert: [1, 2, 88, 3]
 	list.Insert(1, 88)
-	value1, _ := list.Get(2)
-	if value1.(int) != 88 {
+	v1, _ := list.Get(2)
+	if v1.(int) != 88 {
 		t.Error("case1 error: insert a value to mediumn")
 	}
 
@@ -200,6 +200,69 @@ func TestInsert(t *testing.T) {
 		value, _ := list.Get(i)
 		if value != v {
 			t.Error("case4 error: insert values to tailer")
+		}
+	}
+}
+
+func TestSet(t *testing.T) {
+	list := New(1, 2, 3)
+
+	// case1: set value by index
+	list.Set(0, 11)
+	list.Set(1, 22)
+	list.Set(2, 33)
+	v1, _ := list.Get(0)
+	v2, _ := list.Get(0)
+	v3, _ := list.Get(0)
+	if v1.(int) != 11 && v2.(int) != 22 && v3.(int) != 33 {
+		t.Error("case1 error: set value by index")
+	}
+}
+
+// Container Interface
+
+func TestEmpty(t *testing.T) {
+	list := New()
+
+	// case1: list is empty
+	if !list.Empty() {
+		t.Error("case1 error: list is empty")
+	}
+
+	// case2: list is not empty
+	list.Append(1, 2, 3)
+	if list.Empty() {
+		t.Error("case2 error: list is not empty")
+	}
+}
+
+func TestSize(t *testing.T) {
+	list := New(1, 2, 3)
+
+	// case1: size of list
+	if list.Size() != 3 {
+		t.Error("case1 error: size of list")
+	}
+}
+func TestClear(t *testing.T) {
+	list := New(1, 2, 3, 4)
+
+	// case1: clear list
+	list.Clear()
+	if list.size != 0 && list.frist != nil && list.last != nil {
+		t.Error("case1 error: clear list")
+	}
+}
+
+func TestValues(t *testing.T) {
+	list := New(1, 2, 3, 4, 5)
+
+	// case1: get values
+	result := []interface{}{1, 2, 3, 4, 5}
+	values := list.Values()
+	for i := range result {
+		if result[i] != values[i] {
+			t.Error("case1 error: get values")
 		}
 	}
 }
