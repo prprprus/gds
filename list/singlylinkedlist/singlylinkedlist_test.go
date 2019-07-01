@@ -78,4 +78,31 @@ func TestPreAppend(t *testing.T) {
 	if list.frist.value != 1 && list.size != 1 {
 		t.Error("case2 error: append a value to the front of the empty list")
 	}
+
+	// case3: append values to the front of the not empty list
+	list = New(6, 7, 8, 9)
+	list.PreAppend(1, 2, 3, 4, 5)
+	flag = list.frist
+	value = 1
+	for flag != nil {
+		if flag.value != value {
+			t.Error("case3 error: append values to the front of the not empty list")
+		}
+		value++
+		flag = flag.next
+	}
+
+	// case4: append a value to the front of the not empty list
+	list = New(4, 5, 6)
+	list.PreAppend(3)
+	flag = list.frist
+	value = 3
+	for flag != nil {
+		if flag.value != value {
+			t.Error("case4 error: append a value to the front of the not empty list")
+		}
+		value++
+		flag = flag.next
+	}
+
 }
