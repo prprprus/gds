@@ -192,6 +192,7 @@ func TestInsert(t *testing.T) {
 	}
 
 	// case4: insert values to tailer
+	// after insert: [1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80]
 	arr = []interface{}{83, 81, 80}
 	list.Insert(7, arr...)
 	result = []interface{}{1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80}
