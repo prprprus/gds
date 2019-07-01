@@ -18,6 +18,8 @@ func TestNew(t *testing.T) {
 	}
 }
 
+// List Interface
+
 func TestAppend(t *testing.T) {
 	// case1: new a empty list and append values
 	list := New(1, 2, 3, 4, 5)
@@ -105,4 +107,98 @@ func TestPreAppend(t *testing.T) {
 		flag = flag.next
 	}
 
+}
+
+func TestIndexInRange(t *testing.T) {
+	list := New(1, 2, 3)
+
+	// case1: index in the range
+	if !list.indexInRange(0) {
+		t.Log("case1 error: index in the range")
+	}
+
+	// case2: index out of the range
+	if list.indexInRange(5) {
+		t.Error("case2 error: index out of range")
+	}
+}
+
+func TestGet(t *testing.T) {
+	list := New(1, 2, 3, 4, 5)
+
+	// case1: get value
+	v, err := list.Get(3)
+	if err != nil && v.(int) != 4 {
+		t.Error("case2 error: get value")
+	}
+}
+
+func TestRemove(t *testing.T) {
+	list := New(1, 3, 5)
+
+	// case1: remove value
+	err := list.Remove(1)
+	value1, _ := list.Get(0)
+	value2, _ := list.Get(1)
+	if err != nil && value1.(int) != 1 && value2.(int) != 5 {
+		t.Error("case2 error: remove value")
+	}
+	if list.size != 2 {
+		t.Error("case2 error: remove value, size error")
+	}
+}
+
+func TestSwap(t *testing.T) {
+	list := New(1, 2, 3, 4, 5)
+
+	// case1: swap value by index
+	list.Swap(1, 4)
+	value1, _ := list.Get(0)
+	value2, _ := list.Get(4)
+	if value1.(int) != 4 && value2.(int) != 2 {
+		t.Error("case1 error: swap value by index")
+	}
+}
+
+func TestInsert(t *testing.T) {
+	list := New(1, 2, 3)
+
+	// case1: insert a value to mediumn
+	// after insert: [1, 2, 88, 3]
+	list.Insert(1, 88)
+	value1, _ := list.Get(2)
+	if value1.(int) != 88 {
+		t.Error("case1 error: insert a value to mediumn")
+	}
+
+	// case2: insert a value to tailer
+	// after insert: [1, 2, 88, 3, 66]
+	list.Insert(3, 66)
+	value3, _ := list.Get(4)
+	if value3.(int) != 66 {
+		t.Error("case2 error: insert a value to tailer")
+	}
+
+	// case3: insert values to mediumn
+	// after insert: [1, 2, 88, 3, 11, 12, 56, 66]
+	arr := []interface{}{11, 12, 56}
+	list.Insert(3, arr...)
+	result := []interface{}{1, 2, 88, 3, 11, 12, 56, 66}
+	for i, v := range result {
+		value, _ := list.Get(i)
+		if value != v {
+			t.Error("case3 error: insert values to mediumn")
+		}
+	}
+
+	// case4: insert values to tailer
+	arr = []interface{}{83, 81, 80}
+	list.Insert(7, arr...)
+	result = []interface{}{1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80}
+	for i, v := range result {
+		value, _ := list.Get(i)
+		if value != v {
+			t.Error("case4 error: insert values to tailer")
+		}
+	}
 }
