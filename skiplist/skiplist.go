@@ -79,6 +79,7 @@ func (skiplist *SkipList) find(value int) []record {
 
 x:
 	for i := len(currNode.next) - 1; i >= 0; {
+		fmt.Println("---> ", i)
 		// CASE1-1: move down
 		if currNode.next[i] == nil {
 			recordArray = addRecordArray(recordArray, currNode, i)
