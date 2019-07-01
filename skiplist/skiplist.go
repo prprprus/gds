@@ -13,10 +13,6 @@ const (
 	P            = 0.65
 )
 
-// var (
-// 	recordArray = make([]record, 32)
-// )
-
 type node struct {
 	value int
 	next  []*node
