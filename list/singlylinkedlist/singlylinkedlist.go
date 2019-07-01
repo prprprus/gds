@@ -5,8 +5,8 @@ import (
 )
 
 var (
-	// ErrIndex
-	ErrIndex = errors.New("index is not within the range of the list")
+	// ErrIndex is returned when index is out of the list
+	ErrIndex = errors.New("index is out of the list")
 )
 
 // List list
@@ -16,6 +16,7 @@ type List struct {
 	size  int
 }
 
+// element of list
 type element struct {
 	value interface{}
 	next  *element
