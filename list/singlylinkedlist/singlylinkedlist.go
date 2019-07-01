@@ -22,11 +22,11 @@ type element struct {
 }
 
 // New new singly linked list
-func New(value ...interface{}) *List {
+func New(values ...interface{}) *List {
 	list := &List{}
 
-	if len(value) != 0 {
-		list.Append(value...)
+	if len(values) != 0 {
+		list.Append(values...)
 	}
 
 	return list
@@ -35,14 +35,14 @@ func New(value ...interface{}) *List {
 // List Interface
 
 // Append i.e. [] -> Append(1, 2, 3) -> [1, 2, 3]
-func (list *List) Append(value ...interface{}) {
-	if len(value) == 0 {
+func (list *List) Append(values ...interface{}) {
+	if len(values) == 0 {
 		return
 	}
 
 	// if size is equal to 0, it is a new singly linked list
 	if list.size == 0 {
-		for i, v := range value {
+		for i, v := range values {
 			newElement := &element{value: v}
 			// head element
 			if i == 0 {
@@ -55,7 +55,7 @@ func (list *List) Append(value ...interface{}) {
 			list.size++
 		}
 	} else {
-		for _, v := range value {
+		for _, v := range values {
 			newElement := &element{value: v}
 			list.last.next = newElement
 			list.last = newElement
@@ -65,16 +65,20 @@ func (list *List) Append(value ...interface{}) {
 }
 
 // PreAppend i.e. [1, 2] -> Append(3, 4) -> [3, 4, 1, 2]
-func (list *List) PreAppend(value ...interface{}) {
-	if len(value) == 0 {
+func (list *List) PreAppend(values ...interface{}) {
+	if len(values) == 0 {
 		return
 	}
 
-	for i := len(value) - 1; i >= 0; i-- {
-		newElement := &element{value: value[i]}
-		newElement.next = list.frist
-		list.frist = newElement
-		list.size++
+	if list.size == 0 {
+		list.Append(values...)
+	} else {
+		for i := len(values) - 1; i >= 0; i-- {
+			newElement := &element{value: values[i]}
+			newElement.next = list.frist
+			list.frist = newElement
+			list.size++
+		}
 	}
 }
 
