@@ -266,3 +266,91 @@ func TestValues(t *testing.T) {
 		}
 	}
 }
+
+// Serialization Interface
+
+func TestToJSON(t *testing.T) {
+	list := New(1, 2, 3, 4)
+
+	// case1: list to json
+	_, err := list.ToJSON()
+	if err != nil {
+		t.Error("case1 error: list to json")
+	}
+}
+
+func TestFromJSON(t *testing.T) {
+	list := New(1, 2, 3, 4)
+
+	// case1: list from json
+	json, _ := list.ToJSON()
+	err := list.FromJSON(json)
+	if err != nil {
+		t.Error("case1 error: list from json")
+	}
+}
+
+// Iterator Interface
+
+func TestIterator(t *testing.T) {
+	list := New(1, 2, 3, 4, 5, 6)
+
+	// case1: new iterator
+	iterator := list.Iterator()
+	if iterator.index != -1 && iterator.element != nil {
+		t.Error("case1 error: new iterator")
+	}
+}
+
+func TestNext(t *testing.T) {
+	list := New(1, 2, 3, 4, 5, 6)
+	iterator := list.Iterator()
+
+	// case1: traverse iterator
+	for iterator.Next() {
+	}
+	if iterator.index != 5 && iterator.element != nil {
+		t.Error("case1 error: traverse iterator")
+	}
+}
+
+func TestValue(t *testing.T) {
+	list := New(1, 2, 3, 4, 5, 6)
+	iterator := list.Iterator()
+
+	// case1: get value from iterator
+	v := 1
+	for iterator.Next() {
+		if iterator.Value().(int) != v {
+			t.Error("case1 error: get value from iterator")
+		}
+		v++
+	}
+}
+
+func TestIndex(t *testing.T) {
+	list := New(1, 2, 3, 4, 5, 6)
+	iterator := list.Iterator()
+
+	// case1: get index from iterator
+	i := 0
+	for iterator.Next() {
+		if iterator.Index() != i {
+			t.Error("case1 error: get value from iterator")
+		}
+		i++
+	}
+}
+
+func TestBegin(t *testing.T) {
+	list := New(1, 2, 3, 4, 5, 6)
+	iterator := list.Iterator()
+
+	// case1: reset iterator
+	for iterator.Next() {
+	}
+	iterator.Begin()
+	if iterator.index != -1 && iterator.element != nil {
+		t.Error("case1 error: reset iterator")
+	}
+}
