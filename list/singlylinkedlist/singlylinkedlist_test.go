@@ -3,7 +3,6 @@
 // 2. only one element
 // 3. two element
 // 4. handle first element and last element
-
 package singlylinkedlist
 
 import (
