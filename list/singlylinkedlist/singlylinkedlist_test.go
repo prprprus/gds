@@ -21,22 +21,22 @@ func TestNew(t *testing.T) {
 // List Interface
 
 func TestAppend(t *testing.T) {
-	// case1: new a empty list and append values
+	// case1: append values to empty list
 	list := New(1, 2, 3, 4, 5)
 	flag := list.frist
 	value := 1
 	for flag != nil {
 		if flag.value != value {
-			t.Error("case1 error: append to empty list with more than one value")
+			t.Error("case1 error: append values to empty list")
 		}
 		value++
 		flag = flag.next
 	}
 
-	// case2: new a empty list and append a value
+	// case2: append one value to empty list
 	list = New(1)
 	if list.frist.value != 1 && list.size == 1 {
-		t.Error("case2 error: append to empty list with one value")
+		t.Error("case2 error: append one value to empty list")
 	}
 
 	// case3: append values to not empty list
@@ -46,17 +46,17 @@ func TestAppend(t *testing.T) {
 	value = 1
 	for flag != nil {
 		if flag.value != value {
-			t.Error("case3 error: append to not empty list with more than on value")
+			t.Error("case3 error: append values to not empty list")
 		}
 		value++
 		flag = flag.next
 	}
 
-	// case4: append a value to not empty list
+	// case4: append one value to not empty list
 	list = New(1, 2, 3, 4, 5)
 	list.Append(9)
 	if list.last.value != 9 && list.size == 6 {
-		t.Error("case4 error: append to not empty list with one value")
+		t.Error("case4 error: append one value to not empty list")
 	}
 }
 
