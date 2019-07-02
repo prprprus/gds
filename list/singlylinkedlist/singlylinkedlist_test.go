@@ -394,6 +394,22 @@ func TestSet(t *testing.T) {
 	}
 }
 
+func TestReverse(t *testing.T) {
+	list := New(1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+	// case1: list has some elements
+	list.Reverse()
+	result := []interface{}{9, 8, 7, 6, 5, 4, 3, 2, 1}
+	i := 0
+	flag := list.first
+	for flag != nil {
+		if flag.value != result[i] {
+			t.Error("case1: list has some elements")
+		}
+		i++
+	}
+}
+
 // Container Interface
 
 func TestEmpty(t *testing.T) {
