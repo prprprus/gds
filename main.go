@@ -65,6 +65,9 @@ func main() {
 	err = list.FromJSON(data)
 	fmt.Println(list.Values())
 
+	list.Reverse()
+	fmt.Println(list.Values())
+
 	// // ---> double linked list
 
 	// list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)

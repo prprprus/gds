@@ -227,7 +227,23 @@ func (list *List) IndexOf(value interface{}) int {
 
 // Reverse the list.
 func (list *List) Reverse() {
-	// TODO
+	preElement := new(element)
+	preElement.value = nil
+	preElement.next = nil
+	currElement := list.frist
+	nextElement := list.frist.next
+	list.last = currElement
+
+	for currElement != nil {
+		currElement.next = preElement
+		preElement = currElement
+		currElement = nextElement
+		if nextElement != nil {
+			nextElement = nextElement.next
+		}
+	}
+
+	list.frist = preElement
 }
 
 // Container Interface
