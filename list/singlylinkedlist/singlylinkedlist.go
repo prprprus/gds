@@ -227,13 +227,17 @@ func (list *List) IndexOf(value interface{}) int {
 
 // Reverse the list.
 func (list *List) Reverse() {
+	// initial assist pointer
 	preElement := new(element)
 	preElement.value = nil
 	preElement.next = nil
 	currElement := list.frist
 	nextElement := list.frist.next
+
+	// reset the last pointer
 	list.last = currElement
 
+	// reverse
 	for currElement != nil {
 		currElement.next = preElement
 		preElement = currElement
@@ -243,6 +247,7 @@ func (list *List) Reverse() {
 		}
 	}
 
+	// reset the frist pointer
 	list.frist = preElement
 }
 
