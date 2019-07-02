@@ -1,3 +1,9 @@
+// singlylinkedlist test principle:
+// 1. empty list
+// 2. only one node
+// 3. two node
+// 4. handle first element and last element
+
 package singlylinkedlist
 
 import (
@@ -7,7 +13,7 @@ import (
 func TestNew(t *testing.T) {
 	// case1: new a empty list
 	list := New()
-	if list.frist != nil || list.last != nil || list.size != 0 {
+	if list.first != nil || list.last != nil || list.size != 0 {
 		t.Error("case1 error: new a empty list")
 	}
 
@@ -23,7 +29,7 @@ func TestNew(t *testing.T) {
 func TestAppend(t *testing.T) {
 	// case1: append values to empty list
 	list := New(1, 2, 3, 4, 5)
-	flag := list.frist
+	flag := list.first
 	value := 1
 	for flag != nil {
 		if flag.value != value {
@@ -35,14 +41,14 @@ func TestAppend(t *testing.T) {
 
 	// case2: append one value to empty list
 	list = New(1)
-	if list.frist.value != 1 && list.size == 1 {
+	if list.first.value != 1 && list.size == 1 {
 		t.Error("case2 error: append one value to empty list")
 	}
 
 	// case3: append values to not empty list
 	list = New(1, 2, 3, 4, 5)
 	list.Append(6, 7, 8, 9)
-	flag = list.frist
+	flag = list.first
 	value = 1
 	for flag != nil {
 		if flag.value != value {
@@ -64,7 +70,7 @@ func TestPreAppend(t *testing.T) {
 	// case1: append values to the front of the empty list
 	list := New()
 	list.PreAppend(1, 2, 3, 4, 5)
-	flag := list.frist
+	flag := list.first
 	value := 1
 	for flag != nil {
 		if flag.value != value {
@@ -77,14 +83,14 @@ func TestPreAppend(t *testing.T) {
 	// case2: append a value to the front of the empty list
 	list = New()
 	list.PreAppend(1)
-	if list.frist.value != 1 && list.size != 1 {
+	if list.first.value != 1 && list.size != 1 {
 		t.Error("case2 error: append a value to the front of the empty list")
 	}
 
 	// case3: append values to the front of the not empty list
 	list = New(6, 7, 8, 9)
 	list.PreAppend(1, 2, 3, 4, 5)
-	flag = list.frist
+	flag = list.first
 	value = 1
 	for flag != nil {
 		if flag.value != value {
@@ -97,7 +103,7 @@ func TestPreAppend(t *testing.T) {
 	// case4: append a value to the front of the not empty list
 	list = New(4, 5, 6)
 	list.PreAppend(3)
-	flag = list.frist
+	flag = list.first
 	value = 3
 	for flag != nil {
 		if flag.value != value {
@@ -112,39 +118,88 @@ func TestPreAppend(t *testing.T) {
 func TestIndexInRange(t *testing.T) {
 	list := New(1, 2, 3)
 
-	// case1: index in the range
+	// case1: the first index in the range
 	if !list.indexInRange(0) {
-		t.Log("case1 error: index in the range")
+		t.Log("case1 error: the first index in the range")
 	}
 
-	// case2: index out of the range
-	if list.indexInRange(5) {
-		t.Error("case2 error: index out of range")
+	// case2: the medium index in the range
+	if !list.indexInRange(1) {
+		t.Log("case2 error: the medium index in the range")
+	}
+
+	// case3: the last index in the range
+	if !list.indexInRange(2) {
+		t.Error("case2 error: the last index in the range")
+	}
+
+	// case4: the index out of the range
+	if list.indexInRange(3) {
+		t.Error("case4 error: the index out of the range")
 	}
 }
 
 func TestGet(t *testing.T) {
 	list := New(1, 2, 3, 4, 5)
 
-	// case1: get value by index
+	// case1: get medium value by index
 	v, err := list.Get(3)
 	if err != nil && v.(int) != 4 {
-		t.Error("case2 error: get value by index")
+		t.Error("case1 error: get medium value by index")
+	}
+
+	// case2: get first value by index
+	v, err = list.Get(0)
+	if err != nil && v.(int) != 1 {
+		t.Error("case2: get first value by index")
+	}
+
+	// case3: get last value by index
+	v, err = list.Get(4)
+	if err != nil && v.(int) != 5 {
+		t.Error("case2: get last value by index")
 	}
 }
 
 func TestRemove(t *testing.T) {
-	list := New(1, 3, 5)
+	list := New(1, 3, 4, 5, 6)
 
-	// case1: remove value by index
-	err := list.Remove(1)
-	v1, _ := list.Get(0)
-	v2, _ := list.Get(1)
-	if err != nil && v1.(int) != 1 && v2.(int) != 5 {
-		t.Error("case2 error: remove value by index")
+	// case1: remove first value by index
+	_ = list.Remove(0)
+	v, _ := list.Get(0)
+	if list.size != 4 && v.(int) != 3 {
+		t.Error("case1 error: remove first value by index")
 	}
-	if list.size != 2 {
-		t.Error("case2 error: remove value by index, size error")
+
+	// case2: remove last value by index
+	_ = list.Remove(3)
+	v, _ = list.Get(2)
+	if list.size != 3 && v.(int) != 5 {
+		t.Error("case2 error: remove last value by index")
+	}
+
+	// case3: remove medium value by index
+	_ = list.Remove(1)
+	v, _ = list.Get(1)
+	if list.size != 2 && v.(int) != 5 {
+		t.Error("case3 error: remove medium value by index")
+	}
+
+	list = New()
+
+	// case4: remove value by index from empty list
+	err1 := list.Remove(0)
+	err2 := list.Remove(3)
+	if err1 == nil && err2 == nil {
+		t.Error("case4 error: remove value by index from empty list")
+	}
+
+	list = New(1)
+
+	// case5: remove value by index from a list of only one element
+	_ = list.Remove(0)
+	if list.size != 0 {
+		t.Error("case5 error: remove value by index from a list of only one element")
 	}
 }
 
@@ -152,23 +207,49 @@ func TestSwap(t *testing.T) {
 	list := New(1, 2, 3, 4, 5)
 
 	// case1: swap value by index
-	list.Swap(1, 4)
-	v1, _ := list.Get(0)
-	v2, _ := list.Get(4)
-	if v1.(int) != 4 && v2.(int) != 2 {
+	// [1, 4, 3, 2, 5]
+	_ = list.Swap(1, 3)
+	v1, _ := list.Get(1)
+	v2, _ := list.Get(3)
+	if v1.(int) != 4 || v2.(int) != 2 {
 		t.Error("case1 error: swap value by index")
+	}
+
+	// case2: swap value by equal index
+	_ = list.Swap(2, 2)
+	v3, _ := list.Get(2)
+	if v3.(int) != 3 {
+		t.Error("case2 error: swap value by equal index")
+	}
+
+	// case3: swap first value by index
+	// [3, 4, 1, 2, 5]
+	_ = list.Swap(0, 2)
+	v4, _ := list.Get(0)
+	v5, _ := list.Get(2)
+	if v4.(int) != 3 || v5.(int) != 1 {
+		t.Error("case3 error: swap first value by index")
+	}
+
+	// case4: swap last value by index
+	// [3, 4, 1, 5, 2]
+	_ = list.Swap(3, 4)
+	v6, _ := list.Get(3)
+	v7, _ := list.Get(4)
+	if v6.(int) != 5 || v7.(int) != 2 {
+		t.Error("case4 error: swap last value by index")
 	}
 }
 
 func TestInsert(t *testing.T) {
 	list := New(1, 2, 3)
 
-	// case1: insert a value to mediumn
+	// case1: insert a value to medium
 	// after insert: [1, 2, 88, 3]
 	list.Insert(1, 88)
 	v1, _ := list.Get(2)
 	if v1.(int) != 88 {
-		t.Error("case1 error: insert a value to mediumn")
+		t.Error("case1 error: insert a value to medium")
 	}
 
 	// case2: insert a value to tailer
@@ -179,7 +260,7 @@ func TestInsert(t *testing.T) {
 		t.Error("case2 error: insert a value to tailer")
 	}
 
-	// case3: insert values to mediumn
+	// case3: insert values to medium
 	// after insert: [1, 2, 88, 3, 11, 12, 56, 66]
 	arr := []interface{}{11, 12, 56}
 	list.Insert(3, arr...)
@@ -187,7 +268,7 @@ func TestInsert(t *testing.T) {
 	for i, v := range result {
 		value, _ := list.Get(i)
 		if value != v {
-			t.Error("case3 error: insert values to mediumn")
+			t.Error("case3 error: insert values to medium")
 		}
 	}
 
@@ -249,7 +330,7 @@ func TestClear(t *testing.T) {
 
 	// case1: clear list
 	list.Clear()
-	if list.size != 0 && list.frist != nil && list.last != nil {
+	if list.size != 0 && list.first != nil && list.last != nil {
 		t.Error("case1 error: clear list")
 	}
 }

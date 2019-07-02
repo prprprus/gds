@@ -11,7 +11,7 @@ var (
 
 // List represents a singly linked list structure.
 type List struct {
-	frist *element // the address of the first element
+	first *element // the address of the first element
 	last  *element // the address of the last element
 	size  int      // size of list
 }
@@ -44,9 +44,9 @@ func (list *List) Append(values ...interface{}) {
 	if list.size == 0 {
 		for i, v := range values {
 			newElement := &element{value: v}
-			// frist element
+			// first element
 			if i == 0 {
-				list.frist = newElement
+				list.first = newElement
 				list.last = newElement
 			} else {
 				list.last.next = newElement
@@ -79,8 +79,8 @@ func (list *List) PreAppend(values ...interface{}) {
 		// reverse traversal values and add to list
 		for i := len(values) - 1; i >= 0; i-- {
 			newElement := &element{value: values[i]}
-			newElement.next = list.frist
-			list.frist = newElement
+			newElement.next = list.first
+			list.first = newElement
 			list.size++
 		}
 	}
@@ -101,7 +101,7 @@ func (list *List) Get(index int) (interface{}, error) {
 	}
 
 	// find element by index
-	foundElement := list.frist
+	foundElement := list.first
 	for i := 0; i != index; i++ {
 		foundElement = foundElement.next
 	}
@@ -115,11 +115,11 @@ func (list *List) Remove(index int) error {
 		return ErrIndex
 	}
 
-	foundElement := list.frist
+	foundElement := list.first
 
 	// remove the first element
 	if index == 0 {
-		list.frist = list.frist.next
+		list.first = list.first.next
 	} else {
 		// find element by index
 		preFoundElement := new(element)
@@ -160,12 +160,12 @@ func (list *List) Swap(i, j int) error {
 	}
 
 	// find element by i
-	foundElementI := list.frist
+	foundElementI := list.first
 	for index := 0; index != i; index++ {
 		foundElementI = foundElementI.next
 	}
 	// find element by j
-	foundElementJ := list.frist
+	foundElementJ := list.first
 	for index := 0; index != j; index++ {
 		foundElementJ = foundElementJ.next
 	}
@@ -185,7 +185,7 @@ func (list *List) Insert(index int, value ...interface{}) error {
 	}
 
 	// find element by index
-	foundElement := list.frist
+	foundElement := list.first
 	for i := 0; i != index; i++ {
 		foundElement = foundElement.next
 	}
@@ -210,7 +210,7 @@ func (list *List) Set(index int, value interface{}) error {
 	}
 
 	// find element by index
-	foundElement := list.frist
+	foundElement := list.first
 	for i := 0; i != index; i++ {
 		foundElement = foundElement.next
 	}
@@ -231,8 +231,8 @@ func (list *List) Reverse() {
 	preElement := new(element)
 	preElement.value = nil
 	preElement.next = nil
-	currElement := list.frist
-	nextElement := list.frist.next
+	currElement := list.first
+	nextElement := list.first.next
 
 	// reset the last pointer
 	list.last = currElement
@@ -247,8 +247,8 @@ func (list *List) Reverse() {
 		}
 	}
 
-	// reset the frist pointer
-	list.frist = preElement
+	// reset the first pointer
+	list.first = preElement
 }
 
 // Container Interface
@@ -267,7 +267,7 @@ func (list *List) Size() int {
 // Clear th list.
 func (list *List) Clear() {
 	list.size = 0
-	list.frist = nil
+	list.first = nil
 	list.last = nil
 }
 
