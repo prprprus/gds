@@ -5,24 +5,24 @@ import (
 )
 
 var (
-	// ErrIndex is returned when index is out of the list
+	// ErrIndex is returned when the index is out of the list
 	ErrIndex = errors.New("index is out of the list")
 )
 
-// List list
+// List represents a singly linked list structure.
 type List struct {
-	frist *element
-	last  *element
-	size  int
+	frist *element // the address of the first element
+	last  *element // the address of the last element
+	size  int      // size of list
 }
 
 // element of list
 type element struct {
-	value interface{}
-	next  *element
+	value interface{} // can store any type of value
+	next  *element    // next stores the address pointing to the next element
 }
 
-// New new singly linked list
+// New singly linked list.
 func New(values ...interface{}) *List {
 	list := &List{}
 
@@ -35,17 +35,18 @@ func New(values ...interface{}) *List {
 
 // List Interface
 
-// Append i.e. [] -> Append(1, 2, 3) -> [1, 2, 3]
+// Append values (one or more than one) to list.
+// i.e. [] -> Append(1, 2, 3) -> [1, 2, 3]
 func (list *List) Append(values ...interface{}) {
 	if len(values) == 0 {
 		return
 	}
 
-	// if size is equal to 0, it is a new singly linked list
+	// if the size is equal to 0, mean it is a new singly linked list
 	if list.size == 0 {
 		for i, v := range values {
 			newElement := &element{value: v}
-			// head element
+			// frist element
 			if i == 0 {
 				list.frist = newElement
 				list.last = newElement
@@ -65,15 +66,19 @@ func (list *List) Append(values ...interface{}) {
 	}
 }
 
-// PreAppend i.e. [1, 2] -> Append(3, 4) -> [3, 4, 1, 2]
+// PreAppend can append values to the front of the list.
+// i.e. [1, 2] -> Append(3, 4) -> [3, 4, 1, 2]
 func (list *List) PreAppend(values ...interface{}) {
 	if len(values) == 0 {
 		return
 	}
 
+	// if the size is equal to 0, mean it is a new singly linked list,
+	// Call Append method directly
 	if list.size == 0 {
 		list.Append(values...)
 	} else {
+		// reverse traversal values and add to list
 		for i := len(values) - 1; i >= 0; i-- {
 			newElement := &element{value: values[i]}
 			newElement.next = list.frist
@@ -83,7 +88,7 @@ func (list *List) PreAppend(values ...interface{}) {
 	}
 }
 
-// Check if the index is within the length of the list
+// indexInRange check if the index is within the length of the list
 func (list *List) indexInRange(index int) bool {
 	if index >= 0 && index < list.size {
 		return true
@@ -91,7 +96,7 @@ func (list *List) indexInRange(index int) bool {
 	return false
 }
 
-// Get get value by index
+// Get value by index
 func (list *List) Get(index int) (interface{}, error) {
 	if !list.indexInRange(index) {
 		return nil, ErrIndex
@@ -106,27 +111,33 @@ func (list *List) Get(index int) (interface{}, error) {
 	return foundElement.value, nil
 }
 
-// Remove remove element by index
+// Remove element by index
 func (list *List) Remove(index int) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
 	}
 
 	foundElement := list.frist
-	// if you want to remove the first element
+
+	// remove the first element
 	if index == 0 {
 		list.frist = list.frist.next
 	} else {
+		// find element by index
 		preFoundElement := new(element)
 		for i := 0; i != index; i++ {
 			preFoundElement = foundElement
 			foundElement = foundElement.next
 		}
+		// Adjustment pointer
 		preFoundElement.next = foundElement.next
 	}
 
-	foundElement = nil
+	// remove element
+	foundElement.value = nil
+	foundElement.next = nil
 	list.size--
+
 	return nil
 }
 
