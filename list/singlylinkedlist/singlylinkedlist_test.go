@@ -246,42 +246,99 @@ func TestInsert(t *testing.T) {
 
 	// case1: insert a value after first element
 	// [1, 88, 2, 3]
-	list.Insert(0, 88)
+	_ = list.Insert(0, 88)
 	v1, _ := list.Get(1)
 	if v1.(int) != 88 {
 		t.Error("case1 error: insert a value after first element")
 	}
 
-	// case2: insert a value to tailer
-	// [1, 2, 88, 3, 66]
-	list.Insert(3, 66)
-	value3, _ := list.Get(4)
-	if value3.(int) != 66 {
-		t.Error("case2 error: insert a value to tailer")
+	// case2: insert a value after last element
+	// [1, 88, 2, 3, 66]
+	_ = list.Insert(3, 66)
+	v1, _ = list.Get(4)
+	if v1.(int) != 66 {
+		t.Error("case2 error: insert a value after last element")
 	}
 
-	// case3: insert values to medium
-	// [1, 2, 88, 3, 11, 12, 56, 66]
+	// case3: insert a value after medium element
+	// [1, 88, 2, 7, 3, 66]
+	_ = list.Insert(2, 7)
+	v1, _ = list.Get(3)
+	if v1.(int) != 7 {
+		t.Error("case3 error: insert a value after medium element")
+	}
+
+	// case4: insert values after medium element
+	// [1, 88, 2, 7, 11, 12, 56, 3, 66]
 	arr := []interface{}{11, 12, 56}
 	list.Insert(3, arr...)
-	result := []interface{}{1, 2, 88, 3, 11, 12, 56, 66}
+	result := []interface{}{1, 88, 2, 7, 11, 12, 56, 3, 66}
 	for i, v := range result {
 		value, _ := list.Get(i)
 		if value != v {
-			t.Error("case3 error: insert values to medium")
+			t.Error("case4 error: insert values after medium element")
 		}
 	}
 
-	// case4: insert values to tailer
-	// [1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80]
-	arr = []interface{}{83, 81, 80}
-	list.Insert(7, arr...)
-	result = []interface{}{1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80}
+	// case5: insert values after first element
+	// [1, 5, 32, 70, 88, 2, 7, 11, 12, 56, 3, 66]
+	arr = []interface{}{5, 32, 70}
+	list.Insert(0, arr...)
+	result = []interface{}{1, 5, 32, 70, 88, 2, 7, 11, 12, 56, 3, 66}
 	for i, v := range result {
 		value, _ := list.Get(i)
 		if value != v {
-			t.Error("case4 error: insert values to tailer")
+			t.Error("case5 error: insert values after first element")
 		}
+	}
+
+	// case6: insert values after last element
+	// [1, 5, 32, 70, 88, 2, 7, 11, 12, 56, 3, 66, 0, 9, 87, 111]
+	arr = []interface{}{0, 9, 87, 111}
+	list.Insert(11, arr...)
+	result = []interface{}{1, 5, 32, 70, 88, 2, 7, 11, 12, 56, 3, 66, 0, 9, 87, 111}
+	for i, v := range result {
+		value, _ := list.Get(i)
+		if value != v {
+			t.Error("case6 error: insert values after last element")
+		}
+	}
+
+	list = New(1)
+
+	// case7: insert a value to a list of only one element
+	_ = list.Insert(0, 1)
+	v1, _ = list.Get(0)
+	v2, _ := list.Get(1)
+	if list.size != 2 || v1.(int) != 1 || v2.(int) != 1 {
+		t.Error("case7 error: insert a value to a list of only one element")
+	}
+
+	list = New(1)
+
+	// case8: insert values to a list of only one element
+	arr = []interface{}{23, 233, 2333}
+	_ = list.Insert(0, arr...)
+	result = []interface{}{1, 23, 233, 2333}
+	for i, v := range result {
+		value, _ := list.Get(i)
+		if value != v {
+			t.Error("case8 error: insert values to a list of only one element")
+		}
+	}
+
+	list = New()
+
+	// case9: insert a value to a list of empty
+	err := list.Insert(0, 1)
+	if err == nil {
+		t.Error("case9 error: insert a value to a list of empty")
+	}
+
+	// case10: insert values to a list of empty
+	err = list.Insert(0, 1, 2, 3)
+	if err == nil {
+		t.Error("case10 error: insert values to a list of empty")
 	}
 }
 
