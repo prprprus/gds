@@ -155,7 +155,6 @@ func (list *List) Swap(i, j int) error {
 	if !list.indexInRange(i) || !list.indexInRange(j) {
 		return ErrIndex
 	}
-
 	if i == j {
 		return nil
 	}
