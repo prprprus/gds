@@ -16,7 +16,7 @@ type List struct {
 	size  int      // size of list
 }
 
-// element of list
+// element of list.
 type element struct {
 	value interface{} // can store any type of value
 	next  *element    // next stores the address pointing to the next element
@@ -66,7 +66,7 @@ func (list *List) Append(values ...interface{}) {
 	}
 }
 
-// PreAppend can append values to the front of the list.
+// PreAppend can append values (one or more than one) to the front of the list.
 // i.e. [1, 2] -> Append(3, 4) -> [3, 4, 1, 2]
 func (list *List) PreAppend(values ...interface{}) {
 	if len(values) == 0 {
@@ -88,7 +88,7 @@ func (list *List) PreAppend(values ...interface{}) {
 	}
 }
 
-// indexInRange check if the index is within the length of the list
+// indexInRange check if the index is within the length of the list.
 func (list *List) indexInRange(index int) bool {
 	if index >= 0 && index < list.size {
 		return true
@@ -111,7 +111,7 @@ func (list *List) Get(index int) (interface{}, error) {
 	return foundElement.value, nil
 }
 
-// Remove element by index
+// Remove element by index.
 func (list *List) Remove(index int) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
@@ -141,9 +141,9 @@ func (list *List) Remove(index int) error {
 	return nil
 }
 
-// Contains
-func (list *List) Contains(value ...interface{}) bool {
-	if len(value) == 0 {
+// Contains returns true if list contains values, false otherwise.
+func (list *List) Contains(values ...interface{}) bool {
+	if len(values) == 0 {
 		return true
 	}
 
@@ -152,7 +152,7 @@ func (list *List) Contains(value ...interface{}) bool {
 	return false
 }
 
-// Swap swap value by index
+// Swap value by index.
 func (list *List) Swap(i, j int) error {
 	if !list.indexInRange(i) || !list.indexInRange(j) {
 		return ErrIndex
@@ -174,10 +174,11 @@ func (list *List) Swap(i, j int) error {
 	}
 	// swap
 	foundElementI.value, foundElementJ.value = foundElementJ.value, foundElementI.value
+
 	return nil
 }
 
-// Insert insert value (one or more) after index
+// Insert value (one or more than one) after index.
 func (list *List) Insert(index int, value ...interface{}) error {
 	if len(value) == 0 {
 		return nil
@@ -206,7 +207,7 @@ func (list *List) Insert(index int, value ...interface{}) error {
 	return nil
 }
 
-// Set set element by index
+// Set element by index.
 func (list *List) Set(index int, value interface{}) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
@@ -218,10 +219,11 @@ func (list *List) Set(index int, value interface{}) error {
 		foundElement = foundElement.next
 	}
 	foundElement.value = value
+
 	return nil
 }
 
-// IndexOf get index by value
+// IndexOf get index by value.
 func (list *List) IndexOf(value interface{}) int {
 	// TODO
 	return 0
@@ -229,25 +231,25 @@ func (list *List) IndexOf(value interface{}) int {
 
 // Container Interface
 
-// Empty
+// Empty returns true if the list is empty, otherwise returns false.
 func (list *List) Empty() bool {
 	return list.size == 0
 }
 
-// Size
+// Size returns the size of the list.
 func (list *List) Size() int {
 	size := list.size
 	return size
 }
 
-// Clear
+// Clear th list.
 func (list *List) Clear() {
 	list.size = 0
 	list.frist = nil
 	list.last = nil
 }
 
-// Values
+// Values returns the values of list.
 func (list *List) Values() []interface{} {
 	values := make([]interface{}, 0)
 
