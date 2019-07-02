@@ -11,14 +11,16 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	// case1: new a empty list
 	list := New()
+
+	// case1: new a empty list
 	if list.first != nil || list.last != nil || list.size != 0 {
 		t.Error("case1 error: new a empty list")
 	}
 
-	// case2: new a not empty list
 	list = New(1, 2, 3, 4, 5)
+
+	// case2: new a not empty list
 	if list.size != 5 {
 		t.Error("case2 error: new a not empty list")
 	}
