@@ -1,7 +1,7 @@
 // singlylinkedlist test principle:
 // 1. empty list
-// 2. only one node
-// 3. two node
+// 2. only one element
+// 3. two element
 // 4. handle first element and last element
 
 package singlylinkedlist
@@ -355,15 +355,42 @@ func TestInsert(t *testing.T) {
 func TestSet(t *testing.T) {
 	list := New(1, 2, 3)
 
-	// case1: set value by index
-	list.Set(0, 11)
-	list.Set(1, 22)
-	list.Set(2, 33)
-	v1, _ := list.Get(0)
-	v2, _ := list.Get(0)
-	v3, _ := list.Get(0)
-	if v1.(int) != 11 && v2.(int) != 22 && v3.(int) != 33 {
-		t.Error("case1 error: set value by index")
+	// case1: set first value by index
+	_ = list.Set(0, 11)
+	v, _ := list.Get(0)
+	if v.(int) != 11 {
+		t.Error("case1 error: set first value by index")
+	}
+
+	// case2: set last value by index
+	_ = list.Set(2, 33)
+	v, _ = list.Get(2)
+	if v.(int) != 33 {
+		t.Error("case2 error: set last value by index")
+	}
+
+	// case3: set medium value by index
+	_ = list.Set(1, 22)
+	v, _ = list.Get(1)
+	if v.(int) != 22 {
+		t.Error("case3 error: set last value by index")
+	}
+
+	list = New(1)
+
+	// case4: set value by index with a list of only one element
+	_ = list.Set(0, -1)
+	v, _ = list.Get(0)
+	if v.(int) != -1 {
+		t.Error("case4 error: set value by index from a list of only one element")
+	}
+
+	list = New()
+
+	// case5: set value by index with a list of empty
+	err := list.Set(0, 99)
+	if err == nil {
+		t.Error("case5 error: set value by index with a list of empty")
 	}
 }
 
@@ -372,45 +399,105 @@ func TestSet(t *testing.T) {
 func TestEmpty(t *testing.T) {
 	list := New()
 
-	// case1: list is empty
+	// case1: the list is empty
 	if !list.Empty() {
-		t.Error("case1 error: list is empty")
+		t.Error("case1 error: the list is empty")
 	}
 
-	// case2: list is not empty
-	list.Append(1, 2, 3)
+	list = New(1)
+
+	// case2: the list has one element
 	if list.Empty() {
-		t.Error("case2 error: list is not empty")
+		t.Error("case2 error: the list has one element")
+	}
+
+	list = New(1, 2, 3, 4)
+
+	// case3: the list has some elements
+	if list.Empty() {
+		t.Error("case3 error: the list has some elements")
 	}
 }
 
 func TestSize(t *testing.T) {
 	list := New(1, 2, 3)
 
-	// case1: size of list
+	// case1: the list has some elements
 	if list.Size() != 3 {
-		t.Error("case1 error: size of list")
+		t.Error("case1 error: the list has some elements")
+	}
+
+	list = New(1)
+
+	// case2: the list has one element
+	if list.Size() != 1 {
+		t.Error("case2 error: the list has one element")
+	}
+
+	list = New()
+
+	// case3: the list has no element
+	if list.Size() != 0 {
+		t.Error("case3 error: the list has no element")
 	}
 }
 func TestClear(t *testing.T) {
 	list := New(1, 2, 3, 4)
 
-	// case1: clear list
+	// case1: the list has some elements
 	list.Clear()
 	if list.size != 0 && list.first != nil && list.last != nil {
-		t.Error("case1 error: clear list")
+		t.Error("case1 error: the list has some elements")
+	}
+
+	list = New(1)
+
+	// case2: the list has one element
+	list.Clear()
+	if list.size != 0 && list.first != nil && list.last != nil {
+		t.Error("case2 error: the list has one element")
+	}
+
+	list = New()
+
+	// case3: the list has no element
+	list.Clear()
+	if list.size != 0 && list.first != nil && list.last != nil {
+		t.Error("case2 error: case3: the list has no element")
 	}
 }
 
 func TestValues(t *testing.T) {
 	list := New(1, 2, 3, 4, 5)
 
-	// case1: get values
+	// case1: list has some elements
 	result := []interface{}{1, 2, 3, 4, 5}
 	values := list.Values()
 	for i := range result {
 		if result[i] != values[i] {
-			t.Error("case1 error: get values")
+			t.Error("case1 error: list has some elements")
+		}
+	}
+
+	list = New(1)
+
+	// case2: list has one element
+	result = []interface{}{1}
+	values = list.Values()
+	for i := range result {
+		if result[i] != values[i] {
+			t.Error("case2 error: list has one element")
+		}
+	}
+
+	list = New()
+
+	// case3: list has no element
+	result = []interface{}{}
+	values = list.Values()
+	for i := range result {
+		if result[i] != values[i] {
+			t.Error("case3 error: list has no element")
 		}
 	}
 }
@@ -420,21 +507,55 @@ func TestValues(t *testing.T) {
 func TestToJSON(t *testing.T) {
 	list := New(1, 2, 3, 4)
 
-	// case1: list to json
+	// case1: list has some elements
 	_, err := list.ToJSON()
 	if err != nil {
-		t.Error("case1 error: list to json")
+		t.Error("case1 error: list has some elements")
+	}
+
+	list = New(1)
+
+	// case2: list has one element
+	_, err = list.ToJSON()
+	if err != nil {
+		t.Error("case2 error: list has one element")
+	}
+
+	list = New()
+
+	// case3: list has no element
+	_, err = list.ToJSON()
+	if err != nil {
+		t.Error("case3 error: list has no element")
 	}
 }
 
 func TestFromJSON(t *testing.T) {
 	list := New(1, 2, 3, 4)
 
-	// case1: list from json
+	// case1: list has some elements
 	json, _ := list.ToJSON()
 	err := list.FromJSON(json)
 	if err != nil {
-		t.Error("case1 error: list from json")
+		t.Error("case1 error: list has some elements")
+	}
+
+	list = New(1)
+
+	// case2: list has one element
+	json, _ = list.ToJSON()
+	err = list.FromJSON(json)
+	if err != nil {
+		t.Error("case2 error: list has one element")
+	}
+
+	list = New()
+
+	// case3: list has no element
+	json, _ = list.ToJSON()
+	err = list.FromJSON(json)
+	if err != nil {
+		t.Error("case3 error: list has no element")
 	}
 }
 
@@ -450,55 +571,139 @@ func TestIterator(t *testing.T) {
 	}
 }
 
+func TestBegin(t *testing.T) {
+	list := New(1, 2, 3, 4, 5, 6)
+
+	// case1: list has some elements
+	iterator := list.Iterator()
+	for iterator.Next() {
+	}
+	iterator.Begin()
+	if iterator.index != -1 && iterator.element != nil {
+		t.Error("case1 error: list has some elements")
+	}
+
+	list = New(1)
+
+	// case2: list has one element
+	iterator = list.Iterator()
+	for iterator.Next() {
+	}
+	iterator.Begin()
+	if iterator.index != -1 && iterator.element != nil {
+		t.Error("case2 error: list has one element")
+	}
+
+	list = New()
+
+	// case3: list has no element
+	iterator = list.Iterator()
+	for iterator.Next() {
+	}
+	iterator.Begin()
+	if iterator.index != -1 && iterator.element != nil {
+		t.Error("case3 error: list has no element")
+	}
+}
+
 func TestNext(t *testing.T) {
 	list := New(1, 2, 3, 4, 5, 6)
-	iterator := list.Iterator()
 
-	// case1: traverse iterator
+	// case1: list has some elements
+	iterator := list.Iterator()
 	for iterator.Next() {
 	}
 	if iterator.index != 5 && iterator.element != nil {
-		t.Error("case1 error: traverse iterator")
+		t.Error("case1 error: list has some elements")
+	}
+
+	list = New(1)
+
+	// case2: list has one element
+	iterator = list.Iterator()
+	for iterator.Next() {
+	}
+	if iterator.index != 0 && iterator.element != nil {
+		t.Error("case2 error: list has one element")
+	}
+
+	list = New()
+
+	// case3: list has no element
+	iterator = list.Iterator()
+	for iterator.Next() {
+	}
+	if iterator.index != -1 && iterator.element != nil {
+		t.Error("case3 error: list has no element")
 	}
 }
 
 func TestValue(t *testing.T) {
 	list := New(1, 2, 3, 4, 5, 6)
-	iterator := list.Iterator()
 
-	// case1: get value from iterator
+	// case1: list has some elements
+	iterator := list.Iterator()
 	v := 1
 	for iterator.Next() {
 		if iterator.Value().(int) != v {
-			t.Error("case1 error: get value from iterator")
+			t.Error("case1 error: list has some elements")
 		}
 		v++
+	}
+
+	list = New(1)
+
+	// case2: list has one element
+	iterator = list.Iterator()
+	v = 1
+	for iterator.Next() {
+		if iterator.Value().(int) != v {
+			t.Error("case2 error: list has one element")
+		}
+		v++
+	}
+
+	list = New()
+
+	// case3: list has no element
+	iterator = list.Iterator()
+	iterator.Next()
+	if iterator.Value() != nil {
+		t.Error("case3 error: list has no element")
 	}
 }
 
 func TestIndex(t *testing.T) {
 	list := New(1, 2, 3, 4, 5, 6)
-	iterator := list.Iterator()
 
-	// case1: get index from iterator
+	// case1: list has some elements
+	iterator := list.Iterator()
 	i := 0
 	for iterator.Next() {
 		if iterator.Index() != i {
-			t.Error("case1 error: get value from iterator")
+			t.Error("case1 error: list has some elements")
 		}
 		i++
 	}
-}
 
-func TestBegin(t *testing.T) {
-	list := New(1, 2, 3, 4, 5, 6)
-	iterator := list.Iterator()
+	list = New(1)
 
-	// case1: reset iterator
+	// case2: list has one element
+	iterator = list.Iterator()
+	i = 1
 	for iterator.Next() {
+		if iterator.Value().(int) != i {
+			t.Error("case2 error: list has one element")
+		}
+		i++
 	}
-	iterator.Begin()
-	if iterator.index != -1 && iterator.element != nil {
-		t.Error("case1 error: reset iterator")
+
+	list = New()
+
+	// case3: list has no element
+	iterator = list.Iterator()
+	iterator.Next()
+	if iterator.Index() != -1 {
+		t.Error("case3 error: list has no element")
 	}
 }
