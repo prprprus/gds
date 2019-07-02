@@ -180,7 +180,6 @@ func (list *List) Insert(index int, value ...interface{}) error {
 	if len(value) == 0 {
 		return nil
 	}
-
 	if !list.indexInRange(index) {
 		return ErrIndex
 	}
@@ -199,8 +198,8 @@ func (list *List) Insert(index int, value ...interface{}) error {
 		foundElement = element
 	}
 	foundElement.next = foundElementNext
-
 	list.size += len(value)
+
 	return nil
 }
 
