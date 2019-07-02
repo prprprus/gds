@@ -227,6 +227,10 @@ func (list *List) IndexOf(value interface{}) int {
 
 // Reverse the list.
 func (list *List) Reverse() {
+	if list.size == 0 || list.size == 1 {
+		return
+	}
+
 	// initial assist pointer
 	preElement := new(element)
 	preElement.value = nil

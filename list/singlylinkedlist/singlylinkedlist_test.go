@@ -402,11 +402,28 @@ func TestReverse(t *testing.T) {
 	result := []interface{}{9, 8, 7, 6, 5, 4, 3, 2, 1}
 	i := 0
 	flag := list.first
-	for flag != nil {
+	for i < 9 {
 		if flag.value != result[i] {
-			t.Error("case1: list has some elements")
+			t.Error("case1 error: list has some elements")
 		}
+		flag = flag.next
 		i++
+	}
+
+	list = New(1)
+
+	// case2: list has one element
+	list.Reverse()
+	if list.size != 1 || list.first != list.last || list.first.value != 1 {
+		t.Error("case2 error: list has one element")
+	}
+
+	list = New()
+
+	// case3: list has no element
+	list.Reverse()
+	if list.size != 0 || list.first != list.last {
+		t.Error("case3 error: list has no element")
 	}
 }
 
