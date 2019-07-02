@@ -27,8 +27,9 @@ func TestNew(t *testing.T) {
 // List Interface
 
 func TestAppend(t *testing.T) {
-	// case1: append values to empty list
 	list := New(1, 2, 3, 4, 5)
+
+	// case1: append values to empty list
 	flag := list.first
 	value := 1
 	for flag != nil {
@@ -39,14 +40,16 @@ func TestAppend(t *testing.T) {
 		flag = flag.next
 	}
 
-	// case2: append one value to empty list
 	list = New(1)
+
+	// case2: append one value to empty list
 	if list.first.value != 1 && list.size == 1 {
 		t.Error("case2 error: append one value to empty list")
 	}
 
-	// case3: append values to not empty list
 	list = New(1, 2, 3, 4, 5)
+
+	// case3: append values to not empty list
 	list.Append(6, 7, 8, 9)
 	flag = list.first
 	value = 1
@@ -58,8 +61,9 @@ func TestAppend(t *testing.T) {
 		flag = flag.next
 	}
 
-	// case4: append one value to not empty list
 	list = New(1, 2, 3, 4, 5)
+
+	// case4: append one value to not empty list
 	list.Append(9)
 	if list.last.value != 9 && list.size == 6 {
 		t.Error("case4 error: append one value to not empty list")
@@ -67,8 +71,9 @@ func TestAppend(t *testing.T) {
 }
 
 func TestPreAppend(t *testing.T) {
-	// case1: append values to the front of the empty list
 	list := New()
+
+	// case1: append values to the front of the empty list
 	list.PreAppend(1, 2, 3, 4, 5)
 	flag := list.first
 	value := 1
@@ -80,15 +85,17 @@ func TestPreAppend(t *testing.T) {
 		flag = flag.next
 	}
 
-	// case2: append a value to the front of the empty list
 	list = New()
+
+	// case2: append a value to the front of the empty list
 	list.PreAppend(1)
 	if list.first.value != 1 && list.size != 1 {
 		t.Error("case2 error: append a value to the front of the empty list")
 	}
 
-	// case3: append values to the front of the not empty list
 	list = New(6, 7, 8, 9)
+
+	// case3: append values to the front of the not empty list
 	list.PreAppend(1, 2, 3, 4, 5)
 	flag = list.first
 	value = 1
@@ -100,8 +107,9 @@ func TestPreAppend(t *testing.T) {
 		flag = flag.next
 	}
 
-	// case4: append a value to the front of the not empty list
 	list = New(4, 5, 6)
+
+	// case4: append a value to the front of the not empty list
 	list.PreAppend(3)
 	flag = list.first
 	value = 3
