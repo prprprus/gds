@@ -244,16 +244,16 @@ func TestSwap(t *testing.T) {
 func TestInsert(t *testing.T) {
 	list := New(1, 2, 3)
 
-	// case1: insert a value to medium
-	// after insert: [1, 2, 88, 3]
-	list.Insert(1, 88)
-	v1, _ := list.Get(2)
+	// case1: insert a value after first element
+	// [1, 88, 2, 3]
+	list.Insert(0, 88)
+	v1, _ := list.Get(1)
 	if v1.(int) != 88 {
-		t.Error("case1 error: insert a value to medium")
+		t.Error("case1 error: insert a value after first element")
 	}
 
 	// case2: insert a value to tailer
-	// after insert: [1, 2, 88, 3, 66]
+	// [1, 2, 88, 3, 66]
 	list.Insert(3, 66)
 	value3, _ := list.Get(4)
 	if value3.(int) != 66 {
@@ -261,7 +261,7 @@ func TestInsert(t *testing.T) {
 	}
 
 	// case3: insert values to medium
-	// after insert: [1, 2, 88, 3, 11, 12, 56, 66]
+	// [1, 2, 88, 3, 11, 12, 56, 66]
 	arr := []interface{}{11, 12, 56}
 	list.Insert(3, arr...)
 	result := []interface{}{1, 2, 88, 3, 11, 12, 56, 66}
@@ -273,7 +273,7 @@ func TestInsert(t *testing.T) {
 	}
 
 	// case4: insert values to tailer
-	// after insert: [1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80]
+	// [1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80]
 	arr = []interface{}{83, 81, 80}
 	list.Insert(7, arr...)
 	result = []interface{}{1, 2, 88, 3, 11, 12, 56, 66, 83, 81, 80}
