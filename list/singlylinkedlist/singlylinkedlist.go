@@ -25,11 +25,9 @@ type element struct {
 // New singly linked list.
 func New(values ...interface{}) *List {
 	list := &List{}
-
 	if len(values) != 0 {
 		list.Append(values...)
 	}
-
 	return list
 }
 
