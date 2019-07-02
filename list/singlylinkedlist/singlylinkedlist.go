@@ -225,6 +225,11 @@ func (list *List) IndexOf(value interface{}) int {
 	return 0
 }
 
+// Reverse the list.
+func (list *List) Reverse() {
+	// TODO
+}
+
 // Container Interface
 
 // Empty returns true if the list is empty, otherwise returns false.
