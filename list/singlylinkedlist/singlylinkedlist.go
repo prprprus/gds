@@ -20,8 +20,8 @@ type List struct {
 
 // element of list.
 type element struct {
-	value interface{} // can store any type of value
-	next  *element    // next stores the address pointing to the next element
+	value interface{} // value fields can store any type
+	next  *element    // next fields stores the address pointing to the next element
 }
 
 // New singly linked list.
@@ -91,7 +91,7 @@ func (list *List) indexInRange(index int) bool {
 	return false
 }
 
-// Get value by index
+// Get value by index.
 func (list *List) Get(index int) (interface{}, error) {
 	if !list.indexInRange(index) {
 		return nil, ErrIndex

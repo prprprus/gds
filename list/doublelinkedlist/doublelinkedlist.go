@@ -11,27 +11,26 @@ var (
 	ErrIndexOf = errors.New("index of value can not found")
 )
 
-// List
+// List represents a double linked list structure.
 type List struct {
 	first *element
 	last  *element
 	size  int
 }
 
+// element of list.
 type element struct {
-	value interface{}
-	prev  *element
-	next  *element
+	value interface{} // value fields can store any type
+	prev  *element    // prev fields stores the address pointing to the next element
+	next  *element    // next fields stores the address pointing to the next element
 }
 
-// New
+// New double linked list.
 func New(value ...interface{}) *List {
 	list := &List{}
-
 	if len(value) > 0 {
 		list.Append(value...)
 	}
-
 	return list
 }
 
@@ -69,7 +68,7 @@ func (list *List) Append(value ...interface{}) {
 	}
 }
 
-// PreAppend
+// PreAppend can append values (one or more than one) to the front of the list.
 func (list *List) PreAppend(values ...interface{}) {
 	if len(values) == 0 {
 		return
@@ -88,7 +87,7 @@ func (list *List) PreAppend(values ...interface{}) {
 	}
 }
 
-// Check if the index is within the length of the list
+// indexInRange check if the index is within the length of the list.
 func (list *List) indexInRange(index int) bool {
 	if index >= 0 && index < list.size {
 		return true
@@ -96,7 +95,7 @@ func (list *List) indexInRange(index int) bool {
 	return false
 }
 
-// Get
+// Get value by index.
 func (list *List) Get(index int) (interface{}, error) {
 	if !list.indexInRange(index) {
 		return nil, ErrIndex
@@ -110,7 +109,7 @@ func (list *List) Get(index int) (interface{}, error) {
 	return foundElement.value, nil
 }
 
-// Remove
+// Remove element by index.
 func (list *List) Remove(index int) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
@@ -139,7 +138,7 @@ func (list *List) Remove(index int) error {
 	return nil
 }
 
-// Contains
+// Contains returns true if list contains values, false otherwise.
 func (list *List) Contains(values ...interface{}) bool {
 	if len(values) == 0 {
 		return true
@@ -163,7 +162,7 @@ func (list *List) Contains(values ...interface{}) bool {
 	return true
 }
 
-// Swap
+// Swap value by index.
 func (list *List) Swap(i, j int) error {
 	if !list.indexInRange(i) || !list.indexInRange(j) {
 		return ErrIndex
@@ -187,7 +186,7 @@ func (list *List) Swap(i, j int) error {
 	return nil
 }
 
-// Insert
+// Insert value (one or more than one) after index.
 func (list *List) Insert(index int, values ...interface{}) error {
 	if len(values) == 0 {
 		return nil
@@ -220,7 +219,7 @@ func (list *List) Insert(index int, values ...interface{}) error {
 	return nil
 }
 
-// Set
+// Set element by index.
 func (list *List) Set(index int, value interface{}) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
@@ -235,7 +234,7 @@ func (list *List) Set(index int, value interface{}) error {
 	return nil
 }
 
-// IndexOf
+// IndexOf get index by value.
 func (list *List) IndexOf(value interface{}) (int, error) {
 	for i, v := range list.Values() {
 		if v == value {
@@ -245,7 +244,7 @@ func (list *List) IndexOf(value interface{}) (int, error) {
 	return -1, ErrIndexOf
 }
 
-// Reverse
+// Reverse the list.
 func (list *List) Reverse() {
 	if list.size == 0 || list.size == 1 {
 		return
@@ -278,25 +277,25 @@ func (list *List) Reverse() {
 
 // Container Interface
 
-// Empty
+// Empty returns true if the list is empty, otherwise returns false.
 func (list *List) Empty() bool {
 	return list.size == 0
 }
 
-// Size
+// Size returns the size of the list.
 func (list *List) Size() int {
 	size := list.size
 	return size
 }
 
-// Clear
+// Clear th list.
 func (list *List) Clear() {
 	list.size = 0
 	list.first = nil
 	list.last = nil
 }
 
-// Values
+// Values returns the values of list.
 func (list *List) Values() []interface{} {
 	values := make([]interface{}, 0)
 
