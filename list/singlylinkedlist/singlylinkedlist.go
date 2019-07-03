@@ -73,12 +73,9 @@ func (list *List) PreAppend(values ...interface{}) {
 		return
 	}
 
-	// if the size is equal to 0, mean it is a new singly linked list,
-	// Call Append method directly
 	if list.size == 0 {
 		list.Append(values...)
 	} else {
-		// reverse traversal values and add to list
 		for i := len(values) - 1; i >= 0; i-- {
 			newElement := &element{value: values[i]}
 			newElement.next = list.first
@@ -102,7 +99,6 @@ func (list *List) Get(index int) (interface{}, error) {
 		return nil, ErrIndex
 	}
 
-	// find element by index
 	foundElement := list.first
 	for i := 0; i != index; i++ {
 		foundElement = foundElement.next
@@ -119,21 +115,17 @@ func (list *List) Remove(index int) error {
 
 	foundElement := list.first
 
-	// remove the first element
 	if index == 0 {
 		list.first = list.first.next
 	} else {
-		// find element by index
 		preFoundElement := new(element)
 		for i := 0; i != index; i++ {
 			preFoundElement = foundElement
 			foundElement = foundElement.next
 		}
-		// Adjustment pointer
 		preFoundElement.next = foundElement.next
 	}
 
-	// remove element
 	foundElement.value = nil
 	foundElement.next = nil
 	list.size--
@@ -174,17 +166,16 @@ func (list *List) Swap(i, j int) error {
 		return nil
 	}
 
-	// find element by i
 	foundElementI := list.first
 	for index := 0; index != i; index++ {
 		foundElementI = foundElementI.next
 	}
-	// find element by j
+
 	foundElementJ := list.first
 	for index := 0; index != j; index++ {
 		foundElementJ = foundElementJ.next
 	}
-	// swap
+
 	foundElementI.value, foundElementJ.value = foundElementJ.value, foundElementI.value
 
 	return nil
@@ -199,7 +190,6 @@ func (list *List) Insert(index int, value ...interface{}) error {
 		return ErrIndex
 	}
 
-	// find element by index
 	foundElement := list.first
 	for i := 0; i != index; i++ {
 		foundElement = foundElement.next
@@ -224,7 +214,6 @@ func (list *List) Set(index int, value interface{}) error {
 		return ErrIndex
 	}
 
-	// find element by index
 	foundElement := list.first
 	for i := 0; i != index; i++ {
 		foundElement = foundElement.next
@@ -250,7 +239,6 @@ func (list *List) Reverse() {
 		return
 	}
 
-	// initial assist pointer
 	preElement := new(element)
 	preElement.value = nil
 	preElement.next = nil
