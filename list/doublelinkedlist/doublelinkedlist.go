@@ -118,8 +118,10 @@ func (list *List) Remove(index int) error {
 	foundElement := list.first
 
 	if index == 0 {
+		if list.first.next != nil {
+			list.first.next.prev = nil
+		}
 		list.first = list.first.next
-		list.first.next.prev = nil
 	} else {
 		preFoundElement := new(element)
 		for i := 0; i != index; i++ {
@@ -127,7 +129,9 @@ func (list *List) Remove(index int) error {
 			foundElement = foundElement.next
 		}
 		preFoundElement.next = foundElement.next
-		foundElement.next.prev = preFoundElement
+		if foundElement.next != nil {
+			foundElement.next.prev = preFoundElement
+		}
 	}
 
 	foundElement.value = nil

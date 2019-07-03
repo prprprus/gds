@@ -1,3 +1,8 @@
+// test principle:
+// 1. the list has no element
+// 2. the list has one element
+// 3. the list has some elements(handle first element, last element and medium element)
+
 package doublelinkedlist
 
 import "testing"
@@ -208,5 +213,215 @@ func TestPreAppend(t *testing.T) {
 	result = []interface{}{5, 6, 7, 8, 1, 2, 3, 4}
 	if !verifyElements(result, list) {
 		t.Error("case9 error: the list has some elements, pre-append some elements")
+	}
+}
+
+func TestIndexInRange(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	if list.indexInRange(0) {
+		t.Error("case1 error: the list has no element")
+	}
+	if list.indexInRange(1) {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	if !list.indexInRange(0) {
+		t.Error("case2 error: the list has one element")
+	}
+	if list.indexInRange(1) {
+		t.Error("case2 error: the list has one element")
+	}
+
+	// case3: the list has some elements, check with first element index
+	list = New(1, 2, 3, 4, 5)
+	if !list.indexInRange(0) {
+		t.Error("case3 error: the list has some elements, check with first element index")
+	}
+
+	// case4: the list has some elements, check with last element index
+	list = New(1, 2, 3, 4, 5)
+	if !list.indexInRange(4) {
+		t.Error("case4 error: the list has some elements, check with last element index")
+	}
+
+	// case5: the list has some elements, check with medium element index
+	list = New(1, 2, 3, 4, 5)
+	if !list.indexInRange(2) {
+		t.Error("case4 error: the list has some elements, check with last element index")
+	}
+}
+
+func TestGet(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	_, err := list.Get(0)
+	if err == nil {
+		t.Error("case1 error: the list has no element")
+	}
+	_, err = list.Get(1)
+	if err == nil {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	_, err = list.Get(0)
+	if err != nil {
+		t.Error("case2 error: the list has one element")
+	}
+	_, err = list.Get(1)
+	if err == nil {
+		t.Error("case2 error: the list has one element")
+	}
+
+	// case3: the list has some elements, get first element
+	list = New(1, 2, 3, 4)
+	v, err := list.Get(0)
+	if err != nil || v.(int) != 1 {
+		t.Error("case3 error: the list has some elements, get first element")
+	}
+
+	// case4: the list has some elements, get last element
+	list = New(1, 2, 3, 4)
+	v, err = list.Get(3)
+	if err != nil || v.(int) != 4 {
+		t.Error("case4 error: the list has some elements, get last element")
+	}
+
+	// case5: the list has some elements, get medium element
+	list = New(1, 2, 3, 4)
+	v, err = list.Get(2)
+	if err != nil || v.(int) != 3 {
+		t.Error("case5 error: the list has some elements, get medium element")
+	}
+}
+
+func TestRemove(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	err := list.Remove(0)
+	if err == nil {
+		t.Error("case1 error: the list has no element")
+	}
+	err = list.Remove(1)
+	if err == nil {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	err = list.Remove(0)
+	if err != nil {
+		t.Error("case2 error: the list has one element")
+	}
+	list = New(1)
+	err = list.Remove(1)
+	if err == nil {
+		t.Error("case2 error: the list has one element")
+	}
+
+	// case3: the list has some elements, remove first element
+	list = New(1, 2, 3, 4, 5, 6)
+	err = list.Remove(0)
+	if err != nil {
+		t.Error("case3 error: the list has some elements, remove first element")
+	}
+
+	// case4: the list has some elements, remove last element
+	list = New(1, 2, 3, 4, 5, 6)
+	err = list.Remove(5)
+	if err != nil {
+		t.Error("case4 error: the list has some elements, remove last element")
+	}
+
+	// case5: the list has some elements, remove medium element
+	list = New(1, 2, 3, 4, 5, 6)
+	err = list.Remove(3)
+	if err != nil {
+		t.Error("case5 error: the list has some elements, remove medium element")
+	}
+	err = list.Remove(2)
+	if err != nil {
+		t.Error("case5 error: the list has some elements, remove medium element")
+	}
+}
+
+func TestContains(t *testing.T) {
+	// case1: the list has no element, sub-list has no element
+	list := New()
+	if !list.Contains() {
+		t.Error("case1 error: the list has no element, sub-list has no element")
+	}
+
+	// case2: the list has no element, sub-list has one element
+	list = New()
+	if list.Contains(1) {
+		t.Error("case2 error: the list has no element, sub-list has one element")
+	}
+
+	// case3: the list has no element, sub-list has some elements
+	list = New()
+	if list.Contains(1, 2, 3) {
+		t.Error("case1 error: the list has no element, sub-list has some elements")
+	}
+
+	// case4: the list has one element, sub-list has no element
+	list = New(1)
+	if !list.Contains() {
+		t.Error("case4 error: the list has one element, sub-list has no element")
+	}
+
+	// case5: the list has one element, sub-list has one element and matching
+	list = New(1)
+	if !list.Contains(1) {
+		t.Error("case5 error: the list has one element, sub-list has one element and matching")
+	}
+
+	// case6: the list has one element, sub-list has one element and not matching
+	list = New(1)
+	if list.Contains(2) {
+		t.Error("case6 error: the list has one element, sub-list has one element and not matching")
+	}
+
+	// case7: the list has one element, sub-list has some elements
+	list = New(1)
+	if list.Contains(1, 2, 3) {
+		t.Error("case7 error: the list has one element, sub-list has some element")
+	}
+
+	// case8: the list has some elements, sub-list has no element
+	list = New(1, 2, 3, 4)
+	if !list.Contains() {
+		t.Error("case8 error: the list has some elements, sub-list has no element")
+	}
+
+	// case9: the list has some elements, sub-list has first element
+	list = New(1, 2, 3, 4)
+	if !list.Contains(1) {
+		t.Error("case9 error: the list has some elements, sub-list has first element")
+	}
+
+	// case10: the list has some elements, sub-list has last element
+	list = New(1, 2, 3, 4)
+	if !list.Contains(4) {
+		t.Error("case10 error: the list has some elements, sub-list has last element")
+	}
+
+	// case11: the list has some elements, sub-list has medium element
+	list = New(1, 2, 3, 4)
+	if !list.Contains(2, 3) {
+		t.Error("case11 error: the list has some elements, sub-list has medium element")
+	}
+	if !list.Contains(1, 2, 3) {
+		t.Error("case11 error: the list has some elements, sub-list has medium element")
+	}
+	if !list.Contains(2, 3, 4) {
+		t.Error("case11 error: the list has some elements, sub-list has medium element")
+	}
+	if !list.Contains(1, 2, 3, 4) {
+		t.Error("case11 error: the list has some elements, sub-list has medium element")
 	}
 }
