@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/prprprus/ds/list/singlylinkedlist"
-	"github.com/prprprus/ds/util"
 )
 
 func main() {
@@ -22,9 +21,6 @@ func main() {
 	fmt.Println(err)
 	v, ok = list.Get(0)
 	fmt.Println(v)
-
-	fmt.Println(util.Sunday("12345", "15"))
-	fmt.Println(util.Sunday("12345", "4"))
 
 	_ = list.Swap(0, 2)
 	v, ok = list.Get(0)
@@ -64,7 +60,10 @@ func main() {
 
 	fmt.Println(list.IndexOf(-3))
 
-	fmt.Println(util.Sunday("12345623", "123"))
+	list1 := singlylinkedlist.New(1, 2, 3, 4, 5, 6, 7, 1, 2, 3)
+	list2 := singlylinkedlist.New(1, 2, 3)
+	fmt.Println(list2.Contains(list1.Values()...))
+
 	// // ---> double linked list
 
 	// list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)

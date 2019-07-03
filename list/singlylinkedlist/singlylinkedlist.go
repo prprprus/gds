@@ -146,10 +146,23 @@ func (list *List) Contains(values ...interface{}) bool {
 	if len(values) == 0 {
 		return true
 	}
+	if list.size == 0 {
+		return false
+	}
 
-	// TODO
-
-	return false
+	for _, value := range values {
+		found := false
+		for element := list.first; element != nil; element = element.next {
+			if element.value == value {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+	return true
 }
 
 // Swap value by index.

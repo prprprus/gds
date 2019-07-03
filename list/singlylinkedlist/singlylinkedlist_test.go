@@ -426,6 +426,67 @@ func TestReverse(t *testing.T) {
 	}
 }
 
+func TestContains(t *testing.T) {
+	list1 := New(1, 2, 3, 4, 5, 6)
+
+	// case1: list1 longer than list2, list1 and list2 has some elements, list2 match in the first element
+	list2 := New(1, 2, 3, 4)
+	if !list1.Contains(list2.Values()...) {
+		t.Error("case1 error: list1 and list2 has some elements, list2 match in the first element")
+	}
+
+	// case2: list1 longer than list2, list1 and list2 has some elements, list2 match in the medium element
+	list2 = New(3, 4, 5)
+	if !list1.Contains(list2.Values()...) {
+		t.Error("case2 error: list1 and list2 has some elements, list2 match in the medium element")
+	}
+
+	// case3: list1 longer than list2, list1 and list2 has some elements, list2 match in the last element
+	list2 = New(5, 6)
+	if !list1.Contains(list2.Values()...) {
+		t.Error("case3 error: list1 and list2 has some elements, list2 match in the last element")
+	}
+
+	// case4: list1 has some elements, list2 has one element, list2 match in the first element
+	list2 = New(1)
+	if !list1.Contains(list2.Values()...) {
+		t.Error("case4 error: list1 has some elements, list2 has one element, list2 match in the first element")
+	}
+
+	// case5: list1 has some elements, list2 has one element, list2 match in the medium element
+	list2 = New(4)
+	if !list1.Contains(list2.Values()...) {
+		t.Error("case5 error: list1 has some elements, list2 has one element, list2 match in the medium element")
+	}
+
+	// case6: list1 has some elements, list2 has one element, list2 match in the last element
+	list2 = New(6)
+	if !list1.Contains(list2.Values()...) {
+		t.Error("case6 error: list1 has some elements, list2 has one element, list2 match in the last element")
+	}
+
+	// case7: list1 has no element
+	list1 = New()
+	list2 = New(1, 2, 3, 4)
+	if list1.Contains(list2.Values()...) {
+		t.Error("case7 error: list1 has no element")
+	}
+
+	// case8: list2 has no element
+	list1 = New(34, 4, 5, 6, 7)
+	list2 = New()
+	if !list1.Contains(list2.Values()...) {
+		t.Error("case8 error: list2 has no element")
+	}
+
+	// case9: list2 longer than list1
+	list1 = New(1, 2, 3)
+	list2 = New(1, 2, 3, 4, 5, 6, 7)
+	if list1.Contains(list2.Values()...) {
+		t.Error("case9 error: list2 longer than list1")
+	}
+}
+
 // Container Interface
 
 func TestEmpty(t *testing.T) {
