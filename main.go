@@ -67,6 +67,9 @@ func main() {
 	// ---> double linked list
 
 	list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)
+	list.PreAppend(-1, -2, -3)
+	list.Reverse()
+
 	iterator := list.Iterator()
 	iterator.Begin()
 	for iterator.Next() {

@@ -30,7 +30,7 @@ func (iterator *Iterator) Next() bool {
 
 	if iterator.index == -1 {
 		iterator.index++
-		iterator.element = iterator.list.frist
+		iterator.element = iterator.list.first
 		return true
 	}
 

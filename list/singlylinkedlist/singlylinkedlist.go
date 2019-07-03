@@ -180,8 +180,8 @@ func (list *List) Swap(i, j int) error {
 }
 
 // Insert value (one or more than one) after index.
-func (list *List) Insert(index int, value ...interface{}) error {
-	if len(value) == 0 {
+func (list *List) Insert(index int, values ...interface{}) error {
+	if len(values) == 0 {
 		return nil
 	}
 	if !list.indexInRange(index) {
@@ -195,13 +195,13 @@ func (list *List) Insert(index int, value ...interface{}) error {
 	foundElementNext := foundElement.next
 
 	// insert
-	for _, v := range value {
+	for _, v := range values {
 		element := &element{value: v}
 		foundElement.next = element
 		foundElement = element
 	}
 	foundElement.next = foundElementNext
-	list.size += len(value)
+	list.size += len(values)
 
 	return nil
 }
