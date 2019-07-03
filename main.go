@@ -3,80 +3,80 @@ package main
 import (
 	"fmt"
 
-	"github.com/prprprus/ds/list/singlylinkedlist"
+	"github.com/prprprus/ds/list/doublelinkedlist"
 )
 
 func main() {
-	// ---> singly linked list
+	// // ---> singly linked list
 
-	list := singlylinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)
+	// list := singlylinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)
 
-	list.Append(10, 11, 12)
-	list.PreAppend(13, 14, 15, 16)
+	// list.Append(10, 11, 12)
+	// list.PreAppend(13, 14, 15, 16)
 
-	v, ok := list.Get(7)
-	fmt.Println(v, ok)
+	// v, ok := list.Get(7)
+	// fmt.Println(v, ok)
 
-	err := list.Remove(0)
-	fmt.Println(err)
-	v, ok = list.Get(0)
-	fmt.Println(v)
+	// err := list.Remove(0)
+	// fmt.Println(err)
+	// v, ok = list.Get(0)
+	// fmt.Println(v)
 
-	_ = list.Swap(0, 2)
-	v, ok = list.Get(0)
-	fmt.Println(v)
-	v, ok = list.Get(2)
-	fmt.Println(v)
-	// 16,15,14,1,2,3,4,5,6,7,8,9,10,11,12
-	fmt.Println("--->")
+	// _ = list.Swap(0, 2)
+	// v, ok = list.Get(0)
+	// fmt.Println(v)
+	// v, ok = list.Get(2)
+	// fmt.Println(v)
+	// // 16,15,14,1,2,3,4,5,6,7,8,9,10,11,12
+	// fmt.Println("--->")
 
-	err = list.Insert(8, -4, -3, -1, -7, -9)
-	fmt.Println(err)
-	for i := 0; i < list.Size(); i++ {
-		v, ok = list.Get(i)
-		fmt.Println(v)
-	}
-	fmt.Println("--->")
+	// err = list.Insert(8, -4, -3, -1, -7, -9)
+	// fmt.Println(err)
+	// for i := 0; i < list.Size(); i++ {
+	// 	v, ok = list.Get(i)
+	// 	fmt.Println(v)
+	// }
+	// fmt.Println("--->")
 
-	list.Set(11, -11)
-	for i := 0; i < list.Size(); i++ {
-		v, ok = list.Get(i)
-		fmt.Println(v)
-	}
-	fmt.Println("--->")
+	// list.Set(11, -11)
+	// for i := 0; i < list.Size(); i++ {
+	// 	v, ok = list.Get(i)
+	// 	fmt.Println(v)
+	// }
+	// fmt.Println("--->")
 
-	values := list.Values()
-	fmt.Println(values)
-	fmt.Println("--->")
+	// values := list.Values()
+	// fmt.Println(values)
+	// fmt.Println("--->")
 
-	iterator := list.Iterator()
-	for iterator.Next() {
-		fmt.Println(iterator.Index(), iterator.Value())
-	}
-	fmt.Println("--->")
-
-	list.Reverse()
-	fmt.Println(list.Values())
-
-	fmt.Println(list.IndexOf(-3))
-
-	list1 := singlylinkedlist.New(1, 2, 3, 4, 5, 6, 7, 1, 2, 3)
-	list2 := singlylinkedlist.New(1, 2, 3)
-	fmt.Println(list2.Contains(list1.Values()...))
-
-	// // ---> double linked list
-
-	// list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)
 	// iterator := list.Iterator()
-	// iterator.Begin()
 	// for iterator.Next() {
 	// 	fmt.Println(iterator.Index(), iterator.Value())
 	// }
 	// fmt.Println("--->")
-	// iterator.End()
-	// for iterator.Prev() {
-	// 	fmt.Println(iterator.Index(), iterator.Value())
-	// }
+
+	// list.Reverse()
+	// fmt.Println(list.Values())
+
+	// fmt.Println(list.IndexOf(-3))
+
+	// list1 := singlylinkedlist.New(1, 2, 3, 4, 5, 6, 7, 1, 2, 3)
+	// list2 := singlylinkedlist.New(1, 2, 3)
+	// fmt.Println(list2.Contains(list1.Values()...))
+
+	// ---> double linked list
+
+	list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)
+	iterator := list.Iterator()
+	iterator.Begin()
+	for iterator.Next() {
+		fmt.Println(iterator.Index(), iterator.Value())
+	}
+	fmt.Println("--->")
+	iterator.End()
+	for iterator.Prev() {
+		fmt.Println(iterator.Index(), iterator.Value())
+	}
 
 	// // ---> skip list
 	// skiplist := skiplist.New()

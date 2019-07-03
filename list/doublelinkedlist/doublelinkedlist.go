@@ -26,7 +26,7 @@ func New(value ...interface{}) *List {
 
 // List Interface
 
-// Append
+// Append values (one or more than one) to list.
 func (list *List) Append(value ...interface{}) {
 	if len(value) == 0 {
 		return
@@ -36,7 +36,7 @@ func (list *List) Append(value ...interface{}) {
 	if list.size == 0 {
 		for i, v := range value {
 			newElement := &element{value: v}
-			// head element
+			// first element
 			if i == 0 {
 				list.frist = newElement
 				list.last = newElement

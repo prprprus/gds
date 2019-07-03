@@ -36,7 +36,6 @@ func New(values ...interface{}) *List {
 // List Interface
 
 // Append values (one or more than one) to list.
-// i.e. [] -> Append(1, 2, 3) -> [1, 2, 3]
 func (list *List) Append(values ...interface{}) {
 	if len(values) == 0 {
 		return
@@ -67,7 +66,6 @@ func (list *List) Append(values ...interface{}) {
 }
 
 // PreAppend can append values (one or more than one) to the front of the list.
-// i.e. [1, 2] -> Append(3, 4) -> [3, 4, 1, 2]
 func (list *List) PreAppend(values ...interface{}) {
 	if len(values) == 0 {
 		return
