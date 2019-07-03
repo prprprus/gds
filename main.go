@@ -59,15 +59,12 @@ func main() {
 	}
 	fmt.Println("--->")
 
-	fmt.Println(list.Values())
-	data, err := list.ToJSON()
-	fmt.Println(data)
-	err = list.FromJSON(data)
-	fmt.Println(list.Values())
-
 	list.Reverse()
 	fmt.Println(list.Values())
 
+	fmt.Println(list.IndexOf(-3))
+
+	fmt.Println(util.Sunday("12345623", "123"))
 	// // ---> double linked list
 
 	// list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)

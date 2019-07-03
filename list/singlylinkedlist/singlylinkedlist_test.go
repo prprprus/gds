@@ -534,63 +534,6 @@ func TestValues(t *testing.T) {
 	}
 }
 
-// Serialization Interface
-
-func TestToJSON(t *testing.T) {
-	list := New(1, 2, 3, 4)
-
-	// case1: list has some elements
-	_, err := list.ToJSON()
-	if err != nil {
-		t.Error("case1 error: list has some elements")
-	}
-
-	list = New(1)
-
-	// case2: list has one element
-	_, err = list.ToJSON()
-	if err != nil {
-		t.Error("case2 error: list has one element")
-	}
-
-	list = New()
-
-	// case3: list has no element
-	_, err = list.ToJSON()
-	if err != nil {
-		t.Error("case3 error: list has no element")
-	}
-}
-
-func TestFromJSON(t *testing.T) {
-	list := New(1, 2, 3, 4)
-
-	// case1: list has some elements
-	json, _ := list.ToJSON()
-	err := list.FromJSON(json)
-	if err != nil {
-		t.Error("case1 error: list has some elements")
-	}
-
-	list = New(1)
-
-	// case2: list has one element
-	json, _ = list.ToJSON()
-	err = list.FromJSON(json)
-	if err != nil {
-		t.Error("case2 error: list has one element")
-	}
-
-	list = New()
-
-	// case3: list has no element
-	json, _ = list.ToJSON()
-	err = list.FromJSON(json)
-	if err != nil {
-		t.Error("case3 error: list has no element")
-	}
-}
-
 // Iterator Interface
 
 func TestIterator(t *testing.T) {

@@ -7,6 +7,8 @@ import (
 var (
 	// ErrIndex is returned when the index is out of the list
 	ErrIndex = errors.New("index is out of the list")
+	// ErrIndexOf is returned when the index of value can not found
+	ErrIndexOf = errors.New("index of value can not found")
 )
 
 // List represents a singly linked list structure.
@@ -220,9 +222,13 @@ func (list *List) Set(index int, value interface{}) error {
 }
 
 // IndexOf get index by value.
-func (list *List) IndexOf(value interface{}) int {
-	// TODO
-	return 0
+func (list *List) IndexOf(value interface{}) (int, error) {
+	for i, v := range list.Values() {
+		if v == value {
+			return i, nil
+		}
+	}
+	return -1, ErrIndexOf
 }
 
 // Reverse the list.
