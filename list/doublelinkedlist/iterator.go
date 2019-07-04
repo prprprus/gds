@@ -1,6 +1,10 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
 package doublelinkedlist
 
-// Iterator
+// Iterator represents an iterable structure of list.
 type Iterator struct {
 	list    *List    // target of iteration
 	index   int      // current index

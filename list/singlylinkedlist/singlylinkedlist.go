@@ -1,3 +1,10 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
+// Package singlylinkedlist implements the singly-linked list.
+// Structure is not concurrent safe.
+// Reference: https://en.wikipedia.org/wiki/Linked_list#Singly_linked_list
 package singlylinkedlist
 
 import (
