@@ -64,6 +64,10 @@ func (iterator *Iterator) Prev() bool {
 
 // Value
 func (iterator *Iterator) Value() interface{} {
+	if iterator.element == nil {
+		return nil
+	}
+
 	return iterator.element.value
 }
 

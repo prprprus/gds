@@ -40,10 +40,11 @@ func (iterator *Iterator) Index() int {
 
 // Value returns the current value of the element of the iterator.
 func (iterator *Iterator) Value() interface{} {
-	if iterator.element != nil {
-		return iterator.element.value
+	if iterator.element == nil {
+		return nil
 	}
-	return nil
+
+	return iterator.element.value
 }
 
 // Begin reset the iterator to the initial status.

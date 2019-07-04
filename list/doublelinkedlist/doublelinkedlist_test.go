@@ -757,8 +757,216 @@ func TestIterator(t *testing.T) {
 	// case1: the list has no element
 	list := New()
 	iterator := list.Iterator()
+	if iterator.element != nil || iterator.index != -1 || list.first != list.last {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	iterator = list.Iterator()
+	if iterator.element != nil || iterator.index != -1 || list.first != list.last {
+		t.Error("case2 error: the list has one element")
+	}
+
+	// case3: the list has some elements
+	list = New(1, 2, 3, 4)
+	iterator = list.Iterator()
+	if iterator.element != nil || iterator.index != -1 {
+		t.Error("case3 error: the list has some elements")
+	}
+}
+
+func TestNext(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	iterator := list.Iterator()
+	if iterator.Next() {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	iterator = list.Iterator()
+	result := []interface{}{1}
+	i := 0
+	for iterator.Next() {
+		if iterator.element.value != result[i] {
+			t.Error("case2 error: the list has one element")
+		}
+		i++
+	}
+
+	// case3: the list has some elements
+	list = New(1, 2, 3, 4)
+	iterator = list.Iterator()
+	result = []interface{}{1, 2, 3, 4}
+	i = 0
+	for iterator.Next() {
+		if iterator.element.value != result[i] {
+			t.Error("case3 error: the list has some elements")
+		}
+		i++
+	}
+}
+
+func TestBegin(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	iterator := list.Iterator()
+	for iterator.Next() {
+	}
+	iterator.Begin()
 	if iterator.element != nil || iterator.index != -1 {
 		t.Error("case1 error: the list has no element")
 	}
 
+	// case2: the list has one element
+	list = New(1)
+	iterator = list.Iterator()
+	for iterator.Next() {
+	}
+	iterator.Begin()
+	if iterator.element != nil || iterator.index != -1 {
+		t.Error("case2 error: the list has one element")
+	}
+
+	// case3: the list has some elements
+	list = New(1, 2, 3, 4, 5)
+	iterator = list.Iterator()
+	for iterator.Next() {
+	}
+	iterator.Begin()
+	if iterator.element != nil || iterator.index != -1 {
+		t.Error("case3 error: the list has some elements")
+	}
+}
+
+func TestPrev(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	iterator := list.Iterator()
+	if iterator.Prev() {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	iterator = list.Iterator()
+	result := []interface{}{1}
+	i := 0
+	for iterator.Prev() {
+		if iterator.element.value != result[i] {
+			t.Error("case2 error: the list has one element")
+		}
+		i++
+	}
+
+	// case3: the list has some elements
+	list = New(1, 2, 3, 4)
+	iterator = list.Iterator()
+	result = []interface{}{4, 3, 2, 1}
+	i = 3
+	for iterator.Prev() {
+		if iterator.element.value != result[i] {
+			t.Error("case3 error: the list has some elements")
+		}
+		i++
+	}
+}
+
+func TestEnd(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	iterator := list.Iterator()
+	for iterator.Prev() {
+	}
+	iterator.End()
+	if iterator.element != list.last || iterator.index != 0 {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	iterator = list.Iterator()
+	for iterator.Prev() {
+	}
+	iterator.End()
+	if iterator.element != list.last || iterator.index != 1 {
+		t.Error("case2 error: the list has one element")
+	}
+
+	// case3: the list has some elements
+	list = New(1, 2, 3, 4, 5)
+	iterator = list.Iterator()
+	for iterator.Prev() {
+	}
+	iterator.End()
+	if iterator.element != list.last || iterator.index != 5 {
+		t.Error("case3 error: the list has some elements")
+	}
+}
+
+func TestValue(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	iterator := list.Iterator()
+	iterator.Next()
+	if iterator.Value() != nil {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	iterator = list.Iterator()
+	result := []interface{}{1}
+	i := 0
+	for iterator.Next() {
+		if iterator.Value() != result[i] {
+			t.Error("case2 error: the list has one element")
+		}
+		i++
+	}
+
+	// case3: the list has some elements
+	list = New(1, 2, 3, 4)
+	iterator = list.Iterator()
+	result = []interface{}{1, 2, 3, 4}
+	i = 0
+	for iterator.Next() {
+		if iterator.Value() != result[i] {
+			t.Error("case3 error: the list has some elements")
+		}
+		i++
+	}
+}
+
+func TestIndex(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	iterator := list.Iterator()
+	if iterator.index != -1 {
+		t.Error("case1 error: the list has no element")
+	}
+
+	// case2: the list has one element
+	list = New(1)
+	iterator = list.Iterator()
+	i := 0
+	for iterator.Next() {
+		if iterator.Index() != i {
+			t.Error("case2 error: the list has one element")
+		}
+		i++
+	}
+
+	// case3: the list has some elements
+	list = New(1, 2, 3, 4)
+	iterator = list.Iterator()
+	i = 0
+	for iterator.Next() {
+		if iterator.Index() != i {
+			t.Error("case3 error: the list has some elements")
+		}
+		i++
+	}
 }
