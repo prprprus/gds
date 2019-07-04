@@ -39,6 +39,8 @@ func TestNew(t *testing.T) {
 	}
 }
 
+// List Interface
+
 func TestAppend(t *testing.T) {
 	// case1: the list has no element, append nothing
 	list := New()
@@ -661,6 +663,8 @@ func TestReverse(t *testing.T) {
 	}
 }
 
+// Container Interface
+
 func TestEmpty(t *testing.T) {
 	// case1: the list has no element
 	list := New()
@@ -745,4 +749,16 @@ func TestValues(t *testing.T) {
 	if !verifyElements(values, list) {
 		t.Error("case3 error: the list has some elements")
 	}
+}
+
+// Iterator Interface
+
+func TestIterator(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	iterator := list.Iterator()
+	if iterator.element != nil || iterator.index != -1 {
+		t.Error("case1 error: the list has no element")
+	}
+
 }
