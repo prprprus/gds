@@ -192,11 +192,11 @@ func (list *List) Swap(i, j int) error {
 
 // Insert value (one or more than one) after index.
 func (list *List) Insert(index int, values ...interface{}) error {
-	if len(values) == 0 {
-		return nil
-	}
 	if !list.indexInRange(index) {
 		return ErrIndex
+	}
+	if len(values) == 0 {
+		return nil
 	}
 	if index == list.size-1 {
 		list.Append(values...)
@@ -302,6 +302,10 @@ func (list *List) Clear() {
 // Values returns the values of list.
 func (list *List) Values() []interface{} {
 	values := make([]interface{}, 0)
+
+	if list.size == 0 {
+		return values
+	}
 
 	iterator := list.Iterator()
 	iterator.Begin()

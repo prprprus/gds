@@ -284,6 +284,10 @@ func (list *List) Clear() {
 func (list *List) Values() []interface{} {
 	values := make([]interface{}, 0)
 
+	if list.size == 0 {
+		return values
+	}
+
 	iterator := list.Iterator()
 	iterator.Begin()
 	for iterator.Next() {
