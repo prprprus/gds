@@ -181,11 +181,15 @@ func (list *List) Swap(i, j int) error {
 
 // Insert value (one or more than one) after index.
 func (list *List) Insert(index int, values ...interface{}) error {
+	if !list.indexInRange(index) {
+		return ErrIndex
+	}
 	if len(values) == 0 {
 		return nil
 	}
-	if !list.indexInRange(index) {
-		return ErrIndex
+	if index == list.size-1 {
+		list.Append(values...)
+		return nil
 	}
 
 	foundElement := list.first
