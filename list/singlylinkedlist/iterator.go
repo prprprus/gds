@@ -2,7 +2,7 @@ package singlylinkedlist
 
 // Iterator represents an iterable structure of list.
 type Iterator struct {
-	list    *List    // list of iterator
+	list    *List    // target of iteration
 	index   int      // current index
 	element *element // current element
 }
