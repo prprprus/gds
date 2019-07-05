@@ -21,6 +21,8 @@ func verifyElements(result []interface{}, list *List) bool {
 	return true
 }
 
+// List Interface
+
 func TestNew(t *testing.T) {
 	// case1: create a new list with no element
 	list := New()
@@ -41,8 +43,6 @@ func TestNew(t *testing.T) {
 		t.Error("case3 error: create a new list with some elements")
 	}
 }
-
-// List Interface
 
 func TestAppend(t *testing.T) {
 	// case1: the list has no element, append nothing
