@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/prprprus/ds/list/doublelinkedlist"
+	"github.com/prprprus/ds/list/arraylist"
 )
 
 func main() {
@@ -66,20 +66,20 @@ func main() {
 
 	// ---> double linked list
 
-	list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)
-	list.PreAppend(-1, -2, -3)
-	list.Reverse()
+	// list := doublelinkedlist.New(1, 2, 3, 4, 5, 6, 7, 8, 9)
+	// list.PreAppend(-1, -2, -3)
+	// list.Reverse()
 
-	iterator := list.Iterator()
-	iterator.Begin()
-	for iterator.Next() {
-		fmt.Println(iterator.Index(), iterator.Value())
-	}
-	fmt.Println("--->")
-	iterator.End()
-	for iterator.Prev() {
-		fmt.Println(iterator.Index(), iterator.Value())
-	}
+	// iterator := list.Iterator()
+	// iterator.Begin()
+	// for iterator.Next() {
+	// 	fmt.Println(iterator.Index(), iterator.Value())
+	// }
+	// fmt.Println("--->")
+	// iterator.End()
+	// for iterator.Prev() {
+	// 	fmt.Println(iterator.Index(), iterator.Value())
+	// }
 
 	// // ---> skip list
 	// skiplist := skiplist.New()
@@ -113,4 +113,19 @@ func main() {
 	// fmt.Println(skiplist.Get(1111))
 	// fmt.Println(skiplist.Get(1278))
 	// fmt.Println(skiplist.Get(11178))
+
+	// arraylist
+	list := arraylist.New()
+	list.Append(1, 2, 3)
+
+	iterator := list.Iterator()
+	iterator.Begin()
+	for iterator.Next() {
+		fmt.Println(iterator.Index(), iterator.Value())
+	}
+	fmt.Println("--->")
+	iterator.End()
+	for iterator.Prev() {
+		fmt.Println(iterator.Index(), iterator.Value())
+	}
 }

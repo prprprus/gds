@@ -20,12 +20,12 @@ var (
 
 // List represents a double linked list structure.
 type List struct {
-	first *element
-	last  *element
-	size  int
+	first *element // the address of the first element
+	last  *element // the address of the last element
+	size  int      // size of list
 }
 
-// element of list.
+// Element of list.
 type element struct {
 	value interface{} // value fields can store any type
 	prev  *element    // prev fields stores the address pointing to the next element
@@ -94,7 +94,7 @@ func (list *List) PreAppend(values ...interface{}) {
 	}
 }
 
-// indexInRange check if the index is within the length of the list.
+// Check if the index is within the length of the list.
 func (list *List) indexInRange(index int) bool {
 	if index >= 0 && index < list.size {
 		return true

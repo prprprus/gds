@@ -1,6 +1,15 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
+// Package arraylist implements the array list.
+// Structure is not concurrent safe.
+// Reference: https://en.wikipedia.org/wiki/Dynamic_array
 package arraylist
 
-import "errors"
+import (
+	"errors"
+)
 
 var (
 	// ErrIndex is returned when the index is out of the list
@@ -10,27 +19,33 @@ var (
 )
 
 const (
-	growthFactor = float32(2.0)
-	shrinkFactor = float32(0.25)
+	growthFactor = float32(2.0)  // growth factor by 100%
+	shrinkFactor = float32(0.25) // shrink factor by 25%
 )
 
-// List
+// List represents a array list structure.
 type List struct {
-	elements []interface{}
-	size     int
+	elements []interface{} // elements of array list
+	size     int           // size of array list
+	cap      int           // capacity of array list
 }
 
+// Growth the list capacity.
+// If the number of elements is greater than the current capacity,
+// expand the capacity by 100%.
 func (list *List) growth(n int) {
 	currCap := cap(list.elements)
 	if list.size+n >= currCap {
-		newCap := int(float32(currCap) * growthFactor)
+		newCap := int(float32(currCap+n) * growthFactor)
 		list.resize(newCap)
 	}
-
-	list.size += n
 }
 
+// Shrink the list capacity.
+// If the number of elements is less than 25% of the current capacity,
+// reduce the capacity to number of elements.
 func (list *List) shrink() {
+	// shrinkFactor equal 0.0 mean never shrink
 	if shrinkFactor == 0.0 {
 		return
 	}
@@ -39,19 +54,19 @@ func (list *List) shrink() {
 	if list.size <= int(float32(currCap)*shrinkFactor) {
 		list.resize(list.size)
 	}
-
-	list.size--
 }
 
+// Resize the list capacity.
 func (list *List) resize(cap int) {
 	newElements := make([]interface{}, cap, cap)
 	copy(newElements, list.elements)
 	list.elements = newElements
+	list.cap = cap
 }
 
 // List Interface
 
-// New
+// New array list.
 func New(values ...interface{}) *List {
 	list := &List{}
 	if len(values) != 0 {
@@ -60,16 +75,16 @@ func New(values ...interface{}) *List {
 	return list
 }
 
-// Append
+// Append values (one or more than one) to list.
 func (list *List) Append(values ...interface{}) {
 	list.growth(len(values))
-	index := list.size
 	for _, v := range values {
-		list.elements[index] = v
-		index++
+		list.elements[list.size] = v
+		list.size++
 	}
 }
 
+// Check if the index is within the length of the list.
 func (list *List) indexInRange(index int) bool {
 	if index >= 0 && index < list.size {
 		return true
@@ -77,7 +92,7 @@ func (list *List) indexInRange(index int) bool {
 	return false
 }
 
-// Get
+// Get value by index.
 func (list *List) Get(index int) (interface{}, error) {
 	if !list.indexInRange(index) {
 		return nil, ErrIndex
@@ -86,7 +101,7 @@ func (list *List) Get(index int) (interface{}, error) {
 	return list.elements[index], nil
 }
 
-// Remove
+// Remove element by index.
 func (list *List) Remove(index int) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
@@ -95,11 +110,12 @@ func (list *List) Remove(index int) error {
 	list.elements[index] = nil
 	copy(list.elements[index:], list.elements[index+1:list.size])
 	list.shrink()
+	list.size--
 
 	return nil
 }
 
-// Contains
+// Contains returns true if list contains values, false otherwise.
 func (list *List) Contains(values ...interface{}) bool {
 	if len(values) == 0 {
 		return true
@@ -123,7 +139,7 @@ func (list *List) Contains(values ...interface{}) bool {
 	return true
 }
 
-// Swap
+// Swap value by index.
 func (list *List) Swap(i, j int) error {
 	if !list.indexInRange(i) || !list.indexInRange(j) {
 		return ErrIndex
@@ -137,7 +153,7 @@ func (list *List) Swap(i, j int) error {
 	return nil
 }
 
-// Insert
+// Insert value (one or more than one) after index.
 func (list *List) Insert(index int, values ...interface{}) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
@@ -152,13 +168,14 @@ func (list *List) Insert(index int, values ...interface{}) error {
 
 	l := len(values)
 	list.growth(l)
+	list.size += l
 	copy(list.elements[index+1+l:], list.elements[index+1:])
 	copy(list.elements[index+1:], values)
 
 	return nil
 }
 
-// Set
+// Set element by index.
 func (list *List) Set(index int, value interface{}) error {
 	if !list.indexInRange(index) {
 		return ErrIndex
@@ -169,7 +186,7 @@ func (list *List) Set(index int, value interface{}) error {
 	return nil
 }
 
-// IndexOf
+// IndexOf get index by value.
 func (list *List) IndexOf(value interface{}) (int, error) {
 	for index, element := range list.elements {
 		if element == value {
@@ -181,23 +198,23 @@ func (list *List) IndexOf(value interface{}) (int, error) {
 
 // Container Interface
 
-// Empty
+// Empty returns true if the list is empty, otherwise returns false.
 func (list *List) Empty() bool {
 	return list.size == 0
 }
 
-// Size
+// Size returns the size of the list.
 func (list *List) Size() int {
 	return list.size
 }
 
-// Clear
+// Clear th list.
 func (list *List) Clear() {
 	list.size = 0
 	list.elements = []interface{}{}
 }
 
-// Values
+// Values returns the values of list.
 func (list *List) Values() []interface{} {
 	newElements := make([]interface{}, list.size, list.size)
 	copy(newElements, list.elements)
