@@ -1,12 +1,16 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
 package arraylist
 
-// Iterator
+// Iterator represents an iterable structure of list.
 type Iterator struct {
-	list  *List
-	index int
+	list  *List // target of iteration
+	index int   // current index
 }
 
-// Iterator
+// Iterator returns the iterator object of list.
 func (list *List) Iterator() *Iterator {
 	return &Iterator{
 		list:  list,
@@ -14,12 +18,12 @@ func (list *List) Iterator() *Iterator {
 	}
 }
 
-// Begin
+// Begin reset the iterator to the initial status.
 func (iterator *Iterator) Begin() {
 	iterator.index = -1
 }
 
-// Next
+// Next returns true if the next element exists, false otherwise.
 func (iterator *Iterator) Next() bool {
 	if !iterator.list.indexInRange(iterator.index + 1) {
 		return false
@@ -29,12 +33,12 @@ func (iterator *Iterator) Next() bool {
 	return true
 }
 
-// End
+// End reset the iterator to the reverse status.
 func (iterator *Iterator) End() {
 	iterator.index = iterator.list.size
 }
 
-// Prev
+// Prev returns true if the prev element exists, false otherwise.
 func (iterator *Iterator) Prev() bool {
 	if !iterator.list.indexInRange(iterator.index - 1) {
 		return false
@@ -44,12 +48,16 @@ func (iterator *Iterator) Prev() bool {
 	return true
 }
 
-// Value
+// Value returns the current value of the element of the iterator.
 func (iterator *Iterator) Value() interface{} {
+	if !iterator.list.indexInRange(iterator.index) {
+		return nil
+	}
+
 	return iterator.list.elements[iterator.index]
 }
 
-// Index
+// Index returns the current index of the iterator.
 func (iterator *Iterator) Index() int {
 	return iterator.index
 }
