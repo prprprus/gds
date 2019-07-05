@@ -57,11 +57,11 @@ func (list *List) shrink() {
 }
 
 // Resize the list capacity.
-func (list *List) resize(cap int) {
-	newElements := make([]interface{}, cap, cap)
+func (list *List) resize(caps int) {
+	newElements := make([]interface{}, caps, caps)
 	copy(newElements, list.elements)
 	list.elements = newElements
-	list.caps = cap
+	list.caps = caps
 }
 
 // List Interface
