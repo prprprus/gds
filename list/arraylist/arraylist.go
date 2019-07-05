@@ -27,7 +27,7 @@ const (
 type List struct {
 	elements []interface{} // elements of array list
 	size     int           // size of array list
-	cap      int           // capacity of array list
+	caps     int           // capacity of array list
 }
 
 // Growth the list capacity.
@@ -61,7 +61,7 @@ func (list *List) resize(cap int) {
 	newElements := make([]interface{}, cap, cap)
 	copy(newElements, list.elements)
 	list.elements = newElements
-	list.cap = cap
+	list.caps = cap
 }
 
 // List Interface
