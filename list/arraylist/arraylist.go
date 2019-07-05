@@ -107,6 +107,7 @@ func (list *List) Remove(index int) error {
 		return ErrIndex
 	}
 
+	// remove
 	list.elements[index] = nil
 	copy(list.elements[index:], list.elements[index+1:list.size])
 	list.size--
@@ -166,6 +167,7 @@ func (list *List) Insert(index int, values ...interface{}) error {
 		return nil
 	}
 
+	// insert
 	l := len(values)
 	list.growth(l)
 	list.size += l
