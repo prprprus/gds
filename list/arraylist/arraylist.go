@@ -109,8 +109,8 @@ func (list *List) Remove(index int) error {
 
 	list.elements[index] = nil
 	copy(list.elements[index:], list.elements[index+1:list.size])
-	list.shrink()
 	list.size--
+	list.shrink()
 
 	return nil
 }
