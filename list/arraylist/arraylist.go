@@ -150,5 +150,56 @@ func (list *List) Insert(index int, values ...interface{}) error {
 		return nil
 	}
 
-	list.growth(len(values))
+	l := len(values)
+	list.growth(l)
+	copy(list.elements[index+1+l:], list.elements[index+1:])
+	copy(list.elements[index+1:], values)
+
+	return nil
+}
+
+// Set
+func (list *List) Set(index int, value interface{}) error {
+	if !list.indexInRange(index) {
+		return ErrIndex
+	}
+
+	list.elements[index] = value
+
+	return nil
+}
+
+// IndexOf
+func (list *List) IndexOf(value interface{}) (int, error) {
+	for index, element := range list.elements {
+		if element == value {
+			return index, nil
+		}
+	}
+	return -1, ErrIndexOf
+}
+
+// Container Interface
+
+// Empty
+func (list *List) Empty() bool {
+	return list.size == 0
+}
+
+// Size
+func (list *List) Size() int {
+	return list.size
+}
+
+// Clear
+func (list *List) Clear() {
+	list.size = 0
+	list.elements = []interface{}{}
+}
+
+// Values
+func (list *List) Values() []interface{} {
+	newElements := make([]interface{}, list.size, list.size)
+	copy(newElements, list.elements)
+	return newElements
 }

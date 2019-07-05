@@ -894,7 +894,7 @@ func TestEnd(t *testing.T) {
 	for iterator.Prev() {
 	}
 	iterator.End()
-	if iterator.element != list.last || iterator.index != 1 {
+	if iterator.element != nil || iterator.index != 1 {
 		t.Error("case2 error: the list has one element")
 	}
 
@@ -904,7 +904,7 @@ func TestEnd(t *testing.T) {
 	for iterator.Prev() {
 	}
 	iterator.End()
-	if iterator.element != list.last || iterator.index != 5 {
+	if iterator.element != nil || iterator.index != 5 {
 		t.Error("case3 error: the list has some elements")
 	}
 }

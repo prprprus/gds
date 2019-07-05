@@ -280,8 +280,7 @@ func (list *List) Empty() bool {
 
 // Size returns the size of the list.
 func (list *List) Size() int {
-	size := list.size
-	return size
+	return list.size
 }
 
 // Clear th list.

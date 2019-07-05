@@ -46,7 +46,7 @@ func (iterator *Iterator) Next() bool {
 // End reset the iterator to the reverse status.
 func (iterator *Iterator) End() {
 	iterator.index = iterator.list.size
-	iterator.element = iterator.list.last
+	iterator.element = nil
 }
 
 // Prev returns true if the prev element exists, false otherwise.
