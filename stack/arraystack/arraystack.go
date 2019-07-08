@@ -26,7 +26,7 @@ type Stack struct {
 // New array stack.
 func New() *Stack {
 	return &Stack{
-		list: arraylist.New(),
+		list: &arraylist.List{},
 	}
 }
 

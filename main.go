@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/prprprus/ds/stack/arraystack"
+	"github.com/emirpasic/gods/stacks/linkedliststack"
 )
 
 func main() {
@@ -129,8 +129,25 @@ func main() {
 	// 	fmt.Println(iterator.Index(), iterator.Value())
 	// }
 
+	// // arraystack
+	// stack := arraystack.New()
+	// stack.Push(1)
+	// stack.Push(2)
+	// stack.Push(3)
+
+	// iterator := stack.Iterator()
+	// iterator.Begin()
+	// for iterator.Next() {
+	// 	fmt.Println(iterator.Index(), iterator.Value())
+	// }
+	// fmt.Println("--->")
+	// iterator.End()
+	// for iterator.Prev() {
+	// 	fmt.Println(iterator.Index(), iterator.Value())
+	// }
+
 	// arraystack
-	stack := arraystack.New()
+	stack := linkedliststack.New()
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)
