@@ -210,7 +210,7 @@ func (list *List) Size() int {
 	return list.size
 }
 
-// Clear th list.
+// Clear the list.
 func (list *List) Clear() {
 	list.size = 0
 	list.elements = []interface{}{}

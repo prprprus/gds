@@ -2,11 +2,6 @@
 // Use of this source code is governed by a BSD-style.
 // license that can be found in the LICENSE file.
 
-// Test Principle:
-// 1. the list has no element.
-// 2. the list has one element.
-// 3. the list has some elements (handle first element, last element and medium element).
-
 package singlylinkedlist
 
 import (
