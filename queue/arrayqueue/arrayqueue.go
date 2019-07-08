@@ -1,3 +1,10 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
+// Package arrayqueue implements the array queue.
+// Structure is not concurrent safe.
+// Reference: https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
 package arrayqueue
 
 import (
@@ -11,20 +18,26 @@ var (
 	ErrPop = errors.New("queue is empty")
 )
 
+// Queue represents a array queue structure.
 type Queue struct {
 	list *arraylist.List
 }
 
+// New array queue.
 func New() *Queue {
 	return &Queue{
 		list: &arraylist.List{},
 	}
 }
 
+// Queue Interface
+
+// Put value into the queue.
 func (queue *Queue) Put(value interface{}) {
 	queue.list.Append(value)
 }
 
+// Get the value from the top of the queue and delete the value.
 func (queue *Queue) Get() (interface{}, error) {
 	if queue.Size() == 0 {
 		return nil, ErrPop
