@@ -6,6 +6,7 @@
 // 1. the list has no element.
 // 2. the list has one element.
 // 3. the list has some elements (handle first element, last element and medium element).
+
 package arraylist
 
 import "testing"
