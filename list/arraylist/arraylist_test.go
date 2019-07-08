@@ -11,14 +11,33 @@ package arraylist
 import "testing"
 
 func verifyElements(result []interface{}, list *List) bool {
-	index := 0
-	for _, v := range result {
-		if list.elements[index] != v {
+	for i, v := range result {
+		if list.elements[i] != v {
 			return false
 		}
-		index++
 	}
 	return true
+}
+
+func TestNew(t *testing.T) {
+	// case1: create a new list with no element
+	list := New()
+	if list.elements != nil || list.size != 0 {
+		t.Error("case1 error: create a new list with no element")
+	}
+
+	// case2: create a new list with one element
+	list = New(1)
+	if list.elements == nil || list.size != 1 || list.elements[0] != 1 {
+		t.Error("case2 error: create a new list with one element")
+	}
+
+	// case3: create a new list with some elements
+	list = New(1, 2, 3, 4)
+	result := []interface{}{1, 2, 3, 4}
+	if list.size != 4 || !verifyElements(result, list) {
+		t.Error("case3 error: create a new list with some elements")
+	}
 }
 
 func TestGrowth(t *testing.T) {
@@ -68,27 +87,6 @@ func TestShrink(t *testing.T) {
 }
 
 // List Interface
-
-func TestNew(t *testing.T) {
-	// case1: create a new list with no element
-	list := New()
-	if list.elements != nil || list.size != 0 {
-		t.Error("case1 error: create a new list with no element")
-	}
-
-	// case2: create a new list with one element
-	list = New(1)
-	if list.elements == nil || list.size != 1 || list.elements[0] != 1 {
-		t.Error("case2 error: create a new list with one element")
-	}
-
-	// case3: create a new list with some elements
-	list = New(1, 2, 3, 4)
-	result := []interface{}{1, 2, 3, 4}
-	if list.size != 4 || !verifyElements(result, list) {
-		t.Error("case3 error: create a new list with some elements")
-	}
-}
 
 func TestAppend(t *testing.T) {
 	// case1: the list has no element, append nothing

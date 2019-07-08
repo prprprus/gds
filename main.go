@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/prprprus/ds/list/arraylist"
+	"github.com/prprprus/ds/stack/arraystack"
 )
 
 func main() {
@@ -114,11 +114,28 @@ func main() {
 	// fmt.Println(skiplist.Get(1278))
 	// fmt.Println(skiplist.Get(11178))
 
-	// arraylist
-	list := arraylist.New()
-	list.Append(1, 2, 3)
+	// // arraylist
+	// list := arraylist.New()
+	// list.Append(1, 2, 3)
 
-	iterator := list.Iterator()
+	// iterator := list.Iterator()
+	// iterator.Begin()
+	// for iterator.Next() {
+	// 	fmt.Println(iterator.Index(), iterator.Value())
+	// }
+	// fmt.Println("--->")
+	// iterator.End()
+	// for iterator.Prev() {
+	// 	fmt.Println(iterator.Index(), iterator.Value())
+	// }
+
+	// arraystack
+	stack := arraystack.New()
+	stack.Push(1)
+	stack.Push(2)
+	stack.Push(3)
+
+	iterator := stack.Iterator()
 	iterator.Begin()
 	for iterator.Next() {
 		fmt.Println(iterator.Index(), iterator.Value())
