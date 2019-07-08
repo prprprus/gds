@@ -2,6 +2,9 @@
 // Use of this source code is governed by a BSD-style.
 // license that can be found in the LICENSE file.
 
+// Package arraystack implements the array stack.
+// Structure is not concurrent safe.
+// Reference: https://en.wikipedia.org/wiki/Stack_(abstract_data_type)#Array
 package arraystack
 
 import (
