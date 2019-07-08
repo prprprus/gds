@@ -64,8 +64,6 @@ func (list *List) resize(caps int) {
 	list.caps = caps
 }
 
-// List Interface
-
 // New array list.
 func New(values ...interface{}) *List {
 	list := &List{}
@@ -74,6 +72,8 @@ func New(values ...interface{}) *List {
 	}
 	return list
 }
+
+// List Interface
 
 // Append values (one or more than one) to list.
 func (list *List) Append(values ...interface{}) {

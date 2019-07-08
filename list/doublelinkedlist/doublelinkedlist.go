@@ -32,8 +32,6 @@ type element struct {
 	next  *element    // next fields stores the address pointing to the next element
 }
 
-// List Interface
-
 // New double linked list.
 func New(value ...interface{}) *List {
 	list := &List{}
@@ -42,6 +40,8 @@ func New(value ...interface{}) *List {
 	}
 	return list
 }
+
+// List Interface
 
 // Append values (one or more than one) to list.
 func (list *List) Append(value ...interface{}) {
