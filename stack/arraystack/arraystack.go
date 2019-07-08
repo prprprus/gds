@@ -11,9 +11,11 @@ import (
 )
 
 var (
+	// ErrPop is returned when the stack is empty
 	ErrPop = errors.New("stack is empty")
 )
 
+// Stack represents a array stack structure.
 type Stack struct {
 	list *arraylist.List
 }
