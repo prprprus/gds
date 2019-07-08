@@ -43,9 +43,9 @@ func (stack *Stack) Pop() (interface{}, error) {
 		return nil, ErrPop
 	}
 
-	element, _ := stack.list.Get(stack.list.Size() - 1)
+	value, _ := stack.list.Get(stack.list.Size() - 1)
 	stack.list.Remove(stack.list.Size() - 1)
-	return element, nil
+	return value, nil
 }
 
 // Peek will get the value from the top of the stack and don't delete the value.
@@ -54,8 +54,8 @@ func (stack *Stack) Peek() (interface{}, error) {
 		return nil, ErrPop
 	}
 
-	element, _ := stack.list.Get(stack.list.Size() - 1)
-	return element, nil
+	value, _ := stack.list.Get(stack.list.Size() - 1)
+	return value, nil
 }
 
 // Check if the index is within the length of the list.
