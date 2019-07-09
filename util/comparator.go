@@ -12,11 +12,11 @@ import (
 // Comparator is used for comparison between the same types.
 //
 // The types of built-in support are:
-// 	int, int8, int16, int32, int64
-// 	uint, uint8, uint16, uint32, uint64
-// 	float32, float64
-// 	byte, run, string
-// 	time
+// int, int8, int16, int32, int64
+// uint, uint8, uint16, uint32, uint64
+// float32, float64
+// byte, run, string
+// time
 //
 // You can also use a custom comparator.
 type Comparator func(a, b interface{}) int
