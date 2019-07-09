@@ -194,7 +194,7 @@ func Float64Comparator(a, b interface{}) int {
 	}
 }
 
-// byte, rune, string
+// byte, rune
 
 // ByteComparator compares the value of type byte.
 func ByteComparator(a, b interface{}) int {
@@ -223,6 +223,8 @@ func RuneComparator(a, b interface{}) int {
 		return 0
 	}
 }
+
+// string
 
 // StringComparator compares the value of type string.
 func StringComparator(a, b interface{}) int {

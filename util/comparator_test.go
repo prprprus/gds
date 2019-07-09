@@ -290,7 +290,7 @@ func TestFloat64Comparator(t *testing.T) {
 	}
 }
 
-// byte, rune, string
+// byte, rune
 
 func TestByteComparator(t *testing.T) {
 	// case1: a < b
@@ -337,6 +337,8 @@ func TestRuneComparator(t *testing.T) {
 		t.Error("case3 error: a == b")
 	}
 }
+
+// string
 
 func TestStringComparator(t *testing.T) {
 	// case1: a < b
