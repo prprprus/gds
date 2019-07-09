@@ -20,7 +20,7 @@ var (
 )
 
 type node struct {
-	// key interface{} // comparator
+	// key interface{}
 	// value interface{}
 	value int
 	next  []*node
@@ -32,6 +32,7 @@ type SkipList struct {
 	head     *node
 	size     int
 	maxLevel int
+	// comparator util.Comparator
 }
 
 type record struct {
