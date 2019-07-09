@@ -20,6 +20,8 @@ var (
 )
 
 type node struct {
+	// key interface{} // comparator
+	// value interface{}
 	value int
 	next  []*node
 	level int
