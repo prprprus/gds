@@ -30,7 +30,7 @@ func IntComparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -44,7 +44,7 @@ func Int8Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -58,7 +58,7 @@ func Int16Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -72,7 +72,7 @@ func Int32Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -86,7 +86,7 @@ func Int64Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -102,7 +102,7 @@ func UIntComparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -116,7 +116,7 @@ func UInt8Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -130,7 +130,7 @@ func UInt16Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -144,7 +144,7 @@ func UInt32Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -158,7 +158,7 @@ func UInt64Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -174,7 +174,7 @@ func Float32Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -188,7 +188,7 @@ func Float64Comparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -204,7 +204,7 @@ func ByteComparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
@@ -218,7 +218,7 @@ func RuneComparator(a, b interface{}) int {
 	switch {
 	case c1 < c2:
 		return -1
-	case c2 > c2:
+	case c1 > c2:
 		return 1
 	default:
 		return 0
