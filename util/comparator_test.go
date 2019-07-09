@@ -147,3 +147,26 @@ func TestUIntComparator(t *testing.T) {
 		t.Error("case3 error: a == b")
 	}
 }
+
+func TestUInt8Comparator(t *testing.T) {
+	// case1: a < b
+	a := uint8(252)
+	b := uint8(253)
+	if UInt8Comparator(a, b) >= 0 {
+		t.Error("case1 error: a < b")
+	}
+
+	// case2: a > b
+	a = uint8(253)
+	b = uint8(252)
+	if UInt8Comparator(a, b) <= 0 {
+		t.Error("case2 error: a > b")
+	}
+
+	// case3: a == b
+	a = uint8(253)
+	b = uint8(253)
+	if UInt8Comparator(a, b) != 0 {
+		t.Error("case3 error: a == b")
+	}
+}
