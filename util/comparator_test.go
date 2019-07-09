@@ -6,6 +6,8 @@ package util
 
 import "testing"
 
+// int, int8, int16, int32, int64
+
 func TestIntComparator(t *testing.T) {
 	// case1: a < b
 	a := 1
@@ -120,3 +122,5 @@ func TestInt64Comparator(t *testing.T) {
 		t.Error("case3 error: a == b")
 	}
 }
+
+// uint, uint8, uint16, uint32, uint64
