@@ -124,3 +124,26 @@ func TestInt64Comparator(t *testing.T) {
 }
 
 // uint, uint8, uint16, uint32, uint64
+
+func TestUIntComparator(t *testing.T) {
+	// case1: a < b
+	a := uint(12)
+	b := uint(22)
+	if UIntComparator(a, b) >= 0 {
+		t.Error("case1 error: a < b")
+	}
+
+	// case2: a > b
+	a = uint(22)
+	b = uint(12)
+	if UIntComparator(a, b) <= 0 {
+		t.Error("case2 error: a > b")
+	}
+
+	// case3: a == b
+	a = uint(12)
+	b = uint(12)
+	if UIntComparator(a, b) != 0 {
+		t.Error("case3 error: a == b")
+	}
+}
