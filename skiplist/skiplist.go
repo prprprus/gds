@@ -1,6 +1,7 @@
 package skiplist
 
 import (
+	"errors"
 	"fmt"
 	"math/rand"
 	"time"
@@ -13,16 +14,22 @@ const (
 	P            = 0.65
 )
 
+var (
+	ErrNotFound = errors.New("can not found value")
+	ErrEmpty    = errors.New("skiplist is empty")
+)
+
 type node struct {
 	value int
 	next  []*node
+	level int
 }
 
 // SkipList
 type SkipList struct {
 	head     *node
-	Size     int
-	MaxLevel int
+	size     int
+	maxLevel int
 }
 
 type record struct {
@@ -34,12 +41,14 @@ type record struct {
 func New() *SkipList {
 	skiplist := &SkipList{
 		head:     new(node),
-		Size:     0,
-		MaxLevel: DEFAULTLEVEL,
+		size:     0,
+		maxLevel: DEFAULTLEVEL,
 	}
 	skiplist.head.next = make([]*node, DEFAULTLEVEL)
 	return skiplist
 }
+
+// Skiplist Interface
 
 // Returns a new random level.
 func randomLevel() (n int) {
@@ -59,6 +68,7 @@ func (skiplist *SkipList) Set(value int) {
 	newNode := &node{
 		value: value,
 		next:  make([]*node, p),
+		level: p,
 	}
 
 	// insert
@@ -69,7 +79,7 @@ func (skiplist *SkipList) Set(value int) {
 		currNode.next[rindex] = newNode
 	}
 
-	skiplist.Size++
+	skiplist.size++
 }
 
 // find
@@ -120,26 +130,60 @@ func (skiplist *SkipList) Show() {
 	}
 }
 
-// Get
-func (skiplist *SkipList) Get(value int) bool {
+// Exists
+func (skiplist *SkipList) Exists(value int) bool {
 	recordArray := skiplist.find(value)
 
-	if recordArray[0].currNode.next[0] == nil {
+	// can not find
+	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].value != value {
 		return false
 	}
 
-	if recordArray[0].currNode.next[0].value == value {
-		return true
-	}
-
-	return false
+	return true
 }
 
-// Delete
-func (skiplist *SkipList) Delete(value int) error {
+// Remove
+func (skiplist *SkipList) Remove(value int) error {
+	if skiplist.size == 0 {
+		return ErrEmpty
+	}
+
+	recordArray := skiplist.find(value)
+
+	// can not find
+	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].value != value {
+		return ErrNotFound
+	}
+
+	// remove(adjustment pointer)
+	level := recordArray[0].currNode.next[0].level
+	for i := 0; i < level; i++ {
+		recordArray[i].currNode.next[i] = recordArray[i].currNode.next[i].next[i]
+	}
+	skiplist.size--
 	return nil
 }
 
-func freeNode(node *node) {
+// Container Interface
 
+// Empty returns true if the skiplist is empty, otherwise returns false.
+func (skiplist *SkipList) Empty() bool {
+	return skiplist.Size() == 0
+}
+
+// Size returns the size of the skiplist.
+func (skiplist *SkipList) Size() int {
+	return skiplist.size
+}
+
+// Clear the skiplist.
+func (skiplist *SkipList) Clear() {
+	skiplist.head = nil
+	skiplist.size = 0
+	skiplist.maxLevel = 0
+}
+
+// Values returns the values of skiplist.
+func (skiplist *SkipList) Values() []interface{} {
+	return nil
 }
