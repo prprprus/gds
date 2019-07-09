@@ -6,7 +6,6 @@ package util
 
 import (
 	"strings"
-	"time"
 )
 
 // Comparator is used for comparison between the same types.
@@ -230,20 +229,4 @@ func StringComparator(a, b interface{}) int {
 	c1 := a.(string)
 	c2 := b.(string)
 	return strings.Compare(c1, c2)
-}
-
-// time
-
-// TimeCompare compares the value of type time.
-func TimeCompare(a, b interface{}) int {
-	c1 := a.(time.Time)
-	c2 := b.(time.Time)
-	switch {
-	case c1.Before(c2):
-		return -1
-	case c1.After(c2):
-		return 1
-	default:
-		return 0
-	}
 }
