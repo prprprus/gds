@@ -188,5 +188,11 @@ func (skiplist *SkipList) Clear() {
 
 // Values returns the values of skiplist.
 func (skiplist *SkipList) Values() []interface{} {
-	return nil
+	values := make([]interface{}, 0)
+	flag := skiplist.head.next[0]
+	for flag != nil {
+		values = append(values, flag.value)
+		flag = flag.next[0]
+	}
+	return values
 }
