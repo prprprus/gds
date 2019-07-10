@@ -48,21 +48,21 @@ func TestRandomLevel(t *testing.T) {
 func TestSet(t *testing.T) {
 	// case1: skiplist has some elements
 	skiplist := New(util.IntComparator)
-	skiplist.Set(777)
-	skiplist.Set(999)
-	skiplist.Set(99)
-	skiplist.Set(1)
-	skiplist.Set(12)
-	skiplist.Set(3)
-	skiplist.Set(42)
-	skiplist.Set(9)
-	skiplist.Set(15)
-	skiplist.Set(6)
-	skiplist.Set(79)
-	skiplist.Set(18)
-	skiplist.Set(63)
-	skiplist.Set(81)
-	skiplist.Set(-1)
+	skiplist.Set(777, nil)
+	skiplist.Set(999, nil)
+	skiplist.Set(99, nil)
+	skiplist.Set(1, nil)
+	skiplist.Set(12, nil)
+	skiplist.Set(3, nil)
+	skiplist.Set(42, nil)
+	skiplist.Set(9, nil)
+	skiplist.Set(15, nil)
+	skiplist.Set(6, nil)
+	skiplist.Set(79, nil)
+	skiplist.Set(18, nil)
+	skiplist.Set(63, nil)
+	skiplist.Set(81, nil)
+	skiplist.Set(-1, nil)
 	result := []interface{}{-1, 1, 3, 6, 9, 12, 15, 18, 42, 63, 79, 81, 99, 777, 999}
 	if skiplist.size != 15 || !verifyElement(result, skiplist) {
 		t.Error("case1 error: skiplist has some elements")
@@ -70,7 +70,7 @@ func TestSet(t *testing.T) {
 
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
-	skiplist.Set(1)
+	skiplist.Set(1, nil)
 	result = []interface{}{1}
 	if skiplist.size != 1 || !verifyElement(result, skiplist) {
 		t.Error("case2 error: skiplist has one element")
@@ -88,16 +88,16 @@ func TestSet(t *testing.T) {
 func TestExists(t *testing.T) {
 	// case1: skiplist has some elements
 	skiplist := New(util.IntComparator)
-	skiplist.Set(777)
-	skiplist.Set(99)
-	skiplist.Set(-1)
+	skiplist.Set(777, nil)
+	skiplist.Set(99, nil)
+	skiplist.Set(-1, nil)
 	if skiplist.size != 3 || !skiplist.Exists(777) || !skiplist.Exists(99) || !skiplist.Exists(-1) {
 		t.Error("case1 error: skiplist has some elements")
 	}
 
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
-	skiplist.Set(1)
+	skiplist.Set(1, nil)
 	if skiplist.size != 1 || !skiplist.Exists(1) {
 		t.Error("case2 error: skiplist has one element")
 	}
@@ -113,21 +113,21 @@ func TestExists(t *testing.T) {
 func TestRemove(t *testing.T) {
 	// case1: skiplist has some elements
 	skiplist := New(util.IntComparator)
-	skiplist.Set(777)
-	skiplist.Set(999)
-	skiplist.Set(99)
-	skiplist.Set(1)
-	skiplist.Set(12)
-	skiplist.Set(3)
-	skiplist.Set(42)
-	skiplist.Set(9)
-	skiplist.Set(15)
-	skiplist.Set(6)
-	skiplist.Set(79)
-	skiplist.Set(18)
-	skiplist.Set(63)
-	skiplist.Set(81)
-	skiplist.Set(-1)
+	skiplist.Set(777, nil)
+	skiplist.Set(999, nil)
+	skiplist.Set(99, nil)
+	skiplist.Set(1, nil)
+	skiplist.Set(12, nil)
+	skiplist.Set(3, nil)
+	skiplist.Set(42, nil)
+	skiplist.Set(9, nil)
+	skiplist.Set(15, nil)
+	skiplist.Set(6, nil)
+	skiplist.Set(79, nil)
+	skiplist.Set(18, nil)
+	skiplist.Set(63, nil)
+	skiplist.Set(81, nil)
+	skiplist.Set(-1, nil)
 	skiplist.Remove(-1)
 	skiplist.Remove(999)
 	skiplist.Remove(79)
@@ -139,7 +139,7 @@ func TestRemove(t *testing.T) {
 
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
-	skiplist.Set(1)
+	skiplist.Set(1, nil)
 	skiplist.Remove(1)
 	result = []interface{}{}
 	if skiplist.size != 0 || !verifyElement(result, skiplist) {
@@ -162,16 +162,16 @@ func TestRemove(t *testing.T) {
 func TestEmpty(t *testing.T) {
 	// case1: skiplist has some elements
 	skiplist := New(util.IntComparator)
-	skiplist.Set(777)
-	skiplist.Set(999)
-	skiplist.Set(99)
+	skiplist.Set(777, nil)
+	skiplist.Set(999, nil)
+	skiplist.Set(99, nil)
 	if skiplist.Empty() {
 		t.Error("case1 error: skiplist has some elements")
 	}
 
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
-	skiplist.Set(1)
+	skiplist.Set(1, nil)
 	if skiplist.Empty() {
 		t.Error("case2 error: skiplist has one element")
 	}
@@ -186,16 +186,16 @@ func TestEmpty(t *testing.T) {
 func TestSize(t *testing.T) {
 	// case1: skiplist has some elements
 	skiplist := New(util.IntComparator)
-	skiplist.Set(777)
-	skiplist.Set(999)
-	skiplist.Set(99)
+	skiplist.Set(777, nil)
+	skiplist.Set(999, nil)
+	skiplist.Set(99, nil)
 	if skiplist.size != 3 {
 		t.Error("case1 error: skiplist has some elements")
 	}
 
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
-	skiplist.Set(1)
+	skiplist.Set(1, nil)
 	if skiplist.Size() != 1 {
 		t.Error("case2 error: skiplist has one element")
 	}
@@ -210,9 +210,9 @@ func TestSize(t *testing.T) {
 func TestClear(t *testing.T) {
 	// case1: skiplist has some elements
 	skiplist := New(util.IntComparator)
-	skiplist.Set(777)
-	skiplist.Set(999)
-	skiplist.Set(99)
+	skiplist.Set(777, nil)
+	skiplist.Set(999, nil)
+	skiplist.Set(99, nil)
 	skiplist.Clear()
 	if skiplist.head != nil || skiplist.size != 0 || skiplist.maxLevel != 0 {
 		t.Error("case1 error: skiplist has some elements")
@@ -220,7 +220,7 @@ func TestClear(t *testing.T) {
 
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
-	skiplist.Set(1)
+	skiplist.Set(1, nil)
 	skiplist.Clear()
 	if skiplist.head != nil || skiplist.size != 0 || skiplist.maxLevel != 0 {
 		t.Error("case2 error: skiplist has one element")
@@ -237,21 +237,21 @@ func TestClear(t *testing.T) {
 func TestValue(t *testing.T) {
 	// case1: skiplist has some elements
 	skiplist := New(util.IntComparator)
-	skiplist.Set(777)
-	skiplist.Set(999)
-	skiplist.Set(99)
-	skiplist.Set(1)
-	skiplist.Set(12)
-	skiplist.Set(3)
-	skiplist.Set(42)
-	skiplist.Set(9)
-	skiplist.Set(15)
-	skiplist.Set(6)
-	skiplist.Set(79)
-	skiplist.Set(18)
-	skiplist.Set(63)
-	skiplist.Set(81)
-	skiplist.Set(-1)
+	skiplist.Set(777, nil)
+	skiplist.Set(999, nil)
+	skiplist.Set(99, nil)
+	skiplist.Set(1, nil)
+	skiplist.Set(12, nil)
+	skiplist.Set(3, nil)
+	skiplist.Set(42, nil)
+	skiplist.Set(9, nil)
+	skiplist.Set(15, nil)
+	skiplist.Set(6, nil)
+	skiplist.Set(79, nil)
+	skiplist.Set(18, nil)
+	skiplist.Set(63, nil)
+	skiplist.Set(81, nil)
+	skiplist.Set(-1, nil)
 	values := skiplist.Values()
 	result := []interface{}{-1, 1, 3, 6, 9, 12, 15, 18, 42, 63, 79, 81, 99, 777, 999}
 	if !verifyValues(result, values) {
@@ -260,7 +260,7 @@ func TestValue(t *testing.T) {
 
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
-	skiplist.Set(1)
+	skiplist.Set(1, nil)
 	values = skiplist.Values()
 	result = []interface{}{1}
 	if !verifyValues(result, values) {

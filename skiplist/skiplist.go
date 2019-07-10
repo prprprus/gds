@@ -22,9 +22,8 @@ var (
 )
 
 type node struct {
-	// key   interface{}
-	// value interface{}
-	key   int
+	key   interface{}
+	value interface{}
 	next  []*node
 	level int
 }
@@ -64,7 +63,7 @@ func randomLevel() (n int) {
 }
 
 // Set
-func (skiplist *SkipList) Set(key int) {
+func (skiplist *SkipList) Set(key, value interface{}) {
 	// find location of insertion
 	recordArray := skiplist.find(key)
 
@@ -73,6 +72,7 @@ func (skiplist *SkipList) Set(key int) {
 	// p := DEBUG_P
 	newNode := &node{
 		key:   key,
+		value: value,
 		next:  make([]*node, p),
 		level: p,
 	}
@@ -89,7 +89,7 @@ func (skiplist *SkipList) Set(key int) {
 }
 
 // find
-func (skiplist *SkipList) find(key int) []record {
+func (skiplist *SkipList) find(key interface{}) []record {
 	recordArray := make([]record, DEFAULTLEVEL)
 	currNode := skiplist.head
 
@@ -102,16 +102,14 @@ x:
 			continue
 		}
 
-		// todo: 换成 comparator
-
 		// CASE2: move right
-		for key > currNode.next[i].key {
+		for skiplist.comparator(key, currNode.next[i].key) == 1 {
 			currNode = currNode.next[i]
 			goto x
 		}
 
 		// CASE1-2: move down
-		if key <= currNode.next[i].key {
+		if skiplist.comparator(key, currNode.next[i].key) == 0 || skiplist.comparator(key, currNode.next[i].key) == -1 {
 			recordArray = addRecordArray(recordArray, currNode, i)
 			i--
 		}
@@ -139,7 +137,7 @@ func (skiplist *SkipList) Show() {
 }
 
 // Exists
-func (skiplist *SkipList) Exists(key int) bool {
+func (skiplist *SkipList) Exists(key interface{}) bool {
 	recordArray := skiplist.find(key)
 
 	// can not find
@@ -151,7 +149,7 @@ func (skiplist *SkipList) Exists(key int) bool {
 }
 
 // Remove
-func (skiplist *SkipList) Remove(key int) error {
+func (skiplist *SkipList) Remove(key interface{}) error {
 	if skiplist.size == 0 {
 		return ErrEmpty
 	}

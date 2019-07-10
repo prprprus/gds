@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/prprprus/ds/skiplist"
+	"github.com/prprprus/ds/util"
 )
 
 func main() {
@@ -82,22 +83,22 @@ func main() {
 	// }
 
 	// ---> skip list
-	skiplist := skiplist.New()
-	skiplist.Set(777)
-	skiplist.Set(999)
-	skiplist.Set(99)
-	skiplist.Set(1)
-	skiplist.Set(12)
-	skiplist.Set(3)
-	skiplist.Set(42)
-	skiplist.Set(9)
-	skiplist.Set(15)
-	skiplist.Set(6)
-	skiplist.Set(79)
-	skiplist.Set(18)
-	skiplist.Set(63)
-	skiplist.Set(81)
-	skiplist.Set(-1)
+	skiplist := skiplist.New(util.IntComparator)
+	skiplist.Set(777, nil)
+	skiplist.Set(999, nil)
+	skiplist.Set(99, nil)
+	skiplist.Set(1, nil)
+	skiplist.Set(12, nil)
+	skiplist.Set(3, nil)
+	skiplist.Set(42, nil)
+	skiplist.Set(9, nil)
+	skiplist.Set(15, nil)
+	skiplist.Set(6, nil)
+	skiplist.Set(79, nil)
+	skiplist.Set(18, nil)
+	skiplist.Set(63, nil)
+	skiplist.Set(81, nil)
+	skiplist.Set(-1, nil)
 	skiplist.Show()
 	fmt.Println("size:", skiplist.Size())
 	// fmt.Println(skiplist.Exists(777))
