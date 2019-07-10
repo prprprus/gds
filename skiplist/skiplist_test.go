@@ -2,13 +2,15 @@ package skiplist
 
 import (
 	"testing"
+
+	"github.com/prprprus/ds/util"
 )
 
 func verifyElement(result []interface{}, skiplist *SkipList) bool {
 	flag := skiplist.head.next[0]
 	i := 0
 	for flag != nil {
-		if flag.value != result[i] {
+		if flag.key != result[i] {
 			return false
 		}
 		flag = flag.next[0]
@@ -27,7 +29,7 @@ func verifyValues(result, values []interface{}) bool {
 }
 
 func TestNew(t *testing.T) {
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	if skiplist.head == nil || skiplist.size != 0 || skiplist.maxLevel != DEFAULTLEVEL || len(skiplist.head.next) != DEFAULTLEVEL {
 		t.Error("TestNew error")
 	}
@@ -45,7 +47,7 @@ func TestRandomLevel(t *testing.T) {
 // Note: cover `find` and `addRecordArray` method.
 func TestSet(t *testing.T) {
 	// case1: skiplist has some elements
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	skiplist.Set(777)
 	skiplist.Set(999)
 	skiplist.Set(99)
@@ -67,7 +69,7 @@ func TestSet(t *testing.T) {
 	}
 
 	// case2: skiplist has one element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Set(1)
 	result = []interface{}{1}
 	if skiplist.size != 1 || !verifyElement(result, skiplist) {
@@ -75,7 +77,7 @@ func TestSet(t *testing.T) {
 	}
 
 	// case3: skiplist has no element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	result = []interface{}{}
 	if skiplist.size != 0 || !verifyElement(result, skiplist) {
 		t.Error("case3 error: skiplist has no element")
@@ -85,7 +87,7 @@ func TestSet(t *testing.T) {
 // Note: cover `find` and `addRecordArray` method.
 func TestExists(t *testing.T) {
 	// case1: skiplist has some elements
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	skiplist.Set(777)
 	skiplist.Set(99)
 	skiplist.Set(-1)
@@ -94,14 +96,14 @@ func TestExists(t *testing.T) {
 	}
 
 	// case2: skiplist has one element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Set(1)
 	if skiplist.size != 1 || !skiplist.Exists(1) {
 		t.Error("case2 error: skiplist has one element")
 	}
 
 	// case3: skiplist has no element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	if skiplist.size != 0 || skiplist.Exists(777) {
 		t.Error("case3 error: skiplist has no element")
 	}
@@ -110,7 +112,7 @@ func TestExists(t *testing.T) {
 // Note: cover `find` and `addRecordArray` method.
 func TestRemove(t *testing.T) {
 	// case1: skiplist has some elements
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	skiplist.Set(777)
 	skiplist.Set(999)
 	skiplist.Set(99)
@@ -136,7 +138,7 @@ func TestRemove(t *testing.T) {
 	}
 
 	// case2: skiplist has one element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Set(1)
 	skiplist.Remove(1)
 	result = []interface{}{}
@@ -145,7 +147,7 @@ func TestRemove(t *testing.T) {
 	}
 
 	// case3: skiplist has no element (including remove the values that do not exist)
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Remove(1)
 	skiplist.Remove(2)
 	skiplist.Remove(3)
@@ -159,7 +161,7 @@ func TestRemove(t *testing.T) {
 
 func TestEmpty(t *testing.T) {
 	// case1: skiplist has some elements
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	skiplist.Set(777)
 	skiplist.Set(999)
 	skiplist.Set(99)
@@ -168,14 +170,14 @@ func TestEmpty(t *testing.T) {
 	}
 
 	// case2: skiplist has one element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Set(1)
 	if skiplist.Empty() {
 		t.Error("case2 error: skiplist has one element")
 	}
 
 	// case3: skiplist has no element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	if !skiplist.Empty() {
 		t.Error("case3 error: skiplist has no element")
 	}
@@ -183,7 +185,7 @@ func TestEmpty(t *testing.T) {
 
 func TestSize(t *testing.T) {
 	// case1: skiplist has some elements
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	skiplist.Set(777)
 	skiplist.Set(999)
 	skiplist.Set(99)
@@ -192,14 +194,14 @@ func TestSize(t *testing.T) {
 	}
 
 	// case2: skiplist has one element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Set(1)
 	if skiplist.Size() != 1 {
 		t.Error("case2 error: skiplist has one element")
 	}
 
 	// case3: skiplist has no element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	if skiplist.Size() != 0 {
 		t.Error("case3 error: skiplist has no element")
 	}
@@ -207,7 +209,7 @@ func TestSize(t *testing.T) {
 
 func TestClear(t *testing.T) {
 	// case1: skiplist has some elements
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	skiplist.Set(777)
 	skiplist.Set(999)
 	skiplist.Set(99)
@@ -217,7 +219,7 @@ func TestClear(t *testing.T) {
 	}
 
 	// case2: skiplist has one element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Set(1)
 	skiplist.Clear()
 	if skiplist.head != nil || skiplist.size != 0 || skiplist.maxLevel != 0 {
@@ -225,7 +227,7 @@ func TestClear(t *testing.T) {
 	}
 
 	// case3: skiplist has no element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Clear()
 	if skiplist.head != nil || skiplist.size != 0 || skiplist.maxLevel != 0 {
 		t.Error("case3 error: skiplist has no element")
@@ -234,7 +236,7 @@ func TestClear(t *testing.T) {
 
 func TestValue(t *testing.T) {
 	// case1: skiplist has some elements
-	skiplist := New()
+	skiplist := New(util.IntComparator)
 	skiplist.Set(777)
 	skiplist.Set(999)
 	skiplist.Set(99)
@@ -257,7 +259,7 @@ func TestValue(t *testing.T) {
 	}
 
 	// case2: skiplist has one element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	skiplist.Set(1)
 	values = skiplist.Values()
 	result = []interface{}{1}
@@ -266,7 +268,7 @@ func TestValue(t *testing.T) {
 	}
 
 	// case3: skiplist has no element
-	skiplist = New()
+	skiplist = New(util.IntComparator)
 	values = skiplist.Values()
 	result = []interface{}{}
 	if !verifyValues(result, values) {

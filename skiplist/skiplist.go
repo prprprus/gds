@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+
+	"github.com/prprprus/ds/util"
 )
 
 const (
@@ -29,10 +31,10 @@ type node struct {
 
 // SkipList
 type SkipList struct {
-	head     *node
-	size     int
-	maxLevel int
-	// comparator util.Comparator
+	head       *node
+	size       int
+	maxLevel   int
+	comparator util.Comparator
 }
 
 type record struct {
@@ -41,11 +43,12 @@ type record struct {
 }
 
 // New
-func New() *SkipList {
+func New(comparator func(a, b interface{}) int) *SkipList {
 	skiplist := &SkipList{
-		head:     new(node),
-		size:     0,
-		maxLevel: DEFAULTLEVEL,
+		head:       new(node),
+		size:       0,
+		maxLevel:   DEFAULTLEVEL,
+		comparator: comparator,
 	}
 	skiplist.head.next = make([]*node, DEFAULTLEVEL)
 	return skiplist
@@ -98,6 +101,8 @@ x:
 			i--
 			continue
 		}
+
+		// todo: 换成 comparator
 
 		// CASE2: move right
 		for key > currNode.next[i].key {
