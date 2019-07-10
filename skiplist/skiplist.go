@@ -22,7 +22,7 @@ var (
 type node struct {
 	// key   interface{}
 	// value interface{}
-	value int
+	key   int
 	next  []*node
 	level int
 }
@@ -61,15 +61,15 @@ func randomLevel() (n int) {
 }
 
 // Set
-func (skiplist *SkipList) Set(value int) {
+func (skiplist *SkipList) Set(key int) {
 	// find location of insertion
-	recordArray := skiplist.find(value)
+	recordArray := skiplist.find(key)
 
 	// new Node
 	p := randomLevel()
 	// p := DEBUG_P
 	newNode := &node{
-		value: value,
+		key:   key,
 		next:  make([]*node, p),
 		level: p,
 	}
@@ -86,7 +86,7 @@ func (skiplist *SkipList) Set(value int) {
 }
 
 // find
-func (skiplist *SkipList) find(value int) []record {
+func (skiplist *SkipList) find(key int) []record {
 	recordArray := make([]record, DEFAULTLEVEL)
 	currNode := skiplist.head
 
@@ -100,13 +100,13 @@ x:
 		}
 
 		// CASE2: move right
-		for value > currNode.next[i].value {
+		for key > currNode.next[i].key {
 			currNode = currNode.next[i]
 			goto x
 		}
 
 		// CASE1-2: move down
-		if value <= currNode.next[i].value {
+		if key <= currNode.next[i].key {
 			recordArray = addRecordArray(recordArray, currNode, i)
 			i--
 		}
@@ -128,17 +128,17 @@ func addRecordArray(recordArray []record, currNode *node, rindex int) []record {
 func (skiplist *SkipList) Show() {
 	flag := skiplist.head.next[0]
 	for flag != nil {
-		fmt.Println(flag.value)
+		fmt.Println(flag.key)
 		flag = flag.next[0]
 	}
 }
 
 // Exists
-func (skiplist *SkipList) Exists(value int) bool {
-	recordArray := skiplist.find(value)
+func (skiplist *SkipList) Exists(key int) bool {
+	recordArray := skiplist.find(key)
 
 	// can not find
-	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].value != value {
+	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].key != key {
 		return false
 	}
 
@@ -146,15 +146,15 @@ func (skiplist *SkipList) Exists(value int) bool {
 }
 
 // Remove
-func (skiplist *SkipList) Remove(value int) error {
+func (skiplist *SkipList) Remove(key int) error {
 	if skiplist.size == 0 {
 		return ErrEmpty
 	}
 
-	recordArray := skiplist.find(value)
+	recordArray := skiplist.find(key)
 
 	// can not find
-	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].value != value {
+	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].key != key {
 		return ErrNotFound
 	}
 
@@ -191,7 +191,7 @@ func (skiplist *SkipList) Values() []interface{} {
 	values := make([]interface{}, 0)
 	flag := skiplist.head.next[0]
 	for flag != nil {
-		values = append(values, flag.value)
+		values = append(values, flag.key)
 		flag = flag.next[0]
 	}
 	return values
