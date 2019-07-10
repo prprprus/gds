@@ -20,7 +20,7 @@ var (
 )
 
 type node struct {
-	// key interface{}
+	// key   interface{}
 	// value interface{}
 	value int
 	next  []*node
