@@ -24,7 +24,7 @@ var (
 	// ErrNotFound is returned when the value can not found
 	ErrNotFound = errors.New("can not found value")
 	// ErrEmpty is returned when the skip list is empty
-	ErrEmpty = errors.New("skiplist is empty")
+	ErrEmpty = errors.New("the skip list is empty")
 )
 
 // Node of the skip list.
