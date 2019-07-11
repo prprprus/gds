@@ -3,8 +3,8 @@
 // license that can be found in the LICENSE file.
 
 // Package linkedhashmap implements the linked hash map.
+// Compared to hashmap the linked hash map can additionally maintain the order of key-value by the double linked list.
 // Structure is not concurrent safe.
-// The linked hash map can additionally maintain the order of key-value by the double linked list.
 // TODO: Add more methods related to the key-value order.
 package linkedhashmap
 
