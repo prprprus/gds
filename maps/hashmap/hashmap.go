@@ -1,3 +1,9 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
+// Package hashmap implements the hash map.
+// Structure is not concurrent safe.
 package hashmap
 
 import "errors"
@@ -9,10 +15,12 @@ var (
 	ErrEmpty = errors.New("the hash map is empty")
 )
 
+// Map represents a hash map structure.
 type Map struct {
 	m map[interface{}]interface{}
 }
 
+// New new the hash map.
 func New() *Map {
 	return &Map{
 		m: make(map[interface{}]interface{}),
@@ -20,10 +28,13 @@ func New() *Map {
 }
 
 // Map Interface
+
+// Put put the key-value into map.
 func (m *Map) Put(key, value interface{}) {
 	m.m[key] = value
 }
 
+// Get get the value by key.
 func (m *Map) Get(key interface{}) (interface{}, error) {
 	value, ok := m.m[key]
 	if !ok {
@@ -32,6 +43,7 @@ func (m *Map) Get(key interface{}) (interface{}, error) {
 	return value, nil
 }
 
+// Remove remove key-value by key.
 func (m *Map) Remove(key interface{}) {
 	delete(m.m, key)
 }
