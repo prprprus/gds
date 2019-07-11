@@ -1,4 +1,4 @@
-package sortedhashmap
+package linkedhashmap
 
 import (
 	"errors"
@@ -48,4 +48,31 @@ func (m *Map) Remove(key interface{}) {
 		index, _ := m.ordering.IndexOf(key)
 		m.ordering.Remove(index)
 	}
+}
+
+// Container Interface
+
+func (m *Map) Empty() bool {
+	return m.Size() == 0
+}
+
+func (m *Map) Size() int {
+	return m.ordering.Size()
+}
+
+func (m *Map) Keys() []interface{} {
+	return m.ordering.Values()
+}
+
+func (m *Map) Values() []interface{} {
+	values := make([]interface{}, 0)
+	for _, value := range m.m {
+		values = append(values, value)
+	}
+	return values
+}
+
+func (m *Map) Clear() {
+	m.m = make(map[interface{}]interface{})
+	m.ordering.Clear()
 }
