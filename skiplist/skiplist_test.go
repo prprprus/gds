@@ -1,3 +1,7 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
 package skiplist
 
 import (
@@ -30,14 +34,14 @@ func verifyValues(result, values []interface{}) bool {
 
 func TestNew(t *testing.T) {
 	skiplist := New(util.IntComparator)
-	if skiplist.head == nil || skiplist.size != 0 || skiplist.maxLevel != DEFAULTLEVEL || len(skiplist.head.next) != DEFAULTLEVEL {
+	if skiplist.head == nil || skiplist.size != 0 || skiplist.maxLevel != DefaultMaxLevel || len(skiplist.head.next) != DefaultMaxLevel {
 		t.Error("TestNew error")
 	}
 }
 
 func TestRandomLevel(t *testing.T) {
 	r := randomLevel()
-	if r < 1 || randomLevel() > DEFAULTLEVEL {
+	if r < 1 || randomLevel() > DefaultMaxLevel {
 		t.Error("TestRandomLevel error")
 	}
 }
@@ -297,7 +301,7 @@ func TestNext(t *testing.T) {
 	skiplist.Set(81, 81)
 	skiplist.Set(-1, -1)
 	result := []interface{}{-1, 1, 3, 6, 9, 12, 15, 18, 42, 63, 79, 81, 99, 777, 999}
-	iterator := skiplist.New()
+	iterator := skiplist.Iterator()
 	i := 0
 	for iterator.Next() {
 		if iterator.element.value != result[i] {
@@ -310,7 +314,7 @@ func TestNext(t *testing.T) {
 	skiplist = New(util.IntComparator)
 	skiplist.Set(1, 1)
 	result = []interface{}{1}
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	i = 0
 	for iterator.Next() {
 		if iterator.element.value != result[i] {
@@ -322,7 +326,7 @@ func TestNext(t *testing.T) {
 	// case3: skiplist has no element
 	skiplist = New(util.IntComparator)
 	result = []interface{}{}
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	i = 0
 	for iterator.Next() {
 		if iterator.element.value != result[i] {
@@ -350,7 +354,7 @@ func TestBegin(t *testing.T) {
 	skiplist.Set(63, 63)
 	skiplist.Set(81, 81)
 	skiplist.Set(-1, -1)
-	iterator := skiplist.New()
+	iterator := skiplist.Iterator()
 	for iterator.Next() {
 	}
 	iterator.Begin()
@@ -361,7 +365,7 @@ func TestBegin(t *testing.T) {
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
 	skiplist.Set(1, 1)
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	for iterator.Next() {
 	}
 	iterator.Begin()
@@ -371,7 +375,7 @@ func TestBegin(t *testing.T) {
 
 	// case3: skiplist has no element
 	skiplist = New(util.IntComparator)
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	for iterator.Next() {
 	}
 	iterator.Begin()
@@ -399,7 +403,7 @@ func TestValue(t *testing.T) {
 	skiplist.Set(81, 81)
 	skiplist.Set(-1, -1)
 	result := []interface{}{-1, 1, 3, 6, 9, 12, 15, 18, 42, 63, 79, 81, 99, 777, 999}
-	iterator := skiplist.New()
+	iterator := skiplist.Iterator()
 	i := 0
 	for iterator.Next() {
 		if iterator.Value() != result[i] {
@@ -412,7 +416,7 @@ func TestValue(t *testing.T) {
 	skiplist = New(util.IntComparator)
 	skiplist.Set(1, 1)
 	result = []interface{}{1}
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	i = 0
 	for iterator.Next() {
 		if iterator.Value() != result[i] {
@@ -424,7 +428,7 @@ func TestValue(t *testing.T) {
 	// case3: skiplist has no element
 	skiplist = New(util.IntComparator)
 	result = []interface{}{}
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	i = 0
 	for iterator.Next() {
 		if iterator.Value() != result[i] {
@@ -452,7 +456,7 @@ func TestIndex(t *testing.T) {
 	skiplist.Set(63, 63)
 	skiplist.Set(81, 81)
 	skiplist.Set(-1, -1)
-	iterator := skiplist.New()
+	iterator := skiplist.Iterator()
 	i := 0
 	for iterator.Next() {
 		if iterator.Index() != i {
@@ -464,7 +468,7 @@ func TestIndex(t *testing.T) {
 	// case2: skiplist has one element
 	skiplist = New(util.IntComparator)
 	skiplist.Set(1, 1)
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	i = 0
 	for iterator.Next() {
 		if iterator.Index() != i {
@@ -475,7 +479,7 @@ func TestIndex(t *testing.T) {
 
 	// case3: skiplist has no element
 	skiplist = New(util.IntComparator)
-	iterator = skiplist.New()
+	iterator = skiplist.Iterator()
 	i = 0
 	for iterator.Next() {
 		if iterator.Index() != i {

@@ -4,14 +4,14 @@
 
 package singlylinkedlist
 
-// Iterator represents an iterable structure of list.
+// Iterator represents an iterable structure of the list.
 type Iterator struct {
 	list    *List    // target of iteration
 	index   int      // current index
 	element *element // current element
 }
 
-// Iterator returns the iterator object of list.
+// Iterator returns the iterator object of the list.
 func (list *List) Iterator() *Iterator {
 	return &Iterator{
 		list:    list,

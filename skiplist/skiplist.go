@@ -1,8 +1,14 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
+// Package skiplist implements the skip list.
+// Structure is not concurrent safe.
+// Reference: https://en.wikipedia.org/wiki/Skip_list
 package skiplist
 
 import (
 	"errors"
-	"fmt"
 	"math/rand"
 	"time"
 
@@ -10,46 +16,48 @@ import (
 )
 
 const (
-	// DEBUG_DEFAULTLEVEL = 4
-	// DEBUG_P = 1
-	DEFAULTLEVEL = 32
-	P            = 0.65
+	// DefaultMaxLevel is the default maximum height of the skip list
+	DefaultMaxLevel = 32
 )
 
 var (
+	// ErrNotFound is returned when the value can not found
 	ErrNotFound = errors.New("can not found value")
-	ErrEmpty    = errors.New("skiplist is empty")
+	// ErrEmpty is returned when the skip list is empty
+	ErrEmpty = errors.New("skiplist is empty")
 )
 
+// Node of the skip list.
 type node struct {
-	key   interface{}
-	value interface{}
-	next  []*node
-	level int
+	key   interface{} // value sorts by key
+	value interface{} // value fields can store any type
+	next  []*node     // next array of the skip list, pointing to multiple node struct behind
+	level int         // height of node
 }
 
-// SkipList
+// SkipList represents a skip list structure.
 type SkipList struct {
-	head       *node
-	size       int
-	maxLevel   int
-	comparator util.Comparator
+	head       *node           // head is a `[]*node`, length equal to DefaultMaxLevel
+	size       int             // number of nodes of the skip list
+	maxLevel   int             // height of the skip list
+	comparator util.Comparator // comparator is used to compare the size of the key
 }
 
-type record struct {
-	currNode *node // the node that bigger than value
-	rindex   int   // the index that node in next array position
+// Node of the path array.
+type pathNode struct {
+	pNode  *node // the node that bigger than value
+	pIndex int   // the index that node in next array position
 }
 
-// New
+// New the skip list.
 func New(comparator func(a, b interface{}) int) *SkipList {
 	skiplist := &SkipList{
 		head:       new(node),
 		size:       0,
-		maxLevel:   DEFAULTLEVEL,
+		maxLevel:   DefaultMaxLevel,
 		comparator: comparator,
 	}
-	skiplist.head.next = make([]*node, DEFAULTLEVEL)
+	skiplist.head.next = make([]*node, DefaultMaxLevel)
 	return skiplist
 }
 
@@ -59,17 +67,14 @@ func New(comparator func(a, b interface{}) int) *SkipList {
 func randomLevel() (n int) {
 	rand.Seed(time.Now().UnixNano())
 	min := 1
-	return rand.Intn(DEFAULTLEVEL-min) + min
+	return rand.Intn(DefaultMaxLevel-min) + min
 }
 
-// Set
+// Set key-value in the skip list.
 func (skiplist *SkipList) Set(key, value interface{}) {
-	// find location of insertion
-	recordArray := skiplist.find(key)
+	path := skiplist.find(key)
 
-	// new Node
 	p := randomLevel()
-	// p := DEBUG_P
 	newNode := &node{
 		key:   key,
 		value: value,
@@ -79,92 +84,98 @@ func (skiplist *SkipList) Set(key, value interface{}) {
 
 	// insert
 	for i := 0; i < p; i++ {
-		currNode := recordArray[i].currNode
-		rindex := recordArray[i].rindex
-		newNode.next[i] = currNode.next[rindex]
-		currNode.next[rindex] = newNode
+		pNode := path[i].pNode
+		pIndex := path[i].pIndex
+		newNode.next[i] = pNode.next[pIndex]
+		pNode.next[pIndex] = newNode
 	}
-
 	skiplist.size++
 }
 
-// find
-func (skiplist *SkipList) find(key interface{}) []record {
-	recordArray := make([]record, DEFAULTLEVEL)
+// Find the traversal path of the skip list.
+//
+// Divided into three cases:
+// case1:
+// 	If the next node of the current node is nil,
+// 	then think that the key is smaller than the next node,
+// 	record the current node to the path array and the current node moves down the next array.
+// case2:
+// 	If the key is larger than the next node of the current node,
+// 	record the current node to the path array and the current node moves to the right along the next node.
+// case3:
+// 	If the key is less than or equal to the next node of the current node,
+//	record the current node to the path array and the current node moves down the next array.
+func (skiplist *SkipList) find(key interface{}) []pathNode {
+	path := make([]pathNode, DefaultMaxLevel)
 	currNode := skiplist.head
 
 x:
 	for i := len(currNode.next) - 1; i >= 0; {
-		// CASE1-1: move down
+		// case1: move down
 		if currNode.next[i] == nil {
-			recordArray = addRecordArray(recordArray, currNode, i)
+			path = addPath(path, currNode, i)
 			i--
 			continue
 		}
 
-		// CASE2: move right
+		// case2: move right
 		for skiplist.comparator(key, currNode.next[i].key) == 1 {
 			currNode = currNode.next[i]
+			// Note: `goto` should be used instead of continue or break.
+			// The difference between them can be referred to
+			// https://medium.com/golangspec/labels-in-go-4ffd81932339.
 			goto x
 		}
 
-		// CASE1-2: move down
+		// case3: move down
 		if skiplist.comparator(key, currNode.next[i].key) == 0 || skiplist.comparator(key, currNode.next[i].key) == -1 {
-			recordArray = addRecordArray(recordArray, currNode, i)
+			path = addPath(path, currNode, i)
 			i--
 		}
 	}
 
-	return recordArray
+	return path
 }
 
-func addRecordArray(recordArray []record, currNode *node, rindex int) []record {
-	record := record{
-		currNode: currNode,
-		rindex:   rindex,
+// Add the current node into path array.
+func addPath(path []pathNode, currNode *node, index int) []pathNode {
+	record := pathNode{
+		pNode:  currNode,
+		pIndex: index,
 	}
-	recordArray[rindex] = record
-	return recordArray
+	path[index] = record
+	return path
 }
 
-// Show
-func (skiplist *SkipList) Show() {
-	flag := skiplist.head.next[0]
-	for flag != nil {
-		fmt.Println(flag.key)
-		flag = flag.next[0]
-	}
-}
-
-// Exists
+// Exists returns true if the key is exists, otherwise returns false.
 func (skiplist *SkipList) Exists(key interface{}) bool {
-	recordArray := skiplist.find(key)
+	path := skiplist.find(key)
 
-	// can not find
-	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].key != key {
+	// can't found
+	if path[0].pNode.next[0] == nil || path[0].pNode.next[0].key != key {
 		return false
 	}
 
 	return true
 }
 
-// Remove
+// Remove the value by key.
 func (skiplist *SkipList) Remove(key interface{}) error {
 	if skiplist.size == 0 {
 		return ErrEmpty
 	}
 
-	recordArray := skiplist.find(key)
+	path := skiplist.find(key)
 
-	// can not find
-	if recordArray[0].currNode.next[0] == nil || recordArray[0].currNode.next[0].key != key {
+	// can't found
+	if path[0].pNode.next[0] == nil || path[0].pNode.next[0].key != key {
 		return ErrNotFound
 	}
 
-	// remove(adjustment pointer)
-	level := recordArray[0].currNode.next[0].level
+	// remove and adjustment pointer
+	level := path[0].pNode.next[0].level
 	for i := 0; i < level; i++ {
-		recordArray[i].currNode.next[i] = recordArray[i].currNode.next[i].next[i]
+		path[i].pNode.next[i] = path[i].pNode.next[i].next[i]
 	}
 	skiplist.size--
 	return nil

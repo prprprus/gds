@@ -28,11 +28,11 @@ type List struct {
 // Element of list.
 type element struct {
 	value interface{} // value fields can store any type
-	prev  *element    // prev fields stores the address pointing to the next element
+	prev  *element    // prev fields stores the address pointing to the prev element
 	next  *element    // next fields stores the address pointing to the next element
 }
 
-// New double linked list.
+// New the double linked list.
 func New(value ...interface{}) *List {
 	list := &List{}
 	if len(value) > 0 {
@@ -49,7 +49,7 @@ func (list *List) Append(value ...interface{}) {
 		return
 	}
 
-	// if size is equal to 0, it is a new double linked list
+	// if size is equal to 0, it is a new the double linked list
 	if list.size == 0 {
 		for i, v := range value {
 			newElement := &element{value: v}

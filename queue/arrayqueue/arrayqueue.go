@@ -23,7 +23,7 @@ type Queue struct {
 	list *arraylist.List
 }
 
-// New array queue.
+// New the array queue.
 func New() *Queue {
 	return &Queue{
 		list: &arraylist.List{},

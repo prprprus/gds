@@ -23,7 +23,7 @@ type Stack struct {
 	list *arraylist.List // internal array list
 }
 
-// New array stack.
+// New the array stack.
 func New() *Stack {
 	return &Stack{
 		list: &arraylist.List{},
