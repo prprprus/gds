@@ -74,16 +74,16 @@ func randomLevel() (n int) {
 func (skiplist *SkipList) Set(key, value interface{}) {
 	path := skiplist.find(key)
 
-	p := randomLevel()
+	level := randomLevel()
 	newNode := &node{
 		key:   key,
 		value: value,
-		next:  make([]*node, p),
-		level: p,
+		next:  make([]*node, level),
+		level: level,
 	}
 
-	// insert
-	for i := 0; i < p; i++ {
+	// insert according to level
+	for i := 0; i < level; i++ {
 		pNode := path[i].pNode
 		pIndex := path[i].pIndex
 		newNode.next[i] = pNode.next[pIndex]
@@ -172,7 +172,7 @@ func (skiplist *SkipList) Remove(key interface{}) error {
 		return ErrNotFound
 	}
 
-	// remove and adjustment pointer
+	// remove according to level
 	level := path[0].pNode.next[0].level
 	for i := 0; i < level; i++ {
 		path[i].pNode.next[i] = path[i].pNode.next[i].next[i]
