@@ -38,7 +38,7 @@ func New(comparator func(a, b interface{}) int) *Map {
 	}
 }
 
-// Put the key-value into map.
+// Put the key-value into the skip map.
 func (m *Map) Put(key, value interface{}) {
 	m.m.Set(key, value)
 }
@@ -55,12 +55,12 @@ func (m *Map) Remove(key interface{}) {
 
 // Container Interface
 
-// Empty returns true if map does not contain any elements.
+// Empty returns true if skip map does not contain any elements.
 func (m *Map) Empty() bool {
 	return m.Size() == 0
 }
 
-// Size returns number of elements in the map.
+// Size returns number of elements in the skip map.
 func (m *Map) Size() int {
 	return m.m.Size()
 }
@@ -82,7 +82,7 @@ func (m *Map) Values() []interface{} {
 	return values
 }
 
-// Clear removes all elements from the map.
+// Clear removes all elements from the skip map.
 func (m *Map) Clear() {
 	m.m.Clear()
 }
