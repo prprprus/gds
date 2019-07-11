@@ -29,7 +29,7 @@ func New() *Map {
 
 // Map Interface
 
-// Put the key-value into map.
+// Put the key-value into the hash map.
 func (m *Map) Put(key, value interface{}) {
 	m.m[key] = value
 }
@@ -50,12 +50,12 @@ func (m *Map) Remove(key interface{}) {
 
 // Container Interface
 
-// Empty returns true if map does not contain any elements.
+// Empty returns true if hash map does not contain any elements.
 func (m *Map) Empty() bool {
 	return m.Size() == 0
 }
 
-// Size returns number of elements in the map.
+// Size returns number of elements in the hash map.
 func (m *Map) Size() int {
 	return len(m.m)
 }
@@ -78,7 +78,7 @@ func (m *Map) Values() []interface{} {
 	return values
 }
 
-// Clear removes all elements from the map.
+// Clear removes all elements from the hash map.
 func (m *Map) Clear() {
 	m.m = make(map[interface{}]interface{})
 }

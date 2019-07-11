@@ -42,12 +42,12 @@ func (iterator *Iterator) End() {
 	iterator.internalIterator.End()
 }
 
-// Key returns the current key of the map.
+// Key returns the current key of the linked hash map.
 func (iterator *Iterator) key() interface{} {
 	return iterator.internalIterator.Value()
 }
 
-// Value returns the current value of the map.
+// Value returns the current value of the linked hash map.
 func (iterator *Iterator) Value() interface{} {
 	key := iterator.internalIterator.Value()
 	return iterator.m[key]

@@ -18,7 +18,7 @@ var (
 	ErrPop = errors.New("queue is empty")
 )
 
-// Queue represents a linked list  queue structure.
+// Queue represents a linked list queue structure.
 type Queue struct {
 	list *singlylinkedlist.List
 }

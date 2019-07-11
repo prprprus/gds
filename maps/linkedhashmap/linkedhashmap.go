@@ -40,7 +40,7 @@ func New() *Map {
 
 // Map Interface
 
-// Put the key-value into map.
+// Put the key-value into linked hash map.
 func (m *Map) Put(key, value interface{}) {
 	if _, ok := m.m[key]; !ok {
 		m.ordering.Append(value)
@@ -68,12 +68,12 @@ func (m *Map) Remove(key interface{}) {
 
 // Container Interface
 
-// Empty returns true if map does not contain any elements.
+// Empty returns true if linked hash map does not contain any elements.
 func (m *Map) Empty() bool {
 	return m.Size() == 0
 }
 
-// Size returns number of elements in the map.
+// Size returns number of elements in the linked hash map.
 func (m *Map) Size() int {
 	return m.ordering.Size()
 }
@@ -95,7 +95,7 @@ func (m *Map) Values() []interface{} {
 	return values
 }
 
-// Clear removes all elements from the map.
+// Clear removes all elements from the linked hash map.
 func (m *Map) Clear() {
 	m.m = make(map[interface{}]interface{})
 	m.ordering.Clear()
