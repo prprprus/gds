@@ -27,7 +27,7 @@ var (
 	ErrEmpty = errors.New("the skip list is empty")
 )
 
-// Node of the skip list.
+// The node struct is a node of the skip list.
 type node struct {
 	key   interface{} // value sorts by key
 	value interface{} // value fields can store any type
@@ -35,7 +35,7 @@ type node struct {
 	level int         // height of node
 }
 
-// SkipList represents a skip list structure.
+// The SkipList struct represents a skip list.
 type SkipList struct {
 	head       *node           // head is a `[]*node`, length equal to DefaultMaxLevel
 	size       int             // number of nodes of the skip list
@@ -43,13 +43,13 @@ type SkipList struct {
 	comparator util.Comparator // comparator is used to compare the size of the key
 }
 
-// node of the path array.
+// The pathNode is a node of the path array.
 type pathNode struct {
 	pNode  *node // the node that bigger than value
 	pIndex int   // the index that node in next array position
 }
 
-// New new the skip list.
+// New the skip list.
 func New(comparator func(a, b interface{}) int) *SkipList {
 	skiplist := &SkipList{
 		head:       new(node),
@@ -70,7 +70,7 @@ func randomLevel() (n int) {
 	return rand.Intn(DefaultMaxLevel-min) + min
 }
 
-// Set set key-value into the skip list.
+// Set key-value into the skip list.
 func (skiplist *SkipList) Set(key, value interface{}) {
 	path := skiplist.find(key)
 
@@ -92,7 +92,7 @@ func (skiplist *SkipList) Set(key, value interface{}) {
 	skiplist.size++
 }
 
-// Find find the traversal path of the skip list.
+// Find the traversal path of the skip list.
 //
 // Divided into three cases:
 // case1:
