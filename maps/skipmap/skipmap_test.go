@@ -193,7 +193,7 @@ func TestValues(t *testing.T) {
 		t.Error("case1 error: the map has no element")
 	}
 
-	// case2: the m has one element
+	// case2: the map has one element
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	values = m.Values()
@@ -201,7 +201,7 @@ func TestValues(t *testing.T) {
 		t.Error("case2 error: the map has one element")
 	}
 
-	// case3: the m has some elements
+	// case3: the map has some elements
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	m.Put(2, 2)
@@ -215,22 +215,22 @@ func TestValues(t *testing.T) {
 // Iterator Interface
 
 func TestIterator(t *testing.T) {
-	// case1: the m has no element
+	// case1: the map has no element
 	m := New(util.IntComparator)
 	iterator := m.Iterator()
 	if iterator.m == nil || iterator.internalIterator == nil {
-		t.Error("case1 error: the m has no element")
+		t.Error("case1 error: the map has no element")
 	}
 
-	// case2: the m has one element
+	// case2: the map has one element
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	iterator = m.Iterator()
 	if iterator.m == nil || iterator.internalIterator == nil {
-		t.Error("case2 error: the m has one element")
+		t.Error("case2 error: the map has one element")
 	}
 
-	// case3: the m has some elements
+	// case3: the map has some elements
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	m.Put(2, 2)
@@ -238,19 +238,19 @@ func TestIterator(t *testing.T) {
 	m.Put(4, 4)
 	iterator = m.Iterator()
 	if iterator.m == nil || iterator.internalIterator == nil {
-		t.Error("case3 error: the m has some elements")
+		t.Error("case3 error: the map has some elements")
 	}
 }
 
 func TestNext(t *testing.T) {
-	// case1: the m has no element
+	// case1: the map has no element
 	m := New(util.IntComparator)
 	iterator := m.Iterator()
 	if iterator.Next() {
-		t.Error("case1 error: the m has no element")
+		t.Error("case1 error: the map has no element")
 	}
 
-	// case2: the m has one element
+	// case2: the map has one element
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	iterator = m.Iterator()
@@ -258,12 +258,12 @@ func TestNext(t *testing.T) {
 	i := 0
 	for iterator.Next() {
 		if iterator.Value() != result[i] {
-			t.Error("case2 error: the m has one element")
+			t.Error("case2 error: the map has one element")
 		}
 		i++
 	}
 
-	// case3: the m has some elements
+	// case3: the map has some elements
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	m.Put(2, 2)
@@ -274,24 +274,24 @@ func TestNext(t *testing.T) {
 	i = 0
 	for iterator.Next() {
 		if iterator.Value() != result[i] {
-			t.Error("case3 error: the m has some elements")
+			t.Error("case3 error: the map has some elements")
 		}
 		i++
 	}
 }
 
 func TestBegin(t *testing.T) {
-	// case1: the m has no element
+	// case1: the map has no element
 	m := New(util.IntComparator)
 	iterator := m.Iterator()
 	for iterator.Next() {
 	}
 	iterator.Begin()
 	if iterator.internalIterator.Index() != -1 {
-		t.Error("case1 error: the m has no element")
+		t.Error("case1 error: the map has no element")
 	}
 
-	// case2: the m has one element
+	// case2: the map has one element
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	iterator = m.Iterator()
@@ -299,10 +299,10 @@ func TestBegin(t *testing.T) {
 	}
 	iterator.Begin()
 	if iterator.internalIterator.Index() != -1 {
-		t.Error("case2 error: the m has one element")
+		t.Error("case2 error: the map has one element")
 	}
 
-	// case3: the m has some elements
+	// case3: the map has some elements
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	m.Put(2, 2)
@@ -313,20 +313,20 @@ func TestBegin(t *testing.T) {
 	}
 	iterator.Begin()
 	if iterator.internalIterator.Index() != -1 {
-		t.Error("case3 error: the m has some elements")
+		t.Error("case3 error: the map has some elements")
 	}
 }
 
 func TestValue(t *testing.T) {
-	// case1: the m has no element
+	// case1: the map has no element
 	m := New(util.IntComparator)
 	iterator := m.Iterator()
 	iterator.Next()
 	if iterator.Value() != nil {
-		t.Error("case1 error: the m has no element")
+		t.Error("case1 error: the map has no element")
 	}
 
-	// case2: the m has one element
+	// case2: the map has one element
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	iterator = m.Iterator()
@@ -334,12 +334,12 @@ func TestValue(t *testing.T) {
 	i := 0
 	for iterator.Next() {
 		if iterator.Value() != result[i] {
-			t.Error("case2 error: the m has one element")
+			t.Error("case2 error: the map has one element")
 		}
 		i++
 	}
 
-	// case3: the m has some elements
+	// case3: the map has some elements
 	m = New(util.IntComparator)
 	iterator = m.Iterator()
 	m.Put(1, 1)
@@ -350,33 +350,33 @@ func TestValue(t *testing.T) {
 	i = 0
 	for iterator.Next() {
 		if iterator.Value() != result[i] {
-			t.Error("case3 error: the m has some elements")
+			t.Error("case3 error: the map has some elements")
 		}
 		i++
 	}
 }
 
 func TestKey(t *testing.T) {
-	// case1: the m has no element
+	// case1: the map has no element
 	m := New(util.IntComparator)
 	iterator := m.Iterator()
 	if iterator.Key() != nil {
 		t.Error("case1 error: the m has no element")
 	}
 
-	// case2: the m has one element
+	// case2: the map has one element
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	iterator = m.Iterator()
 	i := 1
 	for iterator.Next() {
 		if iterator.Key() != i {
-			t.Error("case2 error: the m has one element")
+			t.Error("case2 error: the map has one element")
 		}
 		i++
 	}
 
-	// case3: the m has some elements
+	// case3: the map has some elements
 	m = New(util.IntComparator)
 	m.Put(1, 1)
 	m.Put(2, 2)
@@ -386,7 +386,7 @@ func TestKey(t *testing.T) {
 	i = 1
 	for iterator.Next() {
 		if iterator.Key() != i {
-			t.Error("case3 error: the m has some elements")
+			t.Error("case3 error: the map has some elements")
 		}
 		i++
 	}
