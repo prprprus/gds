@@ -207,24 +207,24 @@ func (skiplist *SkipList) indexInRange(index int) bool {
 
 // Container Interface
 
-// Empty returns true if the skiplist is empty, otherwise returns false.
+// Empty returns true if the skip list is empty, otherwise returns false.
 func (skiplist *SkipList) Empty() bool {
 	return skiplist.Size() == 0
 }
 
-// Size returns the size of the skiplist.
+// Size returns the size of the skip list.
 func (skiplist *SkipList) Size() int {
 	return skiplist.size
 }
 
-// Clear the skiplist.
+// Clear the skip list.
 func (skiplist *SkipList) Clear() {
 	skiplist.head = nil
 	skiplist.size = 0
 	skiplist.maxLevel = 0
 }
 
-// Values returns the values of skiplist.
+// Values returns the values of the skip list.
 func (skiplist *SkipList) Values() []interface{} {
 	values := make([]interface{}, 0)
 	flag := skiplist.head.next[0]

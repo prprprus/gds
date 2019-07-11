@@ -17,7 +17,8 @@ var (
 
 // The Map represents a hash map structure.
 type Map struct {
-	m map[interface{}]interface{}
+	m    map[interface{}]interface{}
+	size int
 }
 
 // New the hash map.
@@ -32,6 +33,7 @@ func New() *Map {
 // Put the key-value into the hash map.
 func (m *Map) Put(key, value interface{}) {
 	m.m[key] = value
+	m.size++
 }
 
 // Get the value by key.
@@ -46,6 +48,7 @@ func (m *Map) Get(key interface{}) (interface{}, error) {
 // Remove key-value by key.
 func (m *Map) Remove(key interface{}) {
 	delete(m.m, key)
+	m.size--
 }
 
 // Container Interface
@@ -81,4 +84,5 @@ func (m *Map) Values() []interface{} {
 // Clear removes all elements from the hash map.
 func (m *Map) Clear() {
 	m.m = make(map[interface{}]interface{})
+	m.size = 0
 }

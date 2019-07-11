@@ -149,7 +149,7 @@ func TestClear(t *testing.T) {
 	// case1: the map has no element
 	m := New()
 	m.Clear()
-	if len(m.m) != 0 {
+	if m.size != 0 {
 		t.Error("case1 error: the map has no element")
 	}
 
@@ -157,7 +157,7 @@ func TestClear(t *testing.T) {
 	m = New()
 	m.Put(1, 1)
 	m.Clear()
-	if len(m.m) != 0 {
+	if m.size != 0 {
 		t.Error("case2 error: the map has one element")
 	}
 
@@ -167,7 +167,7 @@ func TestClear(t *testing.T) {
 	m.Put(2, 2)
 	m.Put(3, 3)
 	m.Clear()
-	if len(m.m) != 0 {
+	if m.size != 0 {
 		t.Error("case3 error: the map has some elements")
 	}
 }

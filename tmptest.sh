@@ -12,3 +12,4 @@ go test -v github.com/prprprus/ds/skiplist
 go test -v github.com/prprprus/ds/maps/hashmap
 go test -v github.com/prprprus/ds/maps/linkedhashmap
 go test -v github.com/prprprus/ds/maps/skipmap
+go test -v github.com/prprprus/ds/set/hashset
