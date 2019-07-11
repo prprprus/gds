@@ -4,10 +4,18 @@
 
 package stack
 
+import "github.com/prprprus/ds/container"
+
 // Stack Interface
 type Stack interface {
 	Push(value interface{})
 	Pop() (interface{}, error)
 	Peek() (interface{}, error)
 	indexInRange(index int) bool
+
+	container.Container
+	// Empty() bool
+	// Size() int
+	// Clear()
+	// Values() []interface{}
 }

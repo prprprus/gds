@@ -4,6 +4,8 @@
 
 package list
 
+import "github.com/prprprus/ds/container"
+
 // List interface
 type List interface {
 	Append(values ...interface{})
@@ -17,4 +19,10 @@ type List interface {
 	Set(index int, value interface{}) error
 	IndexOf(value interface{}) (int, error)
 	Reverse()
+
+	container.Container
+	// Empty() bool
+	// Size() int
+	// Clear()
+	// Values() []interface{}
 }

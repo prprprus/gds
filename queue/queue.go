@@ -4,9 +4,17 @@
 
 package queue
 
+import "github.com/prprprus/ds/container"
+
 // Queue Interface
 type Queue interface {
 	Put(value interface{})
 	Get() (interface{}, error)
 	indexInRange(index int) bool
+
+	container.Container
+	// Empty() bool
+	// Size() int
+	// Clear()
+	// Values() []interface{}
 }
