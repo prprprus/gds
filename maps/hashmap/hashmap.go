@@ -29,12 +29,12 @@ func New() *Map {
 
 // Map Interface
 
-// Put put the key-value into map.
+// Put the key-value into map.
 func (m *Map) Put(key, value interface{}) {
 	m.m[key] = value
 }
 
-// Get get the value by key.
+// Get the value by key.
 func (m *Map) Get(key interface{}) (interface{}, error) {
 	value, ok := m.m[key]
 	if !ok {
@@ -43,7 +43,7 @@ func (m *Map) Get(key interface{}) (interface{}, error) {
 	return value, nil
 }
 
-// Remove remove key-value by key.
+// Remove key-value by key.
 func (m *Map) Remove(key interface{}) {
 	delete(m.m, key)
 }
