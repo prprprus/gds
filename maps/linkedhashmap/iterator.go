@@ -8,13 +8,13 @@ import (
 	"github.com/prprprus/ds/list/doublelinkedlist"
 )
 
-// Iterator represents an iterable structure of the map.
+// Iterator represents an iterable structure of the linked hash map.
 type Iterator struct {
 	m                map[interface{}]interface{}
 	internalIterator *doublelinkedlist.Iterator
 }
 
-// Iterator returns the iterator object of the map.
+// Iterator returns the iterator object of the linked hash map.
 func (m *Map) Iterator() *Iterator {
 	return &Iterator{
 		m:                m.m,
