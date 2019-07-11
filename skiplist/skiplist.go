@@ -43,13 +43,13 @@ type SkipList struct {
 	comparator util.Comparator // comparator is used to compare the size of the key
 }
 
-// Node of the path array.
+// node of the path array.
 type pathNode struct {
 	pNode  *node // the node that bigger than value
 	pIndex int   // the index that node in next array position
 }
 
-// New the skip list.
+// New new the skip list.
 func New(comparator func(a, b interface{}) int) *SkipList {
 	skiplist := &SkipList{
 		head:       new(node),
@@ -63,14 +63,14 @@ func New(comparator func(a, b interface{}) int) *SkipList {
 
 // Skiplist Interface
 
-// Returns a new random level.
+// randomLevel returns a new random level.
 func randomLevel() (n int) {
 	rand.Seed(time.Now().UnixNano())
 	min := 1
 	return rand.Intn(DefaultMaxLevel-min) + min
 }
 
-// Set key-value in the skip list.
+// Set set key-value into the skip list.
 func (skiplist *SkipList) Set(key, value interface{}) {
 	path := skiplist.find(key)
 
@@ -92,7 +92,7 @@ func (skiplist *SkipList) Set(key, value interface{}) {
 	skiplist.size++
 }
 
-// Find the traversal path of the skip list.
+// Find find the traversal path of the skip list.
 //
 // Divided into three cases:
 // case1:
