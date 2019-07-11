@@ -15,12 +15,12 @@ var (
 	ErrEmpty = errors.New("the hash map is empty")
 )
 
-// Map represents a hash map structure.
+// The Map represents a hash map structure.
 type Map struct {
 	m map[interface{}]interface{}
 }
 
-// New new the hash map.
+// New the hash map.
 func New() *Map {
 	return &Map{
 		m: make(map[interface{}]interface{}),

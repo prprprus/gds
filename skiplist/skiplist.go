@@ -27,7 +27,7 @@ var (
 	ErrEmpty = errors.New("the skip list is empty")
 )
 
-// The node struct is a node of the skip list.
+// The node is a node of the skip list.
 type node struct {
 	key   interface{} // value sorts by key
 	value interface{} // value fields can store any type
@@ -35,7 +35,7 @@ type node struct {
 	level int         // height of node
 }
 
-// The SkipList struct represents a skip list.
+// The SkipList represents a skip list structure.
 type SkipList struct {
 	head       *node           // head is a `[]*node`, length equal to DefaultMaxLevel
 	size       int             // number of nodes of the skip list
