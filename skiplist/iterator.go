@@ -45,7 +45,18 @@ func (iterator *Iterator) Begin() {
 
 // Value returns the current value of the element of the iterator.
 func (iterator *Iterator) Value() interface{} {
+	if iterator.element == nil {
+		return nil
+	}
 	return iterator.element.value
+}
+
+// Key returns the current key of the element of the iterator.
+func (iterator *Iterator) Key() interface{} {
+	if iterator.element == nil {
+		return nil
+	}
+	return iterator.element.key
 }
 
 // Index returns the current index of the iterator.

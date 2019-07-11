@@ -159,6 +159,22 @@ func (skiplist *SkipList) Exists(key interface{}) bool {
 	return true
 }
 
+// Get the value by key.
+func (skiplist *SkipList) Get(key interface{}) (interface{}, error) {
+	if skiplist.size == 0 {
+		return nil, ErrEmpty
+	}
+
+	path := skiplist.find(key)
+
+	// can't found
+	if path[0].pNode.next[0] == nil || path[0].pNode.next[0].key != key {
+		return nil, ErrNotFound
+	}
+
+	return path[0].pNode.next[0].value, nil
+}
+
 // Remove the value by key.
 func (skiplist *SkipList) Remove(key interface{}) error {
 	if skiplist.size == 0 {

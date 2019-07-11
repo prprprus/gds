@@ -6,6 +6,13 @@ package linkedhashmap
 
 import "testing"
 
+func TestNew(t *testing.T) {
+	m := New()
+	if m.m == nil {
+		t.Error("TestNew error")
+	}
+}
+
 // Map Interface
 
 func TestPut(t *testing.T) {
