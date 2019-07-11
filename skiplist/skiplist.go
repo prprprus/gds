@@ -45,8 +45,8 @@ type SkipList struct {
 
 // The pathNode is a node of the path array.
 type pathNode struct {
-	pNode  *node // the node that bigger than value
-	pIndex int   // the index that node in next array position
+	pNode      *node // the node that bigger than value
+	pNextIndex int   // the index that node in next array position
 }
 
 // New the skip list.
@@ -85,9 +85,9 @@ func (skiplist *SkipList) Set(key, value interface{}) {
 	// insert according to level
 	for i := 0; i < level; i++ {
 		pNode := path[i].pNode
-		pIndex := path[i].pIndex
-		newNode.next[i] = pNode.next[pIndex]
-		pNode.next[pIndex] = newNode
+		pNextIndex := path[i].pNextIndex
+		newNode.next[i] = pNode.next[pNextIndex]
+		pNode.next[pNextIndex] = newNode
 	}
 	skiplist.size++
 }
@@ -140,8 +140,8 @@ x:
 // Add the current node into path array.
 func addPath(path []pathNode, currNode *node, index int) []pathNode {
 	record := pathNode{
-		pNode:  currNode,
-		pIndex: index,
+		pNode:      currNode,
+		pNextIndex: index,
 	}
 	path[index] = record
 	return path
