@@ -170,6 +170,14 @@ func (skiplist *SkipList) Remove(key interface{}) error {
 	return nil
 }
 
+// Check if the index is within the length of the skiplist.
+func (skiplist *SkipList) indexInRange(index int) bool {
+	if index >= 0 && index < skiplist.size {
+		return true
+	}
+	return false
+}
+
 // Container Interface
 
 // Empty returns true if the skiplist is empty, otherwise returns false.
