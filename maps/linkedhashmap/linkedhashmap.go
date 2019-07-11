@@ -1,3 +1,11 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
+// Package linkedhashmap implements the linked hash map.
+// Structure is not concurrent safe.
+// The linked hash map can additionally maintain the order of key-value.
+// TODO: Add more methods related to the key-value order.
 package linkedhashmap
 
 import (
@@ -13,11 +21,13 @@ var (
 	ErrEmpty = errors.New("the map is empty")
 )
 
+// The Map represents a linked hash map structure.
 type Map struct {
 	m        map[interface{}]interface{}
-	ordering *doublelinkedlist.List
+	ordering *doublelinkedlist.List // maintain the order of key-value
 }
 
+// New the linked hash map.
 func New() *Map {
 	return &Map{
 		m:        make(map[interface{}]interface{}),
@@ -27,6 +37,7 @@ func New() *Map {
 
 // Map Interface
 
+// Put the key-value into map.
 func (m *Map) Put(key, value interface{}) {
 	if _, ok := m.m[key]; !ok {
 		m.ordering.Append(value)
@@ -34,6 +45,7 @@ func (m *Map) Put(key, value interface{}) {
 	m.m[key] = value
 }
 
+// Get the value by key.
 func (m *Map) Get(key interface{}) (interface{}, error) {
 	value, ok := m.m[key]
 	if !ok {
@@ -42,6 +54,7 @@ func (m *Map) Get(key interface{}) (interface{}, error) {
 	return value, nil
 }
 
+// Remove key-value by key.
 func (m *Map) Remove(key interface{}) {
 	if _, ok := m.m[key]; ok {
 		delete(m.m, key)
@@ -52,26 +65,34 @@ func (m *Map) Remove(key interface{}) {
 
 // Container Interface
 
+// Empty returns true if map does not contain any elements.
 func (m *Map) Empty() bool {
 	return m.Size() == 0
 }
 
+// Size returns number of elements in the map.
 func (m *Map) Size() int {
 	return m.ordering.Size()
 }
 
+// Keys returns all keys (orderly).
 func (m *Map) Keys() []interface{} {
 	return m.ordering.Values()
 }
 
+// Values returns all values (orderly).
 func (m *Map) Values() []interface{} {
-	values := make([]interface{}, 0)
-	for _, value := range m.m {
-		values = append(values, value)
+	values := make([]interface{}, m.Size())
+	count := 0
+	it := m.Iterator()
+	for it.Next() {
+		values[count] = it.Value()
+		count++
 	}
 	return values
 }
 
+// Clear removes all elements from the map.
 func (m *Map) Clear() {
 	m.m = make(map[interface{}]interface{})
 	m.ordering.Clear()
