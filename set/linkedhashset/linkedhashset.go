@@ -22,7 +22,7 @@ const (
 )
 
 var (
-	// ErrEmpty is returned when the hash set is empty
+	// ErrEmpty is returned when the linked hash set is empty
 	ErrEmpty = errors.New("the hash set is empty")
 )
 
