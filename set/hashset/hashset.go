@@ -39,8 +39,10 @@ func New() *Set {
 // Add the values into the hash set.
 func (s *Set) Add(values ...interface{}) {
 	for _, v := range values {
-		s.s[v] = FixValue
-		s.size++
+		if _, ok := s.s[v]; !ok {
+			s.s[v] = FixValue
+			s.size++
+		}
 	}
 }
 

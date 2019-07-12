@@ -87,9 +87,9 @@ func (m *Map) Keys() []interface{} {
 func (m *Map) Values() []interface{} {
 	values := make([]interface{}, m.Size())
 	count := 0
-	it := m.Iterator()
-	for it.Next() {
-		values[count] = it.Value()
+	iterator := m.Iterator()
+	for iterator.Next() {
+		values[count] = iterator.Value()
 		count++
 	}
 	return values
