@@ -9,21 +9,21 @@ env:
   - CODECOV_TOKEN="f5d77a8d-9bba-4860-a3d5-e1efa38c5923"
 
 script:
-  - go test -v github.com/prprprus/ds/list/singlylinkedlist
-  - go test -v github.com/prprprus/ds/list/doublelinkedlist
-  - go test -v github.com/prprprus/ds/list/arraylist
-  - go test -v github.com/prprprus/ds/stack/arraystack
-  - go test -v github.com/prprprus/ds/stack/linkedliststack
-  - go test -v github.com/prprprus/ds/queue/arrayqueue
-  - go test -v github.com/prprprus/ds/queue/linkedlistqueue
-  - go test -v github.com/prprprus/ds/util
-  - go test -v github.com/prprprus/ds/skiplist
-  - go test -v github.com/prprprus/ds/maps/hashmap
-  - go test -v github.com/prprprus/ds/maps/linkedhashmap
-  - go test -v github.com/prprprus/ds/maps/skipmap
-  - go test -v github.com/prprprus/ds/set/hashset
-  - go test -v github.com/prprprus/ds/set/linkedhashset
-  - go test -v github.com/prprprus/ds/set/skipset
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/list/singlylinkedlist
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/list/doublelinkedlist
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/list/arraylist
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/stack/arraystack
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/stack/linkedliststack
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/queue/arrayqueue
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/queue/linkedlistqueue
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/util
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/skiplist
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/maps/hashmap
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/maps/linkedhashmap
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/maps/skipmap
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/set/hashset
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/set/linkedhashset
+  - go test -v -coverprofile=coverage.txt -covermode=atomic github.com/prprprus/ds/set/skipset
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
