@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds3.png)
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds1.png)
 
 ![build status](https://travis-ci.org/prprprus/ds.svg?branch=master)
 [![codecov](https://codecov.io/gh/prprprus/ds/branch/master/graph/badge.svg)](https://codecov.io/gh/prprprus/ds)
