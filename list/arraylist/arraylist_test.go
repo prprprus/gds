@@ -237,55 +237,55 @@ func TestGet(t *testing.T) {
 	}
 }
 
-// func TestRemove(t *testing.T) {
-// 	// case1: the list has no element
-// 	list := New()
-// 	err := list.Remove(0)
-// 	if err == nil {
-// 		t.Error("case1 error: the list has no element")
-// 	}
-// 	err = list.Remove(1)
-// 	if err == nil {
-// 		t.Error("case1 error: the list has no element")
-// 	}
+func TestRemove(t *testing.T) {
+	// case1: the list has no element
+	list := New()
+	err := list.Remove(0)
+	if err == nil {
+		t.Error("case1 error: the list has no element")
+	}
+	err = list.Remove(1)
+	if err == nil {
+		t.Error("case1 error: the list has no element")
+	}
 
-// 	// case2: the list has one element
-// 	list = New(1)
-// 	err = list.Remove(0)
-// 	if err != nil {
-// 		t.Error("case2 error: the list has one element")
-// 	}
-// 	list = New(1)
-// 	err = list.Remove(1)
-// 	if err == nil {
-// 		t.Error("case2 error: the list has one element")
-// 	}
+	// case2: the list has one element
+	list = New(1)
+	err = list.Remove(0)
+	if err != nil {
+		t.Error("case2 error: the list has one element")
+	}
+	list = New(1)
+	err = list.Remove(1)
+	if err == nil {
+		t.Error("case2 error: the list has one element")
+	}
 
-// 	// case3: the list has some elements, remove first element
-// 	list = New(1, 2, 3, 4, 5, 6)
-// 	err = list.Remove(0)
-// 	if err != nil {
-// 		t.Error("case3 error: the list has some elements, remove first element")
-// 	}
+	// case3: the list has some elements, remove first element
+	list = New(1, 2, 3, 4, 5, 6)
+	err = list.Remove(0)
+	if err != nil {
+		t.Error("case3 error: the list has some elements, remove first element")
+	}
 
-// 	// case4: the list has some elements, remove last element
-// 	list = New(1, 2, 3, 4, 5, 6)
-// 	err = list.Remove(5)
-// 	if err != nil {
-// 		t.Error("case4 error: the list has some elements, remove last element")
-// 	}
+	// case4: the list has some elements, remove last element
+	list = New(1, 2, 3, 4, 5, 6)
+	err = list.Remove(5)
+	if err != nil {
+		t.Error("case4 error: the list has some elements, remove last element")
+	}
 
-// 	// case5: the list has some elements, remove medium element
-// 	list = New(1, 2, 3, 4, 5, 6)
-// 	err = list.Remove(3)
-// 	if err != nil {
-// 		t.Error("case5 error: the list has some elements, remove medium element")
-// 	}
-// 	err = list.Remove(2)
-// 	if err != nil {
-// 		t.Error("case5 error: the list has some elements, remove medium element")
-// 	}
-// }
+	// case5: the list has some elements, remove medium element
+	list = New(1, 2, 3, 4, 5, 6)
+	err = list.Remove(3)
+	if err != nil {
+		t.Error("case5 error: the list has some elements, remove medium element")
+	}
+	err = list.Remove(2)
+	if err != nil {
+		t.Error("case5 error: the list has some elements, remove medium element")
+	}
+}
 
 func TestContains(t *testing.T) {
 	// case1: the list has no element, sub-list has no element
