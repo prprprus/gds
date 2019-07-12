@@ -23,14 +23,13 @@ const (
 
 var (
 	// ErrEmpty is returned when the linked hash set is empty
-	ErrEmpty = errors.New("the hash set is empty")
+	ErrEmpty = errors.New("the linked hash is empty")
 )
 
 // The Set represents a linked hash set structure.
 type Set struct {
 	s        map[interface{}]int
 	ordering *doublelinkedlist.List
-	size     int
 }
 
 // New the linked hash set.
@@ -38,7 +37,6 @@ func New() *Set {
 	return &Set{
 		s:        make(map[interface{}]int),
 		ordering: doublelinkedlist.New(),
-		size:     0,
 	}
 }
 
@@ -50,7 +48,6 @@ func (s *Set) Add(values ...interface{}) {
 		if _, ok := s.s[v]; !ok {
 			s.s[v] = FixValue
 			s.ordering.Append(v)
-			s.size++
 		}
 	}
 }
@@ -62,10 +59,11 @@ func (s *Set) Remove(values ...interface{}) error {
 	}
 
 	for _, v := range values {
-		delete(s.s, v)
-		index, _ := s.ordering.IndexOf(v)
-		s.ordering.Remove(index)
-		s.size--
+		if _, ok := s.s[v]; ok {
+			delete(s.s, v)
+			index, _ := s.ordering.IndexOf(v)
+			s.ordering.Remove(index)
+		}
 	}
 	return nil
 }
@@ -96,14 +94,13 @@ func (s *Set) Empty() bool {
 
 // Size returns the size of the linked hash set.
 func (s *Set) Size() int {
-	return s.size
+	return s.ordering.Size()
 }
 
 // Clear the linked hash set.
 func (s *Set) Clear() {
 	s.s = make(map[interface{}]int)
 	s.ordering.Clear()
-	s.size = 0
 }
 
 // Values returns the values of the linked hash set.

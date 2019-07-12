@@ -6,15 +6,6 @@ package hashset
 
 import "testing"
 
-func verifyValues(values, result []interface{}) bool {
-	for i := range values {
-		if values[i] != result[i] {
-			return false
-		}
-	}
-	return true
-}
-
 func TestNew(t *testing.T) {
 	s := New()
 	if s.s == nil {
@@ -145,13 +136,12 @@ func TestClear(t *testing.T) {
 	}
 }
 
-func TestValues(t *testing.T) {
+func TestValuesAndContains(t *testing.T) {
 	// case1: set has some elements
 	s := New()
 	s.Add(1, 2, 3, 4)
 	values := s.Values()
-	result := []interface{}{1, 2, 3, 4}
-	if !verifyValues(values, result) {
+	if !s.Contains(values...) {
 		t.Error("case1 error: set has some elements")
 	}
 
@@ -159,16 +149,14 @@ func TestValues(t *testing.T) {
 	s = New()
 	s.Add(1)
 	values = s.Values()
-	result = []interface{}{1}
-	if !verifyValues(values, result) {
+	if !s.Contains(values...) {
 		t.Error("case2 error: set has one element")
 	}
 
 	// case3: set has no element
 	s = New()
 	values = s.Values()
-	result = []interface{}{}
-	if !verifyValues(values, result) {
+	if !s.Contains(values...) {
 		t.Error("case3 error: set has no element")
 	}
 }

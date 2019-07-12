@@ -20,8 +20,8 @@ import (
 var (
 	// ErrNotFound is returned when the value can not found
 	ErrNotFound = errors.New("can not found value")
-	// ErrEmpty is returned when the map is empty
-	ErrEmpty = errors.New("the map is empty")
+	// ErrEmpty is returned when the linked hash map is empty
+	ErrEmpty = errors.New("the linked hash map is empty")
 )
 
 // The Map represents a linked hash map structure.

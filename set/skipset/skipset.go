@@ -1,9 +1,22 @@
+// Copyright (c) 2019, prprprus All rights reserved.
+// Use of this source code is governed by a BSD-style.
+// license that can be found in the LICENSE file.
+
+// Package skipset implements the skip set.
+//
+// Compared to hashset the skip set can additionally
+// maintain the order of key-value by the skip list
+// and compared to linkedhashset the skip set performance is better,
+// the time complexity of put, get, remove operations is O(log N).
+//
+// Structure is not concurrent safe.
+// TODO: Add more methods related to the key-value order.
 package skipset
 
 import (
 	"errors"
 
-	"github.com/prprprus/ds/list/doublelinkedlist"
+	"github.com/prprprus/ds/skiplist"
 )
 
 const (
@@ -12,55 +25,46 @@ const (
 )
 
 var (
-	// ErrEmpty is returned when the hash set is empty
-	ErrEmpty = errors.New("the hash set is empty")
+	// ErrEmpty is returned when the skip set is empty
+	ErrEmpty = errors.New("the skip set is empty")
 )
 
-// The Set represents a linked hash set structure.
+// The Set represents a skip set structure.
 type Set struct {
-	s        map[interface{}]int
-	ordering *doublelinkedlist.List
-	size     int
+	s *skiplist.SkipList
 }
 
-// New the linked hash set.
-func New() *Set {
+// New the skip set.
+func New(comparator func(a, b interface{}) int) *Set {
 	return &Set{
-		s:        make(map[interface{}]int),
-		ordering: doublelinkedlist.New(),
-		size:     0,
+		s: skiplist.New(comparator),
 	}
 }
 
 // Set Interface
 
-// Add the values into the linked hash set.
+// Add the values into the skip set.
 func (s *Set) Add(values ...interface{}) {
 	for _, v := range values {
-		if _, ok := s.s[v]; !ok {
-			s.s[v] = FixValue
-			s.ordering.Append(v)
-			s.size++
+		if !s.s.Exists(v) {
+			s.s.Set(v, FixValue)
 		}
 	}
 }
 
-// Remove the values into the linked hash set.
+// Remove the values into the skip set.
 func (s *Set) Remove(values ...interface{}) error {
 	if s.Size() == 0 {
 		return ErrEmpty
 	}
 
 	for _, v := range values {
-		delete(s.s, v)
-		index, _ := s.ordering.IndexOf(v)
-		s.ordering.Remove(index)
-		s.size--
+		s.s.Remove(v)
 	}
 	return nil
 }
 
-// Contains returns true if the linked hash set contains values, otherwise returns false.
+// Contains returns true if the skip set contains values, otherwise returns false.
 func (s *Set) Contains(values ...interface{}) bool {
 	if len(values) == 0 {
 		return true
@@ -70,7 +74,7 @@ func (s *Set) Contains(values ...interface{}) bool {
 	}
 
 	for _, v := range values {
-		if _, ok := s.s[v]; !ok {
+		if !s.s.Exists(v) {
 			return false
 		}
 	}
@@ -79,24 +83,27 @@ func (s *Set) Contains(values ...interface{}) bool {
 
 // Container Interface
 
-// Empty returns true if the linked hash set is empty, otherwise returns false.
+// Empty returns true if the skip set is empty, otherwise returns false.
 func (s *Set) Empty() bool {
 	return s.Size() == 0
 }
 
-// Size returns the size of the linked hash set.
+// Size returns the size of the skip set.
 func (s *Set) Size() int {
-	return s.size
+	return s.s.Size()
 }
 
-// Clear the linked hash set.
+// Clear the skip set.
 func (s *Set) Clear() {
-	s.s = make(map[interface{}]int)
-	s.ordering.Clear()
-	s.size = 0
+	s.s.Clear()
 }
 
-// Values returns the values of the linked hash set.
+// Values returns the values of the skip set.
 func (s *Set) Values() []interface{} {
-	return s.ordering.Values()
+	values := make([]interface{}, 0)
+	iterator := s.s.Iterator()
+	for iterator.Next() {
+		values = append(values, iterator.Key())
+	}
+	return values
 }

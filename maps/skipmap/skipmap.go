@@ -22,8 +22,8 @@ import (
 var (
 	// ErrNotFound is returned when the value can not found
 	ErrNotFound = errors.New("can not found value")
-	// ErrEmpty is returned when the map is empty
-	ErrEmpty = errors.New("the map is empty")
+	// ErrEmpty is returned when the skip map is empty
+	ErrEmpty = errors.New("the skip map is empty")
 )
 
 // The Map represents a skip map structure.
