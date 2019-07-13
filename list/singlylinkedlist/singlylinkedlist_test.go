@@ -958,4 +958,52 @@ func BenchmarkAppend100000(b *testing.B) {
 	benchmarkAppend(b, list, size)
 }
 
-//
+// Get
+
+func benchmarkGet(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Get(i)
+		}
+	}
+}
+
+func BenchmarkGet0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
