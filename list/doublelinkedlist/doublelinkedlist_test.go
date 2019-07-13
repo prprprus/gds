@@ -969,3 +969,489 @@ func TestIndex(t *testing.T) {
 		i++
 	}
 }
+
+// Benchmark Test
+
+// Append
+
+func benchmarkAppend(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Append(i)
+		}
+	}
+}
+
+func BenchmarkAppend0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+// Get
+
+func benchmarkGet(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Get(i)
+		}
+	}
+}
+
+func BenchmarkGet0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+func BenchmarkGet100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkGet(b, list, size)
+}
+
+// Remove
+
+func benchmarkRemove(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Remove(i)
+		}
+	}
+}
+
+func BenchmarkGetRemove0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkRemove(b, list, size)
+}
+
+func BenchmarkRemove100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkRemove(b, list, size)
+}
+
+func BenchmarkRemove1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkRemove(b, list, size)
+}
+
+func BenchmarkRemove10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkRemove(b, list, size)
+}
+
+func BenchmarkRemove100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkRemove(b, list, size)
+}
+
+// Contains
+
+func benchmarkContains(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Contains(i)
+		}
+	}
+}
+
+func BenchmarkGetContains0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkContains(b, list, size)
+}
+
+func BenchmarkContains100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkContains(b, list, size)
+}
+
+func BenchmarkContains1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkContains(b, list, size)
+}
+
+func BenchmarkContains10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkContains(b, list, size)
+}
+
+func BenchmarkContains100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkContains(b, list, size)
+}
+
+// Swap
+
+func benchmarkSwap(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Swap(i, size-1)
+		}
+	}
+}
+
+func BenchmarkGetSwap0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkSwap(b, list, size)
+}
+
+func BenchmarkSwap100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSwap(b, list, size)
+}
+
+func BenchmarkSwap1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSwap(b, list, size)
+}
+
+func BenchmarkSwap10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSwap(b, list, size)
+}
+
+func BenchmarkSwap100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSwap(b, list, size)
+}
+
+// Insert
+
+func benchmarkInsert(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Insert(i, i)
+		}
+	}
+}
+
+func BenchmarkGetInsert0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkInsert(b, list, size)
+}
+
+func BenchmarkInsert100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkInsert(b, list, size)
+}
+
+func BenchmarkInsert1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkInsert(b, list, size)
+}
+
+func BenchmarkInsert10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkInsert(b, list, size)
+}
+
+func BenchmarkInsert100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkInsert(b, list, size)
+}
+
+// Set
+
+func benchmarkSet(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Set(i, i)
+		}
+	}
+}
+
+func BenchmarkGetSet0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkSet(b, list, size)
+}
+
+func BenchmarkSet100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSet(b, list, size)
+}
+
+func BenchmarkSet1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSet(b, list, size)
+}
+
+func BenchmarkSet10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSet(b, list, size)
+}
+
+func BenchmarkSet100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkSet(b, list, size)
+}
+
+// IndexOf
+
+func benchmarkIndexOf(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.IndexOf(i)
+		}
+	}
+}
+
+func BenchmarkGetIndexOf0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkIndexOf(b, list, size)
+}
+
+func BenchmarkIndexOf100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkIndexOf(b, list, size)
+}
+
+func BenchmarkIndexOf1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkIndexOf(b, list, size)
+}
+
+func BenchmarkIndexOf10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkIndexOf(b, list, size)
+}
+
+// func BenchmarkIndexOf100000(b *testing.B) {
+// 	b.StopTimer()
+// 	list := New()
+// 	size := 100000
+// 	for n := 0; n < size; n++ {
+// 		list.Append(n)
+// 	}
+// 	b.StartTimer()
+// 	benchmarkIndexOf(b, list, size)
+// }

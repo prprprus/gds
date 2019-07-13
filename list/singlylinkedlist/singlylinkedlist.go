@@ -234,10 +234,14 @@ func (list *List) Set(index int, value interface{}) error {
 
 // IndexOf get index by value.
 func (list *List) IndexOf(value interface{}) (int, error) {
-	for i, v := range list.Values() {
-		if v == value {
+	flag := list.first
+	i := 0
+	for flag != nil {
+		if value == flag.value {
 			return i, nil
 		}
+		flag = flag.next
+		i++
 	}
 	return -1, ErrIndexOf
 }

@@ -190,9 +190,9 @@ func (list *List) Set(index int, value interface{}) error {
 
 // IndexOf get index by value.
 func (list *List) IndexOf(value interface{}) (int, error) {
-	for index, element := range list.elements {
-		if element == value {
-			return index, nil
+	for i := 0; i < list.Size(); i++ {
+		if value == list.elements[i] {
+			return i, nil
 		}
 	}
 	return -1, ErrIndexOf
