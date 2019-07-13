@@ -905,3 +905,57 @@ func TestIndex(t *testing.T) {
 		i++
 	}
 }
+
+// Benchmark Test
+
+// Append
+
+func benchmarkAppend(b *testing.B, list *List, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			list.Append(i)
+		}
+	}
+}
+
+func BenchmarkAppend0(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 0
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend100(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend1000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend10000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+func BenchmarkAppend100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkAppend(b, list, size)
+}
+
+//
