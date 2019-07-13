@@ -176,3 +176,155 @@ func TestValues(t *testing.T) {
 		t.Error("case3 error: set has no element")
 	}
 }
+
+// Benchmark Test
+
+// Add
+
+func benchmarkAdd(b *testing.B, s *Set, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			s.Add(i)
+		}
+	}
+}
+
+func BenchmarkGetAdd0(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 0
+	b.StartTimer()
+	benchmarkAdd(b, s, size)
+}
+
+func BenchmarkAdd100(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 100
+	b.StartTimer()
+	benchmarkAdd(b, s, size)
+}
+
+func BenchmarkAdd1000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 1000
+	b.StartTimer()
+	benchmarkAdd(b, s, size)
+}
+
+func BenchmarkAdd10000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 10000
+	b.StartTimer()
+	benchmarkAdd(b, s, size)
+}
+
+func BenchmarkAdd100000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 100000
+	b.StartTimer()
+	benchmarkAdd(b, s, size)
+}
+
+// Remove
+
+func benchmarkRemove(b *testing.B, s *Set, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			s.Remove(i)
+		}
+	}
+}
+
+func BenchmarkGetRemove0(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 0
+	b.StartTimer()
+	benchmarkRemove(b, s, size)
+}
+
+func BenchmarkRemove100(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 100
+	b.StartTimer()
+	benchmarkRemove(b, s, size)
+}
+
+func BenchmarkRemove1000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 1000
+	b.StartTimer()
+	benchmarkRemove(b, s, size)
+}
+
+func BenchmarkRemove10000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 10000
+	b.StartTimer()
+	benchmarkRemove(b, s, size)
+}
+
+func BenchmarkRemove100000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 100000
+	b.StartTimer()
+	benchmarkRemove(b, s, size)
+}
+
+// Contains
+
+func benchmarkContains(b *testing.B, s *Set, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			s.Contains(i)
+		}
+	}
+}
+
+func BenchmarkGetContains0(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 0
+	b.StartTimer()
+	benchmarkContains(b, s, size)
+}
+
+func BenchmarkContains100(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 100
+	b.StartTimer()
+	benchmarkContains(b, s, size)
+}
+
+func BenchmarkContains1000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 1000
+	b.StartTimer()
+	benchmarkContains(b, s, size)
+}
+
+func BenchmarkContains10000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 10000
+	b.StartTimer()
+	benchmarkContains(b, s, size)
+}
+
+func BenchmarkContains100000(b *testing.B) {
+	b.StopTimer()
+	s := New(util.IntComparator)
+	size := 100000
+	b.StartTimer()
+	benchmarkContains(b, s, size)
+}

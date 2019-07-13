@@ -1445,13 +1445,13 @@ func BenchmarkIndexOf10000(b *testing.B) {
 	benchmarkIndexOf(b, list, size)
 }
 
-// func BenchmarkIndexOf100000(b *testing.B) {
-// 	b.StopTimer()
-// 	list := New()
-// 	size := 100000
-// 	for n := 0; n < size; n++ {
-// 		list.Append(n)
-// 	}
-// 	b.StartTimer()
-// 	benchmarkIndexOf(b, list, size)
-// }
+func BenchmarkIndexOf100000(b *testing.B) {
+	b.StopTimer()
+	list := New()
+	size := 100000
+	for n := 0; n < size; n++ {
+		list.Append(n)
+	}
+	b.StartTimer()
+	benchmarkIndexOf(b, list, size)
+}

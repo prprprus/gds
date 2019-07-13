@@ -10,7 +10,6 @@ import "github.com/prprprus/ds/container"
 type Queue interface {
 	Put(value interface{})
 	Get() (interface{}, error)
-	indexInRange(index int) bool
 
 	container.Container
 	// Empty() bool

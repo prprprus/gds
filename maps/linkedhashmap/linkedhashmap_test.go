@@ -457,3 +457,155 @@ func TestKey(t *testing.T) {
 		i++
 	}
 }
+
+// Benchmark Test
+
+// Put
+
+func benchmarkPut(b *testing.B, m *Map, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			m.Put(i, i)
+		}
+	}
+}
+
+func BenchmarkGetPut0(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 0
+	b.StartTimer()
+	benchmarkPut(b, m, size)
+}
+
+func BenchmarkPut100(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 100
+	b.StartTimer()
+	benchmarkPut(b, m, size)
+}
+
+func BenchmarkPut1000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkPut(b, m, size)
+}
+
+func BenchmarkPut10000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkPut(b, m, size)
+}
+
+func BenchmarkPut100000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkPut(b, m, size)
+}
+
+// Get
+
+func benchmarkGet(b *testing.B, m *Map, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			m.Get(i)
+		}
+	}
+}
+
+func BenchmarkGetGet0(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 0
+	b.StartTimer()
+	benchmarkGet(b, m, size)
+}
+
+func BenchmarkGet100(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 100
+	b.StartTimer()
+	benchmarkGet(b, m, size)
+}
+
+func BenchmarkGet1000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkGet(b, m, size)
+}
+
+func BenchmarkGet10000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkGet(b, m, size)
+}
+
+func BenchmarkGet100000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkGet(b, m, size)
+}
+
+// Remove
+
+func benchmarkRemove(b *testing.B, m *Map, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			m.Remove(i)
+		}
+	}
+}
+
+func BenchmarkRemoveRemove0(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 0
+	b.StartTimer()
+	benchmarkRemove(b, m, size)
+}
+
+func BenchmarkRemove100(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 100
+	b.StartTimer()
+	benchmarkRemove(b, m, size)
+}
+
+func BenchmarkRemove1000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkRemove(b, m, size)
+}
+
+func BenchmarkRemove10000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkRemove(b, m, size)
+}
+
+func BenchmarkRemove100000(b *testing.B) {
+	b.StopTimer()
+	m := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkRemove(b, m, size)
+}

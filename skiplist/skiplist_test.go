@@ -488,3 +488,205 @@ func TestIndex(t *testing.T) {
 		i++
 	}
 }
+
+// Benchmark Test
+
+// Set
+
+func benchmarkSet(b *testing.B, skiplist *SkipList, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			skiplist.Set(i, i)
+		}
+	}
+}
+
+func BenchmarkSet0(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 0
+	b.StartTimer()
+	benchmarkSet(b, skiplist, size)
+}
+
+func BenchmarkSet100(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100
+	b.StartTimer()
+	benchmarkSet(b, skiplist, size)
+}
+
+func BenchmarkSet1000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 1000
+	b.StartTimer()
+	benchmarkSet(b, skiplist, size)
+}
+
+func BenchmarkSet10000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 10000
+	b.StartTimer()
+	benchmarkSet(b, skiplist, size)
+}
+
+func BenchmarkSet100000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100000
+	b.StartTimer()
+	benchmarkSet(b, skiplist, size)
+}
+
+// Exists
+
+func benchmarkExists(b *testing.B, skiplist *SkipList, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			skiplist.Exists(i)
+		}
+	}
+}
+
+func BenchmarkExists0(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 0
+	b.StartTimer()
+	benchmarkExists(b, skiplist, size)
+}
+
+func BenchmarkExists100(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100
+	b.StartTimer()
+	benchmarkExists(b, skiplist, size)
+}
+
+func BenchmarkExists1000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 1000
+	b.StartTimer()
+	benchmarkExists(b, skiplist, size)
+}
+
+func BenchmarkExists10000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 10000
+	b.StartTimer()
+	benchmarkExists(b, skiplist, size)
+}
+
+func BenchmarkExists100000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100000
+	b.StartTimer()
+	benchmarkExists(b, skiplist, size)
+}
+
+// Get
+
+func benchmarkGet(b *testing.B, skiplist *SkipList, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			skiplist.Get(i)
+		}
+	}
+}
+
+func BenchmarkGet0(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 0
+	b.StartTimer()
+	benchmarkGet(b, skiplist, size)
+}
+
+func BenchmarkGet100(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100
+	b.StartTimer()
+	benchmarkGet(b, skiplist, size)
+}
+
+func BenchmarkGet1000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 1000
+	b.StartTimer()
+	benchmarkGet(b, skiplist, size)
+}
+
+func BenchmarkGet10000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 10000
+	b.StartTimer()
+	benchmarkGet(b, skiplist, size)
+}
+
+func BenchmarkGet100000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100000
+	b.StartTimer()
+	benchmarkGet(b, skiplist, size)
+}
+
+// Remove
+
+func benchmarkRemove(b *testing.B, skiplist *SkipList, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			skiplist.Remove(i)
+		}
+	}
+}
+
+func BenchmarkRemove0(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 0
+	b.StartTimer()
+	benchmarkRemove(b, skiplist, size)
+}
+
+func BenchmarkRemove100(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100
+	b.StartTimer()
+	benchmarkRemove(b, skiplist, size)
+}
+
+func BenchmarkRemove1000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 1000
+	b.StartTimer()
+	benchmarkRemove(b, skiplist, size)
+}
+
+func BenchmarkRemove10000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 10000
+	b.StartTimer()
+	benchmarkRemove(b, skiplist, size)
+}
+
+func BenchmarkRemove100000(b *testing.B) {
+	b.StopTimer()
+	skiplist := New(util.IntComparator)
+	size := 100000
+	b.StartTimer()
+	benchmarkRemove(b, skiplist, size)
+}

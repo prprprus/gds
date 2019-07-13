@@ -480,3 +480,155 @@ func TestIndex(t *testing.T) {
 		t.Error("case3 error: stack has no element")
 	}
 }
+
+// Benchmark Test
+
+// Push
+
+func benchmarkPush(b *testing.B, stack *Stack, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			stack.Push(i)
+		}
+	}
+}
+
+func BenchmarkGetPush0(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 0
+	b.StartTimer()
+	benchmarkPush(b, stack, size)
+}
+
+func BenchmarkPush100(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 100
+	b.StartTimer()
+	benchmarkPush(b, stack, size)
+}
+
+func BenchmarkPush1000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkPush(b, stack, size)
+}
+
+func BenchmarkPush10000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkPush(b, stack, size)
+}
+
+func BenchmarkPush100000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkPush(b, stack, size)
+}
+
+// Pop
+
+func benchmarkPop(b *testing.B, stack *Stack, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			stack.Pop()
+		}
+	}
+}
+
+func BenchmarkGetPop0(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 0
+	b.StartTimer()
+	benchmarkPop(b, stack, size)
+}
+
+func BenchmarkPop100(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 100
+	b.StartTimer()
+	benchmarkPop(b, stack, size)
+}
+
+func BenchmarkPop1000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkPop(b, stack, size)
+}
+
+func BenchmarkPop10000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkPop(b, stack, size)
+}
+
+func BenchmarkPop100000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkPop(b, stack, size)
+}
+
+// Peek
+
+func benchmarkPeek(b *testing.B, stack *Stack, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			stack.Peek()
+		}
+	}
+}
+
+func BenchmarkGetPeek0(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 0
+	b.StartTimer()
+	benchmarkPeek(b, stack, size)
+}
+
+func BenchmarkPeek100(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 100
+	b.StartTimer()
+	benchmarkPeek(b, stack, size)
+}
+
+func BenchmarkPeek1000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkPeek(b, stack, size)
+}
+
+func BenchmarkPeek10000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkPeek(b, stack, size)
+}
+
+func BenchmarkPeek100000(b *testing.B) {
+	b.StopTimer()
+	stack := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkPeek(b, stack, size)
+}

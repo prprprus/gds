@@ -372,3 +372,105 @@ func TestIndex(t *testing.T) {
 		t.Error("case3 error: queue has no element")
 	}
 }
+
+// Benchmark Test
+
+// Put
+
+func benchmarkPut(b *testing.B, queue *Queue, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			queue.Put(i)
+		}
+	}
+}
+
+func BenchmarkGetPut0(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 0
+	b.StartTimer()
+	benchmarkPut(b, queue, size)
+}
+
+func BenchmarkPut100(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 100
+	b.StartTimer()
+	benchmarkPut(b, queue, size)
+}
+
+func BenchmarkPut1000(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkPut(b, queue, size)
+}
+
+func BenchmarkPut10000(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkPut(b, queue, size)
+}
+
+func BenchmarkPut100000(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkPut(b, queue, size)
+}
+
+// Get
+
+func benchmarkGet(b *testing.B, queue *Queue, size int) {
+	for n := 0; n < b.N; n++ {
+		for i := 0; i < size; i++ {
+			queue.Get()
+		}
+	}
+}
+
+func BenchmarkGetGet0(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 0
+	b.StartTimer()
+	benchmarkGet(b, queue, size)
+}
+
+func BenchmarkGet100(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 100
+	b.StartTimer()
+	benchmarkGet(b, queue, size)
+}
+
+func BenchmarkGet1000(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 1000
+	b.StartTimer()
+	benchmarkGet(b, queue, size)
+}
+
+func BenchmarkGet10000(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 10000
+	b.StartTimer()
+	benchmarkGet(b, queue, size)
+}
+
+func BenchmarkGet100000(b *testing.B) {
+	b.StopTimer()
+	queue := New()
+	size := 100000
+	b.StartTimer()
+	benchmarkGet(b, queue, size)
+}
