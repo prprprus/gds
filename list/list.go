@@ -9,7 +9,6 @@ import "github.com/prprprus/ds/container"
 // List interface
 type List interface {
 	Append(values ...interface{})
-	indexInRange(index int) bool
 	Get(index int) (interface{}, error)
 	Remove(index int) error
 	Contains(values ...interface{}) bool
