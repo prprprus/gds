@@ -44,6 +44,5 @@ func (iterator *Iterator) End() {
 
 // Value returns the current value of the linked hash set.
 func (iterator *Iterator) Value() interface{} {
-	key := iterator.internalIterator.Value()
-	return iterator.s[key]
+	return iterator.internalIterator.Value()
 }

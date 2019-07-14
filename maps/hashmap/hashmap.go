@@ -46,9 +46,22 @@ func (m *Map) Get(key interface{}) (interface{}, error) {
 }
 
 // Remove key-value by key.
-func (m *Map) Remove(key interface{}) {
+func (m *Map) Remove(key interface{}) error {
+	if _, ok := m.m[key]; !ok {
+		return ErrNotFound
+	}
 	delete(m.m, key)
 	m.size--
+	return nil
+}
+
+// Keys returns all keys (random order).
+func (m *Map) Keys() []interface{} {
+	keys := make([]interface{}, 0)
+	for key := range m.m {
+		keys = append(keys, key)
+	}
+	return keys
 }
 
 // Container Interface
@@ -61,15 +74,6 @@ func (m *Map) Empty() bool {
 // Size returns number of elements in the hash map.
 func (m *Map) Size() int {
 	return len(m.m)
-}
-
-// Keys returns all keys (random order).
-func (m *Map) Keys() []interface{} {
-	keys := make([]interface{}, 0)
-	for key := range m.m {
-		keys = append(keys, key)
-	}
-	return keys
 }
 
 // Values returns all values (random order).

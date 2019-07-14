@@ -32,5 +32,5 @@ func (iterator *Iterator) Begin() {
 
 // Value returns the current value of the skip set.
 func (iterator *Iterator) Value() interface{} {
-	return iterator.internalIterator.Value()
+	return iterator.internalIterator.Key()
 }

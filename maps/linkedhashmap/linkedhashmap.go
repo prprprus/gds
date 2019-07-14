@@ -43,7 +43,7 @@ func New() *Map {
 // Put the key-value into linked hash map.
 func (m *Map) Put(key, value interface{}) {
 	if _, ok := m.m[key]; !ok {
-		m.ordering.Append(value)
+		m.ordering.Append(key)
 	}
 	m.m[key] = value
 }
@@ -58,12 +58,19 @@ func (m *Map) Get(key interface{}) (interface{}, error) {
 }
 
 // Remove key-value by key.
-func (m *Map) Remove(key interface{}) {
-	if _, ok := m.m[key]; ok {
-		delete(m.m, key)
-		index, _ := m.ordering.IndexOf(key)
-		m.ordering.Remove(index)
+func (m *Map) Remove(key interface{}) error {
+	if _, ok := m.m[key]; !ok {
+		return ErrNotFound
 	}
+	delete(m.m, key)
+	index, _ := m.ordering.IndexOf(key)
+	m.ordering.Remove(index)
+	return nil
+}
+
+// Keys returns all keys (orderly).
+func (m *Map) Keys() []interface{} {
+	return m.ordering.Values()
 }
 
 // Container Interface
@@ -76,11 +83,6 @@ func (m *Map) Empty() bool {
 // Size returns number of elements in the linked hash map.
 func (m *Map) Size() int {
 	return m.ordering.Size()
-}
-
-// Keys returns all keys (orderly).
-func (m *Map) Keys() []interface{} {
-	return m.ordering.Values()
 }
 
 // Values returns all values (orderly).

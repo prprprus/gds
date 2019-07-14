@@ -53,6 +53,11 @@ func (m *Map) Remove(key interface{}) {
 	m.m.Remove(key)
 }
 
+// Keys returns all keys (orderly).
+func (m *Map) Keys() []interface{} {
+	return m.m.Values()
+}
+
 // Container Interface
 
 // Empty returns true if skip map does not contain any elements.
@@ -63,11 +68,6 @@ func (m *Map) Empty() bool {
 // Size returns number of elements in the skip map.
 func (m *Map) Size() int {
 	return m.m.Size()
-}
-
-// Keys returns all keys (orderly).
-func (m *Map) Keys() []interface{} {
-	return m.m.Values()
 }
 
 // Values returns all values (orderly).

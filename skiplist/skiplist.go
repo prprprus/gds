@@ -205,6 +205,17 @@ func (skiplist *SkipList) indexInRange(index int) bool {
 	return false
 }
 
+// Keys returns the keys of the skip list.
+func (skiplist *SkipList) Keys() []interface{} {
+	keys := make([]interface{}, 0)
+	flag := skiplist.head.next[0]
+	for flag != nil {
+		keys = append(keys, flag.key)
+		flag = flag.next[0]
+	}
+	return keys
+}
+
 // Container Interface
 
 // Empty returns true if the skip list is empty, otherwise returns false.
@@ -229,7 +240,7 @@ func (skiplist *SkipList) Values() []interface{} {
 	values := make([]interface{}, 0)
 	flag := skiplist.head.next[0]
 	for flag != nil {
-		values = append(values, flag.key)
+		values = append(values, flag.value)
 		flag = flag.next[0]
 	}
 	return values

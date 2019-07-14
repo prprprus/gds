@@ -43,7 +43,7 @@ func (iterator *Iterator) End() {
 }
 
 // Key returns the current key of the linked hash map.
-func (iterator *Iterator) key() interface{} {
+func (iterator *Iterator) Key() interface{} {
 	return iterator.internalIterator.Value()
 }
 
