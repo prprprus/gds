@@ -29,6 +29,14 @@ func main() {
 	for it.Next() {
 		fmt.Println(it.Index(), it.Value())
 	}
+	// output:
+	// 0 1
+	// 1 4
+	// 2 5
+	// 3 -1
+	// 4 7
+	// 5 8
+	// 6 3
 
 	_, _ = list.IndexOf(1)   // 0, nil
 	_, _ = list.IndexOf(8)   // 5, nil
@@ -36,5 +44,6 @@ func main() {
 	list.Reverse()           // [3, 8, 7, -1, 5, 4, 1]
 	_ = list.Empty()         // false
 	_ = list.Size()          // 7
+	_ = list.Values()        // [3 8 7 -1 5 4 1]
 	list.Clear()             // []
 }
