@@ -1,4 +1,4 @@
-package container
+package iterator
 
 // ValueIterator Interface
 type ValueIterator interface {

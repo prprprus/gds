@@ -4,7 +4,10 @@
 
 package list
 
-import "github.com/prprprus/ds/container"
+import (
+	"github.com/prprprus/ds/container"
+	"github.com/prprprus/ds/iterator"
+)
 
 // List interface
 type List interface {
@@ -22,4 +25,11 @@ type List interface {
 	// Size() int
 	// Clear()
 	// Values() []interface{}
+
+	iterator.IndexIterator
+	// ValueIterator
+	// 	Next() bool
+	// 	Begin()
+	// 	Value() interface{}
+	// Index() int
 }
