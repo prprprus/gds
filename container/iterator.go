@@ -1,10 +1,24 @@
 package container
 
-// IndexIterator Interface
-type IndexIterator interface {
+// ValueIterator Interface
+type ValueIterator interface {
 	Next() bool
 	Begin()
 	Value() interface{}
+}
+
+// ReverseValueIterator Interface
+type ReverseValueIterator interface {
+	ValueIterator
+
+	Prev() bool
+	End()
+}
+
+// IndexIterator Interface
+type IndexIterator interface {
+	ValueIterator
+
 	Index() int
 }
 
@@ -18,30 +32,14 @@ type ReverseIndexIterator interface {
 
 // KeyIterator Interface
 type KeyIterator interface {
-	Next() bool
-	Begin()
-	Value() interface{}
+	ValueIterator
+
 	Key() interface{}
 }
 
 // ReverseKeyIterator Interface
 type ReverseKeyIterator interface {
 	KeyIterator
-
-	Prev() bool
-	End()
-}
-
-// ValueIterator Interface
-type ValueIterator interface {
-	Next() bool
-	Begin()
-	Value() interface{}
-}
-
-// ReverseValueIterator Interface
-type ReverseValueIterator interface {
-	ValueIterator
 
 	Prev() bool
 	End()

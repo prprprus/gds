@@ -49,7 +49,28 @@ type Container interface {
 }
 ```
 
-The package provides four iterators as following.
+The package provides six iterators as following.
+
+`ValueIterator` will traverse the value backwards.
+
+```go
+type ValueIterator interface {
+	Next() bool
+	Begin()
+	Value() interface{}
+}
+```
+
+`ReverseValueIterator` will traverse the value pair backwards or forwards.
+
+```go
+type ReverseValueIterator interface {
+	ValueIterator
+
+	Prev() bool
+	End()
+}
+```
 
 `IndexIterator` will traverse the index-value pair backwards.
 
@@ -89,27 +110,6 @@ type KeyIterator interface {
 ```go
 type ReverseKeyIterator interface {
 	KeyIterator
-
-	Prev() bool
-	End()
-}
-```
-
-`ValueIterator` will traverse the value backwards.
-
-```go
-type ValueIterator interface {
-	Next() bool
-	Begin()
-	Value() interface{}
-}
-```
-
-`ReverseValueIterator` will traverse the value pair backwards or forwards.
-
-```go
-type ReverseValueIterator interface {
-	ValueIterator
 
 	Prev() bool
 	End()
