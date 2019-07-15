@@ -76,9 +76,8 @@ type ReverseValueIterator interface {
 
 ```go
 type IndexIterator interface {
-	Next() bool
-	Begin()
-	Value() interface{}
+	ValueIterator
+
 	Index() int
 }
 ```
@@ -98,9 +97,8 @@ type ReverseIndexIterator interface {
 
 ```go
 type KeyIterator interface {
-	Next() bool
-	Begin()
-	Value() interface{}
+	ValueIterator
+
 	Key() interface{}
 }
 ```
