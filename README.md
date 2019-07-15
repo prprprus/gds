@@ -95,6 +95,27 @@ type ReverseKeyIterator interface {
 }
 ```
 
+`ValueIterator` will traverse the value backwards.
+
+```go
+type ValueIterator interface {
+	Next() bool
+	Begin()
+	Value() interface{}
+}
+```
+
+`ReverseValueIterator` will traverse the value pair backwards or forwards.
+
+```go
+type ReverseValueIterator interface {
+	ValueIterator
+
+	Prev() bool
+	End()
+}
+```
+
 Different data structures have different support for iterator as following.
 
 ![]()

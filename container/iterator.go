@@ -31,3 +31,18 @@ type ReverseKeyIterator interface {
 	Prev() bool
 	End()
 }
+
+// ValueIterator Interface
+type ValueIterator interface {
+	Next() bool
+	Begin()
+	Value() interface{}
+}
+
+// ReverseValueIterator Interface
+type ReverseValueIterator interface {
+	ValueIterator
+
+	Prev() bool
+	End()
+}
