@@ -7,5 +7,125 @@
 
 [中文文档](https://github.com/prprprus/ds/blob/master/README-zh.md)
 
-## Introduction
+# Introduction
 
+Implement some data structures with go.
+
+## Data Structures
+
+- [Container]()
+    - [List]()
+        - [SinglyLinkedList]()
+        - [DoubleLinkedList]()
+        - [ArrayList]()
+    - [Stack]()
+        - [LinkedListStack]()
+        - [ArrayStack]()
+    - [Queue]()
+        - [LinkedListQueue]()
+        - [ArrayQueue]()
+    - [SkipList]()
+    - [Map]()
+        - [HashMap]()
+        - [LinkedHashMap]()
+        - [SkipMap]()
+    - [Set]()
+        - [HashSet]()
+        - [LinkedHashSet]()
+        - [SkipSet]()
+- [Util]()
+    - [Comparator]()
+
+## Container
+
+All data structures will implement the Container interface.
+
+```go
+type Container interface {
+	Empty() bool
+	Size() int
+	Clear()
+	Values() []interface{}
+}
+```
+
+The package provides four iterators as following.
+
+`IndexIterator` will traverse the index-value pair backwards.
+
+```go
+type IndexIterator interface {
+	Next() bool
+	Begin()
+	Value() interface{}
+	Index() int
+}
+```
+
+`ReverseIndexIterator` will traverse the index-value pair backwards or forwards.
+
+```go
+type ReverseIndexIterator interface {
+	IndexIterator
+
+	Prev() bool
+	End()
+}
+```
+
+`KeyIterator` will traverse the key-value pair backwards.
+
+```go
+type KeyIterator interface {
+	Next() bool
+	Begin()
+	Value() interface{}
+	Key() interface{}
+}
+```
+
+`ReverseKeyIterator` will traverse the key-value pair backwards or forwards.
+
+```go
+type ReverseKeyIterator interface {
+	KeyIterator
+
+	Prev() bool
+	End()
+}
+```
+
+Different data structures have different support for iterator as following.
+
+![]()
+
+### List
+
+List is an abstraction of a linear data structure, ordered and value repeatable.
+
+Implements [Container]() interface.
+
+```go
+type List interface {
+	Append(values ...interface{})
+	Get(index int) (interface{}, error)
+	Remove(index int) error
+	Contains(values ...interface{}) bool
+	Swap(i, j int) error
+	Insert(index int, values ...interface{}) error
+	Set(index int, value interface{}) error
+	IndexOf(value interface{}) (int, error)
+
+	container.Container
+	// Empty() bool
+	// Size() int
+	// Clear()
+	// Values() []interface{}
+}
+```
+
+#### SinglyLinkedList
+
+SinglyLinkedList is a singly linked list, the previous element points to the next element.
+
+Implements [List]() Iterator, 
