@@ -143,6 +143,13 @@ type List interface {
 	// Size() int
 	// Clear()
 	// Values() []interface{}
+
+	iterator.IndexIterator
+	// ValueIterator
+	// 	Next() bool
+	// 	Begin()
+	// 	Value() interface{}
+	// Index() int
 }
 ```
 
