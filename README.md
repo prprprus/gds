@@ -116,7 +116,7 @@ type ReverseKeyIterator interface {
 
 Different data structures have different support for iterator as following.
 
-![]()
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds1.png)
 
 ### List
 
