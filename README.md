@@ -13,6 +13,7 @@ Implement some data structures with go.
 
 ## Data Structures
 
+- [Iterator]()
 - [Container]()
     - [List]()
         - [SinglyLinkedList]()
@@ -36,18 +37,7 @@ Implement some data structures with go.
 - [Util]()
     - [Comparator]()
 
-## Container
-
-All data structures will implement the Container interface.
-
-```go
-type Container interface {
-	Empty() bool
-	Size() int
-	Clear()
-	Values() []interface{}
-}
-```
+## Iterator
 
 The package provides six iterators as following.
 
@@ -117,6 +107,19 @@ type ReverseKeyIterator interface {
 Different data structures have different support for iterator as following.
 
 ![](https://raw.githubusercontent.com/prprprus/picture/master/ds1.png)
+
+## Container
+
+All data structures will implement the Container interface.
+
+```go
+type Container interface {
+	Empty() bool
+	Size() int
+	Clear()
+	Values() []interface{}
+}
+```
 
 ### List
 
