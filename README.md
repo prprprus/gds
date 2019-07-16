@@ -653,6 +653,8 @@ HashMap is a map based on hash table.
 
 Implements [Map](#Map) interface.
 
+<img src="https://raw.githubusercontent.com/prprprus/picture/master/ds18.png" alt="drawing" width="400"/>
+
 ```go
 package main
 
