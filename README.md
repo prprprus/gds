@@ -933,4 +933,87 @@ func main() {
 
 Contains some helper functions.
 
+### Comparator
+
+Provides the following built-in type of comparator.
+
+```go
+func IntComparator(a, b interface{}) int
+
+func Int8Comparator(a, b interface{}) int
+
+func Int16Comparator(a, b interface{}) int
+
+func Int32Comparator(a, b interface{}) int
+
+func Int64Comparator(a, b interface{}) int
+
+func UIntComparator(a, b interface{}) int
+
+func UInt8Comparator(a, b interface{}) int
+
+func UInt16Comparator(a, b interface{}) int
+
+func UInt32Comparator(a, b interface{}) int
+
+func UInt64Comparator(a, b interface{}) int
+
+func Float32Comparator(a, b interface{}) int
+
+func Float64Comparator(a, b interface{}) int
+
+func ByteComparator(a, b interface{}) int
+
+func RuneComparator(a, b interface{}) int
+
+func StringComparator(a, b interface{}) int
+```
+
+The meaning of the return value is as follows.
+
+```
+-1 => a < b
+0  => a == b
+1  => a > b
+```
+
+For custom types, you can also create a corresponding comparator.
+
+```go
+package main
+
+import (
+    "fmt"
+
+    "github.com/prprprus/ds/set/skipset"
+)
+
+type People struct {
+    name string
+    age  int
+}
+
+func AgeComparator(a, b interface{}) int {
+    c1 := a.(People)
+    c2 := b.(People)
+    switch {
+	case c1.age < c2.age:
+		return -1
+	case c1.age > c2.age:
+		return 1
+	default:
+		return 0
+	}
+}
+
+func main() {
+    s := skipset.New(AgeComparator)
+    s.Add(People{"Wade", 35})
+    s.Add(People{"Simon", 32})
+    s.Add(People{"yiyi", 22})
+
+    fmt.Println(s.Values()) // [{"yiyi", 22}, {"Simon", 32}, {"Wade", 35}]
+}
+```
+
 ## Benchmarking
