@@ -170,6 +170,8 @@ The current element of SinglyLinkedList points to the next element.
 
 Implements [List](#list), [ValueIterator](#ValueIterator) and [IndexIterator](#indexIterator) interface.
 
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds13.png)
+
 ```go
 package main
 
@@ -227,6 +229,8 @@ func main() {
 The current and next elements of the DoubleLinkedList point to each other.
 
 Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
+
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds14.png)
 
 ```go
 package main
@@ -298,6 +302,8 @@ ArrayList is a dynamic array that can be dynamically scaled based on capacity an
 
 Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
 
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds17.png)
+
 ```go
 package main
 
@@ -363,6 +369,8 @@ func main() {
 Stack is a FILO data structure.
 
 Implements [Container](#container) interface.
+
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds15.png)
 
 ```go
 type Stack interface {
@@ -467,6 +475,8 @@ func main() {
 Stack is a FIFO data structure.
 
 Implements [Container](#container) interface.
+
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds16.png)
 
 ```go
 type Queue interface {
