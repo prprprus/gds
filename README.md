@@ -583,7 +583,7 @@ SkipList is a random data structure with performance comparable to that of red-b
 
 Implements [Container](#container), [ValueIterator](#ValueIterator) and [KeyIterator](#KeyIterator) interface.
 
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds2.png)
+<img src="https://raw.githubusercontent.com/prprprus/picture/master/ds2.png" alt="drawing" width="550"/>
 
 ```go
 package main
