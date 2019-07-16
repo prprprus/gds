@@ -9,7 +9,7 @@
 
 # Introduction
 
-Implement some data structures with go.
+Implement data structures with Go.
 
 ## Table Of Content
 
@@ -50,7 +50,7 @@ Implement some data structures with go.
 
 The package provides six iterators as following.
 
-`ValueIterator` will traverse the value backwards.
+`ValueIterator` traverses the value backward.
 
 ```go
 type ValueIterator interface {
@@ -62,7 +62,7 @@ type ValueIterator interface {
 
 ### ReverseValueIterator
 
-`ReverseValueIterator` will traverse the value pair backwards or forwards.
+`ReverseValueIterator` can traverse values forward or backward.
 
 ```go
 type ReverseValueIterator interface {
@@ -75,7 +75,7 @@ type ReverseValueIterator interface {
 
 ### IndexIterator
 
-`IndexIterator` will traverse the index-value pair backwards.
+`IndexIterator` traverses the index-value pair backward.
 
 ```go
 type IndexIterator interface {
@@ -87,7 +87,7 @@ type IndexIterator interface {
 
 ### ReverseIndexIterator
 
-`ReverseIndexIterator` will traverse the index-value pair backwards or forwards.
+`ReverseIndexIterator` can traverse the index-value pair forward or backward.
 
 ```go
 type ReverseIndexIterator interface {
@@ -100,7 +100,7 @@ type ReverseIndexIterator interface {
 
 ### KeyIterator
 
-`KeyIterator` will traverse the key-value pair backwards.
+`KeyIterator` traverses the key-value pair backward.
 
 ```go
 type KeyIterator interface {
@@ -112,7 +112,7 @@ type KeyIterator interface {
 
 ### ReverseKeyIterator
 
-`ReverseKeyIterator` will traverse the key-value pair backwards or forwards.
+`ReverseKeyIterator` can traverse the key-value pair forward or backward.
 
 ```go
 type ReverseKeyIterator interface {
@@ -142,7 +142,7 @@ type Container interface {
 
 ### List
 
-List is an abstraction of a linear data structure, ordered and value repeatable.
+`List` is ordered and value repeatable.
 
 Implements [Container](#container) interface.
 
@@ -167,7 +167,7 @@ type List interface {
 
 #### SinglyLinkedList
 
-The current element of SinglyLinkedList points to the next element.
+The current element of `SinglyLinkedList` points to the next element.
 
 Implements [List](#list), [ValueIterator](#ValueIterator) and [IndexIterator](#indexIterator) interface.
 
@@ -227,7 +227,7 @@ func main() {
 
 #### DoubleLinkedList
 
-The current and next elements of the DoubleLinkedList point to each other.
+The current and next elements of the `DoubleLinkedList` point to each other.
 
 Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
 
@@ -299,7 +299,7 @@ func main() {
 
 #### ArrayList
 
-ArrayList is a dynamic array that can be dynamically scaled based on capacity and number of elements.
+`ArrayList` is a dynamic array that can be dynamically scaled based on capacity and number of elements.
 
 Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
 
@@ -367,7 +367,7 @@ func main() {
 
 ### Stack
 
-Stack is a FILO data structure.
+`Stack` is a FILO data structure.
 
 Implements [Container](#container) interface.
 
@@ -389,7 +389,7 @@ type Stack interface {
 
 #### LinkedListStack
 
-LinkedListStack is a stack based on [SinglyLinkedList](#SinglyLinkedList).
+`LinkedListStack` is a stack based on [SinglyLinkedList](#SinglyLinkedList).
 
 Implements [Stack](#Stack), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) interface.
 
@@ -431,7 +431,7 @@ func main() {
 
 #### ArrayStack
 
-LinkedListStack is a stack based on [ArrayList](#ArrayList).
+`ArrayStack` is a stack based on [ArrayList](#ArrayList).
 
 Implements [Stack](#Stack), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
 
@@ -473,7 +473,7 @@ func main() {
 
 ### Queue
 
-Stack is a FIFO data structure.
+`Queue` is a FIFO data structure.
 
 Implements [Container](#container) interface.
 
@@ -494,9 +494,9 @@ type Queue interface {
 
 #### LinkedListQueue
 
-LinkedListQueue is a stack based on [SinglyLinkedList](#SinglyLinkedList).
+`LinkedListQueue` is a stack based on [SinglyLinkedList](#SinglyLinkedList).
 
-Implements [Queue](#Queue), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) interface,.
+Implements [Queue](#Queue), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) interface.
 
 ```go
 package main
@@ -537,7 +537,7 @@ func main() {
 
 #### ArrayQueue
 
-LinkedListQueue is a stack based on [ArrayList](#ArrayList).
+`ArrayQueue` is a stack based on [ArrayList](#ArrayList).
 
 Implements [Queue](#Queue), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) interface.
 
@@ -580,7 +580,7 @@ func main() {
 
 ### SkipList
 
-SkipList is a random data structure with performance comparable to that of red-black trees. It should be noted that the keys must be comparable types and element will be sorted by keys.
+`SkipList` is a random data structure with performance comparable to that of red-black trees. It should be noted that the keys must be comparable types and element will be sorted by keys.
 
 Implements [Container](#container), [ValueIterator](#ValueIterator) and [KeyIterator](#KeyIterator) interface.
 
@@ -630,7 +630,7 @@ func main() {
 
 ### Map
 
-Map stores key-value pairs with excellent operational performance. It should be noted that the keys must be comparable types.
+`Map` stores key-value pairs with excellent operational performance. It should be noted that the keys must be comparable types.
 
 Implements [Container](#container) interface.
 
@@ -650,7 +650,7 @@ type Map interface {
 
 #### HashMap
 
-HashMap is a map based on hash table.
+`HashMap` is a map based on hash table.
 
 Implements [Map](#Map) interface.
 
@@ -683,7 +683,7 @@ func main() {
 
 #### LinkedHashMap
 
-LinkedHashMap is a map based on hash table and [DoubleLinkedList](#DoubleLinkedList), it provides ordered key-value pairs.
+`LinkedHashMap` is a map based on hash table and [DoubleLinkedList](#DoubleLinkedList), it provides ordered key-value pairs.
 
 Implements [Map](#Map), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [KeyIterator](#KeyIterator) and [ReverseKeyIterator](#ReverseKeyIterator) interface.
 
@@ -738,7 +738,7 @@ func main() {
 
 #### SkipMap
 
-SkipMap is a map based on [SkipList](#SkipList).
+`SkipMap` is a map based on [SkipList](#SkipList).
 
 Implements [Map](#Map), [ValueIterator](#ValueIterator) and [KeyIterator](#KeyIterator).
 
@@ -784,7 +784,7 @@ func main() {
 
 ### Set
 
-Set is used to store non-repeating values, usually with good operational performance.
+`Set` is used to store non-repeating values, usually with good operational performance.
 
 Implements [Container](#container) interface.
 
@@ -804,7 +804,7 @@ type Set interface {
 
 #### HashSet
 
-HashSet is a set based on hash table.
+`HashSet` is a set based on hash table.
 
 Implements [Set](#Set) interface.
 
@@ -834,7 +834,7 @@ func main() {
 
 #### LinkedHashSet
 
-LinkedHashSet is a set based on hash table and [DoubleLinkedList](#DoubleLinkedList), it provides ordered value.
+`LinkedHashSet` is a set based on hash table and [DoubleLinkedList](#DoubleLinkedList), it provides ordered value.
 
 Implements [Set](#Set), [ValueIterator](#valueIterator) and [ReverseValueIterator](#reverseValueIterator) interface.
 
@@ -886,7 +886,7 @@ func main() {
 
 #### SkipSet
 
-SkipSet is a set based on hash table [SkipList](#SkipList).
+`SkipSet` is a set based on [SkipList](#SkipList).
 
 Implements [Set](#Set) and [ValueIterator](#valueIterator) interface.
 
@@ -935,7 +935,7 @@ Contains some helper functions.
 
 ### Comparator
 
-Provides the following built-in type of comparator.
+`Comparator` provides the following built-in type of comparator.
 
 ```go
 func IntComparator(a, b interface{}) int
