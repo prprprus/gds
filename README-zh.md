@@ -9,7 +9,7 @@
 
 ## 介绍
 
-用 Go 实现一些数据结构。
+用 Go 实现数据结构。
 
 ## 目录
 
@@ -123,7 +123,7 @@ type ReverseKeyIterator interface {
 }
 ```
 
-不同的数据结构对迭代器的支持是不同的，如下.
+不同的数据结构对迭代器的支持是不同的，如下。
 
 ![](https://raw.githubusercontent.com/prprprus/picture/master/ds1.png)
 
@@ -367,7 +367,7 @@ func main() {
 
 ### Stack
 
-`Stack` 是一种先进后出的数据结构.
+`Stack` 是一种先进后出的数据结构。
 
 实现了 [Container](#container) 接口。
 
