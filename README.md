@@ -23,25 +23,25 @@ Implement some data structures with go.
 - [Container](#container)
     - [List](#list)
         - [SinglyLinkedList](#singlylinkedlist)
-        - [DoubleLinkedList]()
-        - [ArrayList]()
-    - [Stack]()
-        - [LinkedListStack]()
-        - [ArrayStack]()
-    - [Queue]()
-        - [LinkedListQueue]()
-        - [ArrayQueue]()
-    - [SkipList]()
-    - [Map]()
-        - [HashMap]()
-        - [LinkedHashMap]()
-        - [SkipMap]()
-    - [Set]()
-        - [HashSet]()
-        - [LinkedHashSet]()
-        - [SkipSet]()
-- [Util]()
-    - [Comparator]()
+        - [DoubleLinkedList](#DoubleLinkedList)
+        - [ArrayList](#ArrayList)
+    - [Stack](#Stack)
+        - [LinkedListStack](#LinkedListStack)
+        - [ArrayStack](#ArrayStack)
+    - [Queue](#Queue)
+        - [LinkedListQueue](#LinkedListQueue)
+        - [ArrayQueue](#ArrayQueue)
+    - [SkipList](#SkipList)
+    - [Map](#Map)
+        - [HashMap](#HashMap)
+        - [LinkedHashMap](#LinkedHashMap)
+        - [SkipMap](#SkipMap)
+    - [Set](#Set)
+        - [HashSet](#HashSet)
+        - [LinkedHashSet](#LinkedHashSet)
+        - [SkipSet](#SkipSet)
+- [Util](#Util)
+    - [Comparator](#Comparator)
 
 ## Iterator
 
@@ -168,7 +168,7 @@ type List interface {
 
 The current element of SinglyLinkedList points to the next element.
 
-Implements [List](#list), [IndexIterator](#indexIterator).
+Implements [List](#list), [ValueIterator](#ValueIterator), [IndexIterator](#indexIterator).
 
 ```go
 package main
@@ -226,7 +226,7 @@ func main() {
 
 The current and next elements of the DoubleLinkedList point to each other.
 
-Implements [List](#list), [ReverseIndexIterator](#ReverseIndexIterator).
+Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator), [ReverseIndexIterator](#ReverseIndexIterator).
 
 ```go
 package main
@@ -292,7 +292,172 @@ func main() {
 }
 ```
 
+#### ArrayList
 
+ArrayList is a dynamic array that can be dynamically scaled based on capacity and number of elements.
 
+Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator), [ReverseIndexIterator](#ReverseIndexIterator).
 
+```go
+package main
 
+import (
+	"fmt"
+
+	"github.com/prprprus/ds/list/arraylist"
+)
+
+func main() {
+	list := arraylist.New()        // []
+	list.Append(1)                 // [1]
+	list.Append(2)                 // [1 2]
+	list.Append(3)                 // [1 2 3]
+	_, _ = list.Get(0)             // 1, nil
+	_, _ = list.Get(999)           // nil, ErrIndex
+	_ = list.Remove(2)             // [1 2]
+	_ = list.Contains()            // true
+	_ = list.Contains(1, 2)        // true
+	_ = list.Contains(2)           // true
+	_ = list.Contains(1, 2, 3)     // false
+	_ = list.Swap(0, 1)            // [2 1]
+	_ = list.Insert(1, 5, 6, 7, 8) // [2 1 5 6 7 8]
+	_ = list.Set(3, -1)            // [2 1 5 -1 7 8]
+
+	// iterator
+	it := list.Iterator()
+	it.Begin()
+	for it.Next() {
+		fmt.Println(it.Index(), it.Value())
+	}
+	// output:
+	// 0 2
+	// 1 1
+	// 2 5
+	// 3 -1
+	// 4 7
+	// 5 8
+	it.End()
+	for it.Prev() {
+		fmt.Println(it.Index(), it.Value())
+	}
+	// output:
+	// 	5 8
+	// 4 7
+	// 3 -1
+	// 2 5
+	// 1 1
+	// 0 2
+
+	_, _ = list.IndexOf(1)   // 1, nil
+	_, _ = list.IndexOf(8)   // 5, nil
+	_, _ = list.IndexOf(100) // -1, ErrIndexOf
+	_ = list.Empty()         // false
+	_ = list.Size()          // 6
+	_ = list.Values()        // [2 1 5 -1 7 8]
+	list.Clear()             // []
+}
+```
+
+### Stack
+
+Stack is a FILO data structure.
+
+Implements [Container](#container) interface.
+
+```go
+type Stack interface {
+	Push(value interface{})
+	Pop() (interface{}, error)
+	Peek() (interface{}, error)
+
+	container.Container
+	// Empty() bool
+	// Size() int
+	// Clear()
+	// Values() []interface{}
+}
+```
+
+#### LinkedListStack
+
+LinkedListStack is a stack based on [SinglyLinkedList](#SinglyLinkedList).
+
+Implements [Stack](#Stack) interface, [ValueIterator](#ValueIterator), [IndexIterator](#IndexIterator).
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/prprprus/ds/stack/linkedliststack"
+)
+
+func main() {
+	stack := linkedliststack.New() // []
+	stack.Push(1)                  // [1]
+	stack.Push(2)                  // [2 1]
+	stack.Push(3)                  // [3 2 1]
+
+	// iterator
+	it := stack.Iterator()
+	it.Begin()
+	for it.Next() {
+		fmt.Println(it.Index(), it.Value())
+	}
+	// output:
+	// 0 3
+	// 1 2
+	// 2 1
+
+	_, _ = stack.Peek() // 3, nil
+	_, _ = stack.Pop()  // 3, nil
+	_, _ = stack.Peek() // 2, nil
+	_ = stack.Empty()   // false
+	_ = stack.Size()    // 2
+	_ = stack.Values()  // [2 1]
+	stack.Clear()       // []
+}
+```
+
+#### ArrayStack
+
+LinkedListStack is a stack based on [ArrayList](#ArrayList).
+
+Implements [Stack](#Stack) interface, [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator), [ReverseIndexIterator](#ReverseIndexIterator).
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/prprprus/ds/stack/arraystack"
+)
+
+func main() {
+	stack := arraystack.New() // []
+	stack.Push(1)             // [1]
+	stack.Push(2)             // [2 1]
+	stack.Push(3)             // [3 2 1]
+
+	// iterator
+	it := stack.Iterator()
+	it.Begin()
+	for it.Next() {
+		fmt.Println(it.Index(), it.Value())
+	}
+	// output:
+	// 0 3
+	// 1 2
+	// 2 1
+
+	_, _ = stack.Peek() // 3, nil
+	_, _ = stack.Pop()  // 3, nil
+	_, _ = stack.Peek() // 2, nil
+	_ = stack.Empty()   // false
+	_ = stack.Size()    // 2
+	_ = stack.Values()  // [2 1]
+	stack.Clear()       // []
+}
+```
