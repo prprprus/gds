@@ -11,7 +11,7 @@
 
 Implement some data structures with go.
 
-## Data Structures
+## Table Of Content
 
 - [Iterator](#iterator)
     - [ValueIterator](#valueIterator)
@@ -42,6 +42,7 @@ Implement some data structures with go.
         - [SkipSet](#SkipSet)
 - [Util](#Util)
     - [Comparator](#Comparator)
+- [Benchmarking](#Benchmarking)
 
 ## Iterator
 
@@ -929,5 +930,7 @@ func main() {
 ```
 
 ## Util
+
+Contains some helper functions.
 
 ## Benchmarking
