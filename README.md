@@ -230,7 +230,7 @@ The current and next elements of the DoubleLinkedList point to each other.
 
 Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
 
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds14.png)
+<img src="https://raw.githubusercontent.com/prprprus/picture/master/ds14.png" alt="drawing" width="500"/>
 
 ```go
 package main
@@ -302,7 +302,7 @@ ArrayList is a dynamic array that can be dynamically scaled based on capacity an
 
 Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
 
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds17.png)
+<img src="https://raw.githubusercontent.com/prprprus/picture/master/ds17.png" alt="drawing" width="500" height="450"/>
 
 ```go
 package main
@@ -476,7 +476,7 @@ Stack is a FIFO data structure.
 
 Implements [Container](#container) interface.
 
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds16.png)
+<img src="https://raw.githubusercontent.com/prprprus/picture/master/ds16.png" alt="drawing" width="500"/>
 
 ```go
 type Queue interface {
