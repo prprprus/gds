@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds8.png)
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds19.png)
 
 ![build status](https://travis-ci.org/prprprus/ds.svg?branch=master)
 [![go report](https://goreportcard.com/badge/github.com/prprprus/ds)](https://goreportcard.com/report/github.com/prprprus/ds)
