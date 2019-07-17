@@ -4,13 +4,13 @@
 [![go report](https://goreportcard.com/badge/github.com/prprprus/ds)](https://goreportcard.com/report/github.com/prprprus/ds)
 [![godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/prprprus/ds)
 [![license](https://img.shields.io/badge/license-license-yellow.svg)](https://github.com/prprprus/ds/blob/master/LICENSE)
-[![](https://img.shields.io/badge/CN-%E4%B8%AD%E6%96%87-%09%23ff2121.svg)](./README-zh.md)
+[![](https://img.shields.io/badge/EN-%E8%8B%B1%E6%96%87-%09%236495ED.svg)](./README.md)
 
-# Introduction
+## 介绍
 
-Implement data structures with Go.
+用 Go 实现数据结构。
 
-## Table Of Content
+## 目录
 
 - [Iterator](#iterator)
     - [ValueIterator](#valueIterator)
@@ -47,9 +47,9 @@ Implement data structures with Go.
 
 ### ValueIterator
 
-The package provides six iterators as following.
+提供了 6 种迭代器，如下。
 
-`ValueIterator` traverses the value backward.
+`ValueIterator` 向后遍历值。
 
 ```go
 type ValueIterator interface {
@@ -61,7 +61,7 @@ type ValueIterator interface {
 
 ### ReverseValueIterator
 
-`ReverseValueIterator` can traverse values forward or backward.
+`ReverseValueIterator` 可以向前或者向后遍历值。
 
 ```go
 type ReverseValueIterator interface {
@@ -74,7 +74,7 @@ type ReverseValueIterator interface {
 
 ### IndexIterator
 
-`IndexIterator` traverses the index-value pair backward.
+`IndexIterator` 向后遍历索引和值。
 
 ```go
 type IndexIterator interface {
@@ -86,7 +86,7 @@ type IndexIterator interface {
 
 ### ReverseIndexIterator
 
-`ReverseIndexIterator` can traverse the index-value pair forward or backward.
+`ReverseIndexIterator` 可以向前或者向后遍历索引和值。
 
 ```go
 type ReverseIndexIterator interface {
@@ -99,7 +99,7 @@ type ReverseIndexIterator interface {
 
 ### KeyIterator
 
-`KeyIterator` traverses the key-value pair backward.
+`KeyIterator` 向后遍历键值对。
 
 ```go
 type KeyIterator interface {
@@ -111,7 +111,7 @@ type KeyIterator interface {
 
 ### ReverseKeyIterator
 
-`ReverseKeyIterator` can traverse the key-value pair forward or backward.
+`ReverseKeyIterator` 可以向前或者向后遍历键值对。
 
 ```go
 type ReverseKeyIterator interface {
@@ -122,13 +122,13 @@ type ReverseKeyIterator interface {
 }
 ```
 
-Different data structures have different support for iterator as following.
+不同的数据结构对迭代器的支持是不同的，如下。
 
 ![](https://raw.githubusercontent.com/prprprus/picture/master/ds1.png)
 
 ## Container
 
-All data structures will implement the Container interface.
+所有的数据结构都会实现 Container 接口。
 
 ```go
 type Container interface {
@@ -141,9 +141,9 @@ type Container interface {
 
 ### List
 
-`List` is ordered and value repeatable.
+`List` 是有序的，而且值可以重复。
 
-Implements [Container](#container) interface.
+实现了 [Container](#container) 接口。
 
 ```go
 type List interface {
@@ -166,9 +166,9 @@ type List interface {
 
 #### SinglyLinkedList
 
-The current element of `SinglyLinkedList` points to the next element.
+`SinglyLinkedList` 的当前元素会指向下一个元素。
 
-Implements [List](#list), [ValueIterator](#ValueIterator) and [IndexIterator](#indexIterator) interface.
+实现了 [List](#list), [ValueIterator](#ValueIterator) and [IndexIterator](#indexIterator) 接口。
 
 <img src="https://raw.githubusercontent.com/prprprus/picture/master/ds13.png" alt="drawing" width="300"/>
 
@@ -226,9 +226,9 @@ func main() {
 
 #### DoubleLinkedList
 
-The current and next elements of the `DoubleLinkedList` point to each other.
+`DoubleLinkedList` 的当前元素和下一个元素之间相互指向。
 
-Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
+实现了 [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) 接口。
 
 <img src="https://raw.githubusercontent.com/prprprus/picture/master/ds14.png" alt="drawing" width="450"/>
 
@@ -298,9 +298,9 @@ func main() {
 
 #### ArrayList
 
-`ArrayList` is a dynamic array that can be dynamically scaled based on capacity and number of elements.
+`ArrayList` 是一种动态数组，可以根据容量和元素个数之间的比例动态伸缩。
 
-Implements [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
+实现了 [List](#list), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) 接口。
 
 <img src="https://raw.githubusercontent.com/prprprus/picture/master/ds17.png" alt="drawing" width="300"/>
 
@@ -366,9 +366,9 @@ func main() {
 
 ### Stack
 
-`Stack` is a FILO data structure.
+`Stack` 是一种先进后出的数据结构。
 
-Implements [Container](#container) interface.
+实现了 [Container](#container) 接口。
 
 <img src="https://raw.githubusercontent.com/prprprus/picture/master/ds15.png" alt="drawing" width="500"/>
 
@@ -388,9 +388,9 @@ type Stack interface {
 
 #### LinkedListStack
 
-`LinkedListStack` is a stack based on [SinglyLinkedList](#SinglyLinkedList).
+`LinkedListStack` 是基于 [SinglyLinkedList](#SinglyLinkedList) 实现的栈。
 
-Implements [Stack](#Stack), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) interface.
+实现了 [Stack](#Stack), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) 接口。
 
 ```go
 package main
@@ -430,9 +430,9 @@ func main() {
 
 #### ArrayStack
 
-`ArrayStack` is a stack based on [ArrayList](#ArrayList).
+`ArrayStack` 是基于 [ArrayList](#ArrayList) 实现的栈。
 
-Implements [Stack](#Stack), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) interface.
+实现了 [Stack](#Stack), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [IndexIterator](#IndexIterator) and [ReverseIndexIterator](#ReverseIndexIterator) 接口。
 
 ```go
 package main
@@ -472,9 +472,9 @@ func main() {
 
 ### Queue
 
-`Queue` is a FIFO data structure.
+`Queue` 是一种先进先出的数据结构。
 
-Implements [Container](#container) interface.
+实现了 [Container](#container) 接口。
 
 <img src="https://raw.githubusercontent.com/prprprus/picture/master/ds16.png" alt="drawing" width="300"/>
 
@@ -493,9 +493,9 @@ type Queue interface {
 
 #### LinkedListQueue
 
-`LinkedListQueue` is a stack based on [SinglyLinkedList](#SinglyLinkedList).
+`LinkedListQueue` 是基于 [SinglyLinkedList](#SinglyLinkedList) 实现的队列。
 
-Implements [Queue](#Queue), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) interface.
+实现了 [Queue](#Queue), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) 接口。
 
 ```go
 package main
@@ -536,9 +536,9 @@ func main() {
 
 #### ArrayQueue
 
-`ArrayQueue` is a stack based on [ArrayList](#ArrayList).
+`ArrayQueue` 是基于 [ArrayList](#ArrayList) 实现的队列。
 
-Implements [Queue](#Queue), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) interface.
+实现了 [Queue](#Queue), [ValueIterator](#ValueIterator) and [IndexIterator](#IndexIterator) 接口。
 
 ```go
 package main
@@ -579,9 +579,9 @@ func main() {
 
 ### SkipList
 
-`SkipList` is a random data structure with performance comparable to that of red-black trees. It should be noted that the keys must be comparable types and element will be sorted by keys.
+`SkipList` 是一种带有随机性的数据结构，它的性能可以和红黑树媲美。需要注意的是，键必须是可以比较的类型。
 
-Implements [Container](#container), [ValueIterator](#ValueIterator) and [KeyIterator](#KeyIterator) interface.
+实现了 [Container](#container), [ValueIterator](#ValueIterator) and [KeyIterator](#KeyIterator) 接口。
 
 <img src="https://raw.githubusercontent.com/prprprus/picture/master/ds2.png" alt="drawing" width="550"/>
 
@@ -629,9 +629,9 @@ func main() {
 
 ### Map
 
-`Map` stores key-value pairs with excellent operational performance. It should be noted that the keys must be comparable types.
+`Map` 用于存储键值对，拥有出色的性能。需要注意的是，键必须是可以比较的类型。
 
-Implements [Container](#container) interface.
+实现了 [Container](#container) 接口。
 
 ```go
 type Map interface {
@@ -649,9 +649,9 @@ type Map interface {
 
 #### HashMap
 
-`HashMap` is a map based on hash table.
+`HashMap` 是基于哈希表实现的 map。
 
-Implements [Map](#Map) interface.
+实现了 [Map](#Map) 接口。
 
 <img src="https://raw.githubusercontent.com/prprprus/picture/master/ds18.png" alt="drawing" width="400"/>
 
@@ -682,9 +682,9 @@ func main() {
 
 #### LinkedHashMap
 
-`LinkedHashMap` is a map based on hash table and [DoubleLinkedList](#DoubleLinkedList), it provides ordered key-value pairs.
+`LinkedHashMap` 是基于哈希表和 [DoubleLinkedList](#DoubleLinkedList) 实现的 map，它提供了额外的有序键值对。
 
-Implements [Map](#Map), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [KeyIterator](#KeyIterator) and [ReverseKeyIterator](#ReverseKeyIterator) interface.
+实现了 [Map](#Map), [ValueIterator](#ValueIterator), [ReverseValueIterator](#ReverseValueIterator), [KeyIterator](#KeyIterator) and [ReverseKeyIterator](#ReverseKeyIterator) 接口。
 
 ```go
 package main
@@ -737,9 +737,9 @@ func main() {
 
 #### SkipMap
 
-`SkipMap` is a map based on [SkipList](#SkipList).
+`SkipMap` 是基于 [SkipList](#SkipList) 实现的 map。
 
-Implements [Map](#Map), [ValueIterator](#ValueIterator) and [KeyIterator](#KeyIterator).
+实现了 [Map](#Map), [ValueIterator](#ValueIterator) and [KeyIterator](#KeyIterator) 接口。
 
 ```go
 package main
@@ -783,9 +783,9 @@ func main() {
 
 ### Set
 
-`Set` is used to store non-repeating values, usually with good operational performance.
+`Set` 用于存储不可重复的值，通常也拥有出色的性能。
 
-Implements [Container](#container) interface.
+实现了 [Container](#container) 接口。
 
 ```go
 type Set interface {
@@ -803,9 +803,9 @@ type Set interface {
 
 #### HashSet
 
-`HashSet` is a set based on hash table.
+`HashSet` 是基于哈希表实现的 set。
 
-Implements [Set](#Set) interface.
+实现了 [Set](#Set) 接口。
 
 ```go
 package main
@@ -833,9 +833,9 @@ func main() {
 
 #### LinkedHashSet
 
-`LinkedHashSet` is a set based on hash table and [DoubleLinkedList](#DoubleLinkedList), it provides ordered value.
+`LinkedHashSet` 是基于哈希表和 [DoubleLinkedList](#DoubleLinkedList) 实现的 set，它保证了值是有序的。
 
-Implements [Set](#Set), [ValueIterator](#valueIterator) and [ReverseValueIterator](#reverseValueIterator) interface.
+实现了 [Set](#Set), [ValueIterator](#valueIterator) and [ReverseValueIterator](#reverseValueIterator) 接口。
 
 ```go
 package main
@@ -885,9 +885,9 @@ func main() {
 
 #### SkipSet
 
-`SkipSet` is a set based on [SkipList](#SkipList).
+`SkipSet` 是基于 [SkipList](#SkipList) 实现的 set。
 
-Implements [Set](#Set) and [ValueIterator](#valueIterator) interface.
+实现了 [Set](#Set) and [ValueIterator](#valueIterator) 接口。
 
 ```go
 package main
@@ -930,11 +930,11 @@ func main() {
 
 ## Util
 
-Contains some helper functions.
+包含一些辅助函数。
 
 ### Comparator
 
-`Comparator` provides the following built-in type of comparator.
+提供了用于内置类型的比较器，如下。
 
 ```go
 func IntComparator(a, b interface{}) int
@@ -968,7 +968,7 @@ func RuneComparator(a, b interface{}) int
 func StringComparator(a, b interface{}) int
 ```
 
-The meaning of the return value is as follows.
+返回值的意义如下。
 
 ```
 -1 => a < b
@@ -976,7 +976,7 @@ The meaning of the return value is as follows.
 1  => a > b
 ```
 
-For custom types, you can also create a corresponding comparator.
+对于自定义类型，也可以创建相对应的比较器。
 
 ```go
 package main
