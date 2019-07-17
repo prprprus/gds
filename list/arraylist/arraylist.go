@@ -172,12 +172,7 @@ func (list *List) Insert(index int, values ...interface{}) error {
 	list.growth(l)
 	list.size += l
 	copy(list.elements[index+1+l:], list.elements[index+1:])
-	// copy(list.elements[index+1:], values)
-	i := index + 1
-	for _, v := range values {
-		list.elements[i] = v
-		i++
-	}
+	copy(list.elements[index+1:], values)
 
 	return nil
 }
