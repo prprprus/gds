@@ -1016,5 +1016,3 @@ func main() {
 ```
 
 ## Benchmarking
-
-![]()
