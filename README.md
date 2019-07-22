@@ -1019,3 +1019,9 @@ func main() {
 
 `go test -run=NO_TEST -bench=. -benchmem -benchtime 1s github.com/prprprus/ds/...`
 
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds-bench-1.png)
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds-bench-2.png)
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds-bench-3.png)
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds-bench-4.png)
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds-bench-5.png)
+![](https://raw.githubusercontent.com/prprprus/picture/master/ds-bench-6.png)
