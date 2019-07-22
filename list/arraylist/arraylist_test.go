@@ -1043,7 +1043,7 @@ func benchmarkRemove(b *testing.B, list *List, size int) {
 	}
 }
 
-func BenchmarkGetRemove0(b *testing.B) {
+func BenchmarkRemove0(b *testing.B) {
 	b.StopTimer()
 	list := New()
 	size := 0
