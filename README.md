@@ -1017,4 +1017,5 @@ func main() {
 
 ## Benchmarking
 
-![]()
+`go test -run=NO_TEST -bench=. -benchmem -benchtime 1s github.com/prprprus/ds/...`
+
