@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds19.png)
+![ds19.png](https://i.loli.net/2019/09/21/HPnV4Flh2iJE85w.png)
 
 ![build status](https://travis-ci.org/prprprus/ds.svg?branch=master)
 [![go report](https://goreportcard.com/badge/github.com/prprprus/ds)](https://goreportcard.com/report/github.com/prprprus/ds)
@@ -13,34 +13,34 @@
 ## 目录
 
 - [Iterator](#iterator)
-    - [ValueIterator](#valueIterator)
-    - [ReverseValueIterator](#reverseValueIterator)
-    - [IndexIterator](#indexIterator)
-    - [ReverseIndexIterator](#reverseIndexIterator)
-    - [KeyIterator](#keyIterator)
-    - [ReverseKeyIterator](#reverseKeyIterator)
+  - [ValueIterator](#valueIterator)
+  - [ReverseValueIterator](#reverseValueIterator)
+  - [IndexIterator](#indexIterator)
+  - [ReverseIndexIterator](#reverseIndexIterator)
+  - [KeyIterator](#keyIterator)
+  - [ReverseKeyIterator](#reverseKeyIterator)
 - [Container](#container)
-    - [List](#list)
-        - [SinglyLinkedList](#singlylinkedlist)
-        - [DoubleLinkedList](#DoubleLinkedList)
-        - [ArrayList](#ArrayList)
-    - [Stack](#Stack)
-        - [LinkedListStack](#LinkedListStack)
-        - [ArrayStack](#ArrayStack)
-    - [Queue](#Queue)
-        - [LinkedListQueue](#LinkedListQueue)
-        - [ArrayQueue](#ArrayQueue)
-    - [SkipList](#SkipList)
-    - [Map](#Map)
-        - [HashMap](#HashMap)
-        - [LinkedHashMap](#LinkedHashMap)
-        - [SkipMap](#SkipMap)
-    - [Set](#Set)
-        - [HashSet](#HashSet)
-        - [LinkedHashSet](#LinkedHashSet)
-        - [SkipSet](#SkipSet)
+  - [List](#list)
+    - [SinglyLinkedList](#singlylinkedlist)
+    - [DoubleLinkedList](#DoubleLinkedList)
+    - [ArrayList](#ArrayList)
+  - [Stack](#Stack)
+    - [LinkedListStack](#LinkedListStack)
+    - [ArrayStack](#ArrayStack)
+  - [Queue](#Queue)
+    - [LinkedListQueue](#LinkedListQueue)
+    - [ArrayQueue](#ArrayQueue)
+  - [SkipList](#SkipList)
+  - [Map](#Map)
+    - [HashMap](#HashMap)
+    - [LinkedHashMap](#LinkedHashMap)
+    - [SkipMap](#SkipMap)
+  - [Set](#Set)
+    - [HashSet](#HashSet)
+    - [LinkedHashSet](#LinkedHashSet)
+    - [SkipSet](#SkipSet)
 - [Util](#Util)
-    - [Comparator](#Comparator)
+  - [Comparator](#Comparator)
 - [Benchmarking](#Benchmarking)
 
 ## Iterator
@@ -124,7 +124,7 @@ type ReverseKeyIterator interface {
 
 不同的数据结构对迭代器的支持是不同的，如下。
 
-![](https://raw.githubusercontent.com/prprprus/picture/master/ds1.png)
+![ds1.png](https://i.loli.net/2019/09/21/mvktdhMKD9g8oSy.png)
 
 ## Container
 
@@ -1017,4 +1017,11 @@ func main() {
 
 ## Benchmarking
 
-- TODO
+`go test -run=NO_TEST -bench=. -benchmem -benchtime 1s github.com/prprprus/ds/...`
+
+![ds-bench-1.png](https://i.loli.net/2019/09/21/ws3z1RWhm8yxYGC.png)
+![ds-bench-2.png](https://i.loli.net/2019/09/21/gI3wGazoBuAF4XQ.png)
+![ds-bench-3.png](https://i.loli.net/2019/09/21/hi9YLGUfX3DyzNE.png)
+![ds-bench-4.png](https://i.loli.net/2019/09/21/qGQ3yFdsevifCYm.png)
+![ds-bench-5.png](https://i.loli.net/2019/09/21/HfnzLDoImb1xGt6.png)
+![ds-bench-6.png](https://i.loli.net/2019/09/21/4c6s3NQJpzErWj1.png)
