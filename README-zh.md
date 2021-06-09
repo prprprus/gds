@@ -1,5 +1,3 @@
-![ds19.png](https://i.loli.net/2019/09/21/HPnV4Flh2iJE85w.png)
-
 ![build status](https://travis-ci.org/prprprus/ds.svg?branch=master)
 [![go report](https://goreportcard.com/badge/github.com/prprprus/ds)](https://goreportcard.com/report/github.com/prprprus/ds)
 [![godoc](https://img.shields.io/badge/godoc-reference-blue.svg)](https://godoc.org/github.com/prprprus/ds)
